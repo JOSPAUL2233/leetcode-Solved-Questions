@@ -6,11 +6,15 @@ public:
         
         int sum = 0;
         
+        //finding the xor of all the elements in the vector
+        
         for(int i = 0;i<nums.size();i++){
             
             sum^=nums[i];
             
         }
+        
+        // finding the 1st bit in sum which is 1 (we can take other bit                also which is 1)
         
         int index = 0;
         
@@ -22,6 +26,8 @@ public:
             }
             
         }
+        
+        //seperating the elements on the basis of the bit found in the 2nd          loop(1s in one group and 0s in another group) and do xor them.
         
         int ones = 0;
         int zeroes = 0;
