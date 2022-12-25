@@ -1,6 +1,8 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
+        
+        //sol
 
         int ans = 0;
 
