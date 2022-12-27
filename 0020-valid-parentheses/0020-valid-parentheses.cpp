@@ -4,35 +4,100 @@ public:
         
         stack<char> st;
         
-        for(auto x:s){
+        
+        for(char x:s){
             
-            if(x=='[' || x=='{' || x=='('){
-                
-                st.push(x);
-               
-                
-            }else{
-                
-                if(st.empty())return false;
-                
-                char temp = st.top();
-                
-                if( (x==']' && temp=='[') || (x=='}' && temp=='{') || (x==')' && temp=='(') ){
+            switch(x){
+                    
+                case '(':
+                    st.push('(');
+                    // cout<<st.top()<<endl;
+                    
+                    break;
+                    
+                case '{':
+                    
+                    st.push('{');
+                    // cout<<st.top()<<endl;
+                    
+                    break;
+                    
+                case '[':
+                    
+                    st.push('[');
+                    // cout<<st.top()<<endl;
+                    
+                    break;
                     
                     
-                    st.pop();
                     
-                }else{
+                case ')':
                     
-                    return false;
-                }
-            
+                    if(!st.empty()){
+                        
+                        if(st.top()=='('){
+                        // cout<<"before:"<<st.top()<<endl;
+                        st.pop();
+                        // cout<<"after:"<<st.top()<<endl;
+                        
+                        }else{
+                            return false;
+                        }
+                        
+                    }else{
+                        return false;
+                    }
+                    
+                    break;
+                      
+                case '}':
+                    
+                    if(!st.empty()){
+                        
+                        if(st.top()=='{'){
+                        // cout<<"before:"<<st.top()<<endl;
+                        st.pop();
+                        // cout<<"after:"<<st.top()<<endl;
+                        
+                        }else{
+                            return false;
+                        }
+                        
+                    }else{
+                        return false;
+                    }
+                    
+                    break;
+
+                    
+                case ']':
+                    
+                    if(!st.empty()){
+                        
+                        if(st.top()=='['){
+                        // cout<<"before:"<<st.top()<<endl;
+                        st.pop();
+                        // cout<<"after:"<<st.top()<<endl;
+                        
+                        }else{
+                            return false;
+                        }
+                        
+                    }else{
+                        return false;
+                    }
+                    
+                break;
+                       
             }
             
             
         }
         
-       
+        // while(!st.empty()){
+        //     cout<<st.top()<<endl;
+        //     st.pop();
+        // }
         
         if(st.empty())return true;
         else return false;
