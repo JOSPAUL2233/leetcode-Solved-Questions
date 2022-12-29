@@ -27,19 +27,21 @@ public:
                 }
                 
             }
+            if(position==1){
+                s[index] = "Gold Medal";
+            }else if(position==2){
+                s[index] = "Silver Medal";
+            }else if(position==3){
+                s[index] = "Bronze Medal";
+            }else{
+                s[index] = to_string(position);
+            }
             
-            s[index] = to_string(position);
             
             position++;
             
         }
-        
-        for(int i = 0;i<s.size();i++){
-            if(s[i] == "1")s[i] = "Gold Medal";
-            if(s[i] == "2")s[i] = "Silver Medal";
-            if(s[i] == "3")s[i] = "Bronze Medal";
-        }
-        
+
         return s;
         
     }
