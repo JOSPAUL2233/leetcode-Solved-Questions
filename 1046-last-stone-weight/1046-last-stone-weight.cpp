@@ -17,15 +17,7 @@ public:
             int y = q.top();
             q.pop();
             
-            if(x==y){
-                continue;
-            }else if(x<y){
-                y = y-x;
-                q.push(y);
-            }else if(x>y){
-                x = x-y;
-                q.push(x);
-            }
+            if(x!=y)q.push(x-y);
             
         }
         
