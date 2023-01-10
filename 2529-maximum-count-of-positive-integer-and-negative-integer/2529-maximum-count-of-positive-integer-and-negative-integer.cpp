@@ -13,12 +13,13 @@ public:
             
             else {
                 Positives = nums.size() - i;
-                break;
+                if(Positives>Negatives)return Positives;
+                
             }
             
         }
         
-        return(Negatives>Positives?Negatives:Positives);
+        return Negatives;
         
     }
 };
