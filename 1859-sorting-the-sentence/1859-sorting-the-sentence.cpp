@@ -1,25 +1,37 @@
 class Solution {
 public:
     string sortSentence(string s) {
-        vector<string>pos(10,"");
-        for(int i=0; i<s.size(); i++){
+        
+        vector<string> vec(10,"");
+        
+        for(int i = 0;i<s.size();i++){
+            
             int j = i;
-            string temp;
+            
+            string temp = "";
+            
             while(!isdigit(s[j])){
-                temp.push_back(s[j]);
+                temp+=s[j];
                 j++;
             }
-            pos[s[j]-'0'] = temp;
+            
+            vec[s[j]-'0'] = temp;
             i = j+1;
+            
         }
+        
         string ans;
-        for(int i=1; i<10; i++){
-            if(pos[i].length()>0){
-                ans+=pos[i];
-                ans.push_back(' ');
+        
+        for(int i = 1;i<10;i++){
+            
+            if(vec[i].size()>0){
+            ans+=vec[i];
+            ans+=' ';
             }
         }
+        
         ans.pop_back();
         return ans;
+        
     }
 };
