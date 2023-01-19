@@ -10,31 +10,25 @@
  */
 class Solution {
 public:
-    
-    void findLength(int &length,ListNode* head){
-        
-        if(head==NULL)return;
-        length++;
-            findLength(length,head->next);
-        
-    }
-    
     ListNode* middleNode(ListNode* head) {
         
-        int length = 0;
         
-        findLength(length,head);
+        ListNode* slow = head;
+        ListNode* fast = head;
         
-        int count = 0;
-        
-        ListNode *temp = head;
-        
-        while(count!=(length/2)){
-            count++;
-            temp = temp->next;
+        while(fast != NULL && fast->next != NULL){
+            
+            
+            fast = fast ->next;
+            if(fast!=NULL)fast = fast->next;
+            
+            slow = slow->next;
+            
+            
         }
         
-        return temp;
+        return slow;
+        
         
     }
 };
