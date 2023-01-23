@@ -12,7 +12,7 @@ public:
         
         map<ListNode*,bool> visited;
         
-        if(head==NULL || head->next == NULL)return false;
+        if(head==NULL)return false;
         
         
         ListNode* it = head->next;
