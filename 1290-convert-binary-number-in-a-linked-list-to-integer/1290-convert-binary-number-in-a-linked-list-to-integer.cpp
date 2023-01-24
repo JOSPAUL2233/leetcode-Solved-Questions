@@ -13,29 +13,14 @@ public:
     int getDecimalValue(ListNode* head) {
         
         int ans = 0;
-        int count = 0;
         
         ListNode* temp = head;
         
         while(temp!=NULL){
-            count++;
+            
+            ans = ans*2+temp->val;
             temp = temp->next;
-        }
-        
-        temp = head;
-        
-        count--;
-        
-        while(temp!=NULL){
             
-            
-            if(temp->val == 1){
-                ans+=pow(2,count);
-            }
-            
-            count--;
-            
-            temp = temp->next;
         }
         
         return ans;
