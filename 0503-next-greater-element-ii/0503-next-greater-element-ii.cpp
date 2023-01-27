@@ -2,37 +2,37 @@ class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         
+        int n = nums.size();
+        nums.resize(2*n);
         
-        vector<int> ans(nums.size(),0);
+        //concatenating nums to the 2nd part to nums
+        for(int i = n;i<2*n;i++){
+            nums[i] = nums[i-n];
+        }
         
-        for(int i = 0;i<nums.size();i++){
+        
+        stack<int> st;
+        vector<int> ans(n,-1);
+        
+        
+        for(int i = 0;i<2*n;i++){
             
-            int j = 0;
-            
-            if(i!=nums.size()-1)
-             j = i+1;
-            
-            
-                while(j!=i){
-                                    
-                    if(nums[j]>nums[i]){
-                        
-                        ans[i] = nums[j];
-                        break;
-                    }
-                    
-                    
-                    if(j==nums.size()-1)j = 0;
-                    else j++;
-                    
-                    
-                    
+            while(!st.empty() && nums[i]>nums[st.top()]){
+                
+                if(st.top() >= n){
+                    st.top() = st.top()-n;
                 }
-                if(j==i)ans[i] = -1;
+                
+                ans[st.top()] = nums[i];
+                st.pop();
+                
+            }
+            st.push(i);
             
         }
         
         return ans;
+        
         
     }
 };
