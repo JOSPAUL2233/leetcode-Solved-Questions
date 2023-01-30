@@ -17,6 +17,7 @@ public:
         ListNode* curr = it2;
         ListNode* forw = it2->next;
         
+    
         while(curr != NULL){
             
             forw = curr->next;
@@ -39,6 +40,9 @@ public:
         ListNode* slow = head;
         ListNode* fast = head->next;
         
+        
+        //FINDING THE MID
+        
         while(fast != NULL && fast->next != NULL){
             
             slow = slow->next;
@@ -48,13 +52,19 @@ public:
         }
         
         
+        //SPLITTING THE LINKED LIST INTO 1ST AND 2ND HALF
         
         ListNode* it1 = head;
         ListNode* it2 = slow->next;
         
         slow->next = NULL;
         
+        
+        //REVERSING THE 2ND LINKED LIST
+        
         reverse(it2);
+        
+        //FINDING THE MAXIMUM SUM OF PAIRS
         
         int sum = 0;
         
