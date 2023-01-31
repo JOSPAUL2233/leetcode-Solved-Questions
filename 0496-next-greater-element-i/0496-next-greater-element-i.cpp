@@ -2,36 +2,43 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
-        vector<int> greatest(nums2.size(),-1);
+        vector<int> greater(nums2.size(),-1);
+        vector<int> ans(nums1.size());
         
-        stack<int> s;
-        s.push(0);
+        stack<int> st;
         
-        for(int i = 1;i<nums2.size();i++){
+        for(int i = nums2.size()-1;i>=0;i--){
             
-            while((!s.empty()) && (nums2[s.top()] < nums2[i])){
+            
+            while(!st.empty()){
                 
-                greatest[s.top()] = nums2[i];
-                s.pop();
+                if(st.top()>nums2[i]){
+                    
+                    greater[i] = st.top();
+    
+                    break;    
+                }
                 
+                st.pop();
             }
-            s.push(i);
+            
+            st.push(nums2[i]);
             
         }
         
-        vector<int> ans;
         
         for(int i = 0;i<nums1.size();i++){
             
             for(int j = 0;j<nums2.size();j++){
                 
-                if(nums1[i]==nums2[j])ans.push_back(greatest[j]);
+                if(nums1[i] == nums2[j])ans[i] = greater[j];
                 
             }
             
         }
-        
+      
         return ans;
+        
         
     }
 };
