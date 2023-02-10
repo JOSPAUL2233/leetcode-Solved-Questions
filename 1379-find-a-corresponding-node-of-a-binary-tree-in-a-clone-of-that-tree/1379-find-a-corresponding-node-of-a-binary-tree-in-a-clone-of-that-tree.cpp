@@ -19,6 +19,8 @@ class Solution {
             return;
         }
         
+        if(ans->val != -1)return;
+        
         solve(original->left,cloned->left,target,ans);
         solve(original->right,cloned->right,target,ans);
         
@@ -28,7 +30,7 @@ class Solution {
 public:
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
         
-        TreeNode* ans = new TreeNode(0);
+        TreeNode* ans = new TreeNode(-1);
         
         solve(original,cloned,target,ans);
         
