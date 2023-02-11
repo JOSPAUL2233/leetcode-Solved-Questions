@@ -28,9 +28,7 @@ class Solution {
         
         sum+=root->val;
         solve(root->left,targetSum,sum,ans);
-        sum-=root->val;
         
-        sum+=root->val;
         solve(root->right,targetSum,sum,ans);
         sum-=root->val;
         
