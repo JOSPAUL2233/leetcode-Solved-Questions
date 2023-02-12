@@ -21,9 +21,7 @@ class Solution {
         
         height++;
         solve(root->left,height,maxHeight);
-        height--;
         
-        height++;
         solve(root->right,height,maxHeight);
         height--;
         
