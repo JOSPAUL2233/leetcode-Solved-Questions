@@ -123,9 +123,7 @@ class Solution{
         
         int height = max(left.second,right.second)+1;
         
-        pair<bool,int> p;
-        p.first = balanced;
-        p.second = height;
+        pair<bool,int> p = make_pair(balanced,height);
         
         return p;
         
