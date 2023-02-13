@@ -31,8 +31,7 @@ class Solution {
         if(left.first && right.first && (diff<=1))
             balanced = true;
         
-        pair<bool,int> p = make_pair(balanced,height);
-        return p;
+        return make_pair(balanced,height);
    
         
     }
