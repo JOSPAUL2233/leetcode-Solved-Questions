@@ -22,7 +22,8 @@ public:
         }
         int ans = 0;
         
-        if(beams.size()==0)return 0;
+        if(beams.size()==0 || beams.size()==1)return 0;
+        
         
         for(int i = 0;i<beams.size()-1;i++){
             
