@@ -11,6 +11,25 @@
  */
 class Solution {
     
+    
+    bool isBST(TreeNode* root,long min,long max){
+        
+        if(root==NULL)return true;
+        
+        if(root->val > min && root->val < max){
+            
+            bool leftPart = isBST(root->left,min,root->val);
+            bool rightPart = isBST(root->right,root->val,max);
+            
+            return leftPart && rightPart;
+            
+        }else{
+            return false;
+        }
+        
+        
+    }
+    
     void solve(TreeNode* root,vector<int> &v){
         
         if(root==NULL)return;
@@ -31,16 +50,26 @@ public:
         
         //INORDER TRAVERSAL - L N R
         
-        vector<int> v;
+//         vector<int> v;
         
-        solve(root,v);
+//         solve(root,v);
         
-        for(int i = 0;i<v.size()-1;i++){
+//         for(int i = 0;i<v.size()-1;i++){
             
-            if(v[i]>=v[i+1])return false;
+//             if(v[i]>=v[i+1])return false;
             
-        }
-        return true;
+//         }
+        
+        
+        
+        // WITHOUT EXTRA SPACE(NOT INORDER)
+        
+        
+        long min = LONG_MIN;
+        long max = LONG_MAX;
+        
+        return isBST(root,min,max);
+
         
     }
 };
