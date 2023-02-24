@@ -26,6 +26,21 @@ class Solution {
         
     }
     
+    int traversal(TreeNode* root,int i,int k){
+        
+        if(root==NULL)return 0;
+        
+        //L-N-R
+        
+        return traversal(root->left,i,k);
+        
+        i++;
+        if(i==k)return root->val;
+        
+        return traversal(root->right,i,k);
+        
+    }
+    
 public:
     int kthSmallest(TreeNode* root, int k) {
         
