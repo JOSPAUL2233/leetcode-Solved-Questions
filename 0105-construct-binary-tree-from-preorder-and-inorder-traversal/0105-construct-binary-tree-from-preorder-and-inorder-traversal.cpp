@@ -44,6 +44,10 @@ public:
         
         int start = 0;
         
+        //using map to store the index of inorder so not to do a loop in every iteration to find its index
+        
+        
+        
         return solve(preorder,inorder,0,inorder.size()-1,start,preorder.size()-1);
         
     }
