@@ -11,7 +11,7 @@
  */
 class Solution {
     
-    TreeNode* solve(vector<int> preorder,vector<int> inorder,int inStart,int inEnd,int &preStart,int preEnd){
+    TreeNode* solve(vector<int> preorder,vector<int> inorder,int inStart,int inEnd,int &preStart,int preEnd,map<int,int> &m){
         
         if(preStart>preEnd || inStart > inEnd)return NULL;
         
@@ -32,8 +32,8 @@ class Solution {
         
         preStart++;
         
-        root->left = solve(preorder,inorder,inStart,index-1,preStart,preEnd);
-        root->right = solve(preorder,inorder,index+1,inEnd,preStart,preEnd);
+        root->left = solve(preorder,inorder,inStart,index-1,preStart,preEnd,m);
+        root->right = solve(preorder,inorder,index+1,inEnd,preStart,preEnd,m);
             
         return root;
         
@@ -51,7 +51,7 @@ public:
             m[inorder[i]] = i;
         }
         
-        return solve(preorder,inorder,0,inorder.size()-1,start,preorder.size()-1);
+        return solve(preorder,inorder,0,inorder.size()-1,start,preorder.size()-1,m);
         
     }
 };
