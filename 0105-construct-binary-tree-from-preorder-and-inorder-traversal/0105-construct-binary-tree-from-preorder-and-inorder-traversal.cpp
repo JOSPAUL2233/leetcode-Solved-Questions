@@ -19,16 +19,9 @@ class Solution {
         
         TreeNode* root = new TreeNode(element);
         
-        int index = 0;
+        //USING MAP
+        int index = m[element];
         
-        // find the index position
-        
-        for(int i = inStart;i<=inEnd;i++){
-            if(inorder[i]==element){
-                index = i;
-                break;
-            }
-        }
         
         preStart++;
         
