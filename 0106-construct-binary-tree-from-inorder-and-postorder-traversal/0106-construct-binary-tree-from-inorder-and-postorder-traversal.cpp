@@ -13,6 +13,10 @@ class Solution {
     
     TreeNode* solve(vector<int> inorder,vector<int> postorder, int inStart,int inEnd,int postStart,int &i,map<int,int> &m){
         
+        // i should be passed by reference since i keeps changing
+        // m should be passed by referecne since it takes O(n) time to copy m each time - so pass the reference instead
+        
+        
         
         if(i<0 || inStart > inEnd) return NULL;
         
