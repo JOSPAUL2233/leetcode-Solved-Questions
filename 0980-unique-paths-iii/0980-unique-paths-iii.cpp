@@ -28,13 +28,9 @@ class Solution {
     
     void solve(vector<vector<int>> &grid,vector<vector<int>>& visited,
                int &ans,int i,int j,int m,int n){
-        
-        // cout<<"i:"<<i<<endl<<"j:"<<j<<endl<<endl;
-        
+                
         // reached the ending index
         if(grid[i][j]==2){
-            
-            // cout<<"hello"<<endl;
             
             visited[i][j] = 1;
             //check if all the indices are visited or not
@@ -61,7 +57,7 @@ class Solution {
         //RIGHT(i,j+1)
         
         if(isSafe(i,j+1,grid,visited,m,n)){
-            // cout<<"i:"<<i<<endl<<"j:"<<j<<endl;
+            
             visited[i][j+1] = 1;
             solve(grid,visited,ans,i,j+1,m,n);
             visited[i][j+1] = 0;
