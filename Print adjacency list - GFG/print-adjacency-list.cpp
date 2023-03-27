@@ -8,24 +8,20 @@ class Solution {
     // Function to return the adjacency list for each vertex.
     vector<vector<int>> printGraph(int V, vector<int> adj[]) {
         
-        vector<vector<int>> ans;
         
+        vector<vector<int>> ans(V);
         
         for(int i = 0;i<V;i++){
             
-            vector<int> temp;
-            temp.push_back(i);
             
-            //go for the adjacency elements
+            // put the index itself
+            ans[i].push_back(i);
             
-            for(auto j : adj[i]){
-                
-                temp.push_back(j);
-                
+            // put the elements inside it
+            
+            for(int j : adj[i]){
+                ans[i].push_back(j);
             }
-            
-            ans.push_back(temp);
-            
             
         }
         
