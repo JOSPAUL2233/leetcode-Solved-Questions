@@ -1,10 +1,9 @@
 class Solution {
 public:
     vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+    
         
-        
-        //make adjacency list
-        
+        //make adjacency list    
         vector<list<int>> adj(n);
         
         for(int i = 0;i<edges.size();i++){
