@@ -5,8 +5,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     
-    void bfsCheck(int i,vector<int> adj[],unordered_map<int,bool> &visited,
-                    unordered_map<int,int> &parent,bool &ans){
+    bool bfsCheck(int i,vector<int> adj[],unordered_map<int,bool> &visited,
+                    unordered_map<int,int> &parent){
         
             queue<int> que;
             que.push(i);
@@ -18,12 +18,10 @@ class Solution {
                 
                 for(auto j : adj[front]){
                     
-                    // cout<<"inside for loop : "<<j<<endl;
-                    
                     if(!visited[j]){
                         
-                        // cout<<"1st if : "<<j<<endl;
-                        
+                        //if not visited, insert it in queue
+                        //and update visited and parent
                         visited[j] = true;
                         parent[j] = front;
                         que.push(j);
@@ -31,19 +29,17 @@ class Solution {
                     }else if(visited[j] && (parent[front] != j)){
                         
                         //if visited and parent is not front
-                        
-                        // cout<<"2st if : "<<j<<endl<<endl;
-                        ans = true;
-                        return;
-                        
+                        return true;
+
                     }
+                
+                    //ignore if it is pointing to it's parent
                     
                 }
                 
             }
             
-            ans = false;
-            return;
+            return false;
         
     }
     
@@ -63,7 +59,7 @@ class Solution {
             if(!visited[i]){
                 visited[i] = true;
                 parent[i] = -1;
-                bfsCheck(i,adj,visited,parent,ans);
+                ans = bfsCheck(i,adj,visited,parent);
                 
             }
             
