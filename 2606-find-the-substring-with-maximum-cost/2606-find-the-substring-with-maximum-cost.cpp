@@ -32,6 +32,7 @@ public:
             
             sum += alphaValue[s[i]];
             
+            //if it is leading to -ve number re-initialize it by 0
             if(sum < 0)sum = 0;
             
             max = sum > max ? sum : max;
