@@ -4,19 +4,21 @@ public:
         
         int ans = 0;
         
-        set<int> s;
+        unordered_map<int,bool> visited;
         
         for(int i = 0;i<nums.size();i++){
             
-            if(s.count(nums[i])){
+            if(!visited[nums[i]]){
+                
+                visited[nums[i]] = true;
+                
+            }else{
                 ans = nums[i];
                 break;
-            }else{
-                s.insert(nums[i]);
             }
             
         }
-        
+
         return ans;
         
     }
