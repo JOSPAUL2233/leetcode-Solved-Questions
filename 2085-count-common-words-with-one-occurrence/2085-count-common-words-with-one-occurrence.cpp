@@ -2,26 +2,28 @@ class Solution {
 public:
     int countWords(vector<string>& words1, vector<string>& words2) {
         
-        unordered_map<string,int> mp;
         int count = 0;
+        unordered_map<string,int> freq;
         
-        for(string s : words1){
+        for(int i = 0;i<words1.size();i++){
             
-            if(mp[s] == 0)mp[s] = 1;
-            else if(mp[s] == 1)mp[s] = -1;//if there are more than one elements
+            
+            for(int j = 0;j<words2.size();j++){
+                
+                    if(words1[i]==words2[j]){
+                        
+                        freq[words1[i]]++;
+                        
+                    }
+                
+            }
+            
             
         }
         
-        for(string s: words2){
+        for(int i = 0;i<words1.size();i++){
             
-            if(mp[s]==1)mp[s]=2;
-            else if(mp[s]==2)mp[s] = -1;
-            
-        }
-        
-        for(auto i : mp){
-            
-            if(i.second==2)count++;
+            if(freq[words1[i]]==1)count++;
             
         }
         
