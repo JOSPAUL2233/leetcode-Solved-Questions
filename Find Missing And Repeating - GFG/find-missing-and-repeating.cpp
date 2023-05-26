@@ -7,8 +7,8 @@ using namespace std;
 class Solution{
 public:
     vector<int> findTwoElement(vector<int> arr, int n) {
-       
-       vector<int> hashArr(n+1,0);
+        
+        vector<int> hashArr(n+1,0);
        
        int repeat = -1;
        int missing = -1;
@@ -26,7 +26,7 @@ public:
        }
        
        return {repeat,missing};
-       
+        
     }
 };
 
