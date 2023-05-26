@@ -11,52 +11,50 @@ using namespace std;
 class Solution 
 {
     
-    bool isPossible(int mid,int A[],int N,int M){
+    
+    bool isPossible(int A[],int N,int M,int mid){
         
         int stdCount = 1;
-        int pages = 0;
+        int page = 0;
         
         for(int i = 0;i<N;i++){
             
-            if(A[i]>mid)return false; //if the element is greater than the limit
+            if(A[i]>mid)return false;
             
-            if(A[i]+pages > mid){
+            if(page + A[i] > mid){
                 
-                //increase the student and start allocating pages from there
                 stdCount++;
                 
-                if(stdCount>M)return false;// if the students exceeds
+                if(stdCount>M)return false;
                 
-                pages = A[i];
+                page = A[i];
                 
             }else{
                 
-                pages+=A[i]; //keep on increasing page for same studdent
+                page+=A[i];
                 
             }
             
         }
         
-        return true;
         
     }
-
+    
     public:
     //Function to find minimum number of pages.
     int findPages(int A[], int N, int M) 
     {
         if(N<M)return -1;
         
-        //start = min element
-        //end = sum of all the elements
-        
         int start = 0;
         int end = 0;
         int ans = -1;
         
+        //assign start and end
+        
         for(int i = 0;i<N;i++){
             
-            if(start>A[i])start = A[i];
+            if(A[i]<start)start = A[i];
             
             end+=A[i];
             
@@ -68,14 +66,13 @@ class Solution
             
             int mid = start+(end-start)/2;
             
-            if(isPossible(mid,A,N,M)){
+            if(isPossible(A,N,M,mid)){
                 
-                //store the answer and look for min value
                 ans = mid;
                 end = mid-1;
-
+                
             }else{
-                //increase the limit
+                
                 start = mid+1;
                 
             }
@@ -83,7 +80,7 @@ class Solution
         }
         
         return ans;
-
+        
     }
 };
 
