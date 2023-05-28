@@ -16,24 +16,41 @@ class Solution{
     int majorityElement(int a[], int size)
     {
         
-        unordered_map<int,int> freq;
+        int ele = a[0];
+        int count = 0;
         
         for(int i = 0;i<size;i++){
             
-            freq[a[i]]++;
-        
+            if(a[i]==ele)
+                count++;
+            else
+                count--;
+                
+            if(count==0){
+                ele = a[i];
+                count = 1;
+            }
             
         }
+        
+        //a possible answer is ele if majority element
+        //exists.
+        //So,check if the ele exists or not by checking
+        //it's count
+        
+        int counter = 0;
         
         for(int i = 0;i<size;i++){
             
-            if(freq[a[i]]>(size/2))return a[i];
+            if(a[i]==ele)counter++;
             
         }
         
-        
-        return -1;
-        
+        if(counter > (size/2))
+            return ele;//if exists
+        else
+            return -1;//if not exists
+
     }
 };
 
