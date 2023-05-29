@@ -37,13 +37,27 @@ return 0;
 int search(int arr[], int n, int x, int k)
 {
    
+   int i = 0;
+   int ans = -1;
    
-   for(int i = 0;i<n;i++){
+   while(i<n){
        
-       if(arr[i]==x)return i;
+       if(arr[i]==x){
+           ans = i;
+           break;
+       }
+       
+       int diff = abs(arr[i]-x);
+      
+       int jump = diff/k; //times to jump
+     
+        if(jump < 1)jump = 1; //if diff is one, 0 jumps will reflect
+
+       
+       i = i + jump; //Jump diff times
+       
        
    }
    
-   return -1;
-   
+   return ans;
 }    	
