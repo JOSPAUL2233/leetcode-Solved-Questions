@@ -38,6 +38,8 @@ bool findPair(int arr[], int size, int n){
     
     while(right<size){
         
+        while(arr[right] == arr[right+1])right++;
+        
         int diff = arr[right]-arr[left];
         
         if(diff==n)return true;
