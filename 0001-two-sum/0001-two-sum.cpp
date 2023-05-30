@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
-    std::unordered_map<int, int> tmp;
+    map<int, int> tmp;
         
     for (int i = 0; i < nums.size(); ++i) {
         
@@ -21,4 +21,5 @@ public:
     return {-1, -1};
         
   }
+    
 };
