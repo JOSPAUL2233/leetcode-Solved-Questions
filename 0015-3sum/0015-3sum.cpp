@@ -3,45 +3,42 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
         vector<vector<int>> ans;
-        int n = nums.size();
         
         sort(nums.begin(),nums.end());
         
-        //outer loop for the 1st number
-        
-        for(int i = 0;i<n;i++){
+        for(int left = 0;left < nums.size();left++){
             
-            int t = -nums[i];
             
-            int a = i+1;
-            int b = n-1;
+            if(left > 0 && nums[left] == nums[left-1])continue;
             
-            while(a<b){
+            int mid = left+1;
+            int right = nums.size()-1;
+            
+            while(mid < right){
                 
-                int sum = nums[a]+nums[b];
+                int sum = nums[left]+nums[mid]+nums[right];
                 
-                if(sum == t){
+                if(sum==0){
                     
-                    ans.push_back({nums[a],nums[b],nums[i]});
+                    ans.push_back({nums[left],nums[mid],nums[right]});
                     
-                    while(a<b && nums[a] == nums[a+1])a++;
-                    while(a<b && nums[b] == nums[b-1])b--;
+                    mid++;
+                    right--;
                     
-                    a++;
-                    b--;
+                    while(mid < right && nums[mid] == nums[mid-1])mid++;
+                    while(mid < right && nums[right] == nums[right+1])right--;
                     
+                }else if(sum < 0){
                     
-                }else if(sum > t){
-                    b--;
+                    mid++;
                     
                 }else{
-                    a++;                    
+                    
+                    right--;
+                    
                 }
-                
-                
+                   
             }
-            
-            while(i+1<n && nums[i] == nums[i+1])i++;
             
         }
         
