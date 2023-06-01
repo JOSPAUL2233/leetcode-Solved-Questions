@@ -6,32 +6,56 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
+    
+        void swapIfNeeded(long long arr1[],long long arr2[],int ind1,int ind2){
+            
+            if(arr1[ind1] > arr2[ind2]){
+                
+                swap(arr1[ind1],arr2[ind2]);
+                
+            }
+            
+        }
         //Function to merge the arrays.
         void merge(long long arr1[], long long arr2[], int n, int m) 
         { 
-           
-            int left = n-1;
-            int right = 0;
             
-            while(left>=0 && right < m){
+            int len = n+m;
+            
+            int gap = (len + 1)/2;//if it is 0.4, take it as 5
+            
+            while(gap > 0){
                 
-                if(arr1[left]>arr2[right]){
-                    swap(arr1[left],arr2[right]);
-                    left--;
-                    right++;
-                }else{
+                int left = 0;
+                int right = left+gap;
+                
+                while(right < len){
                     
-                    //if this is sorted,
-                    //then remaining elements are also sorted
-                    break;
+                    if(left < n && right >= n){//in arr1 and arr2
+                        
+                        swapIfNeeded(arr1,arr2,left,right-n);
+                        
+                    }else if(left >= n){//in arr2
+                        
+                        swapIfNeeded(arr2,arr2,left-n,right-n);
+                        
+                    }else{//in arr1
+                        
+                        swapIfNeeded(arr1,arr1,left,right);
+                        
+                    }
+                    
+                    left++;
+                    right++;
                     
                 }
                 
+                if(gap==1)break;
+                
+                gap = (gap+1)/2;
+                
             }
-        
-            //after partesin, sort them individualy
-            sort(arr1,arr1+n);
-            sort(arr2,arr2+m);
+            
             
         } 
 };
