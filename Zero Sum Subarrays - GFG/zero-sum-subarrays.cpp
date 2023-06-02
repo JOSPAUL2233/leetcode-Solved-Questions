@@ -16,18 +16,19 @@ public:
         
         unordered_map<int,int> freq;
         
-        int ans = 0;
+        int counter = 0;
         
         int sum = 0;
-        freq[0]++;
-        
+
         for(int i = 0;i<n;i++){
             
             sum += arr[i];
+            
+            if(sum==0)counter++;
 
             if(freq.find(sum) != freq.end()){
                 
-                ans += freq[sum];
+                counter += freq[sum];
                 
             }
             
@@ -35,7 +36,7 @@ public:
             
         }
         
-        return ans;
+        return counter;
         
     }
 };
