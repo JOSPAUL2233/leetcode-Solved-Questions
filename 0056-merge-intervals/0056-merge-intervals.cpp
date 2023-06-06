@@ -3,7 +3,7 @@ public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         
         vector<vector<int>> ans;
-        
+    
         sort(intervals.begin(),intervals.end());
         
         vector<int> p;
@@ -21,7 +21,8 @@ public:
                 
             }else{
                 
-                ans.push_back(p);
+                    ans.push_back(p);
+                
                     p[0] = intervals[i][0];
                     p[1] = intervals[i][1];
                 
