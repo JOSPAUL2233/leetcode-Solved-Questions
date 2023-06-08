@@ -6,10 +6,11 @@ class Solution {
         if(index == nums.size()){
             
             ans.push_back(nums);
+            return;
             
         }
         
-        
+        //iterate through all the alphabets from index
         for(int i = index;i<nums.size();i++){
             
             swap(nums[index],nums[i]);
@@ -17,8 +18,7 @@ class Solution {
             swap(nums[index],nums[i]);//backtracking
             
         }
-        
-        
+         
     }
     
     public:
