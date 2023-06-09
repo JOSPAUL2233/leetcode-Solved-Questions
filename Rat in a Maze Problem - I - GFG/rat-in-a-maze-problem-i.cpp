@@ -10,97 +10,99 @@ using namespace std;
 
 class Solution{
     
-    void solve(vector<vector<int>> arr,int i,int j,
-        string curr,vector<string> &ans,vector<vector<int>> visited,int n){
-        
-        //DESTINATION
-        
-        if(i==n-1 && j==n-1){
-            ans.push_back(curr);
-            return;
-        }
-
-        //LEFT (i,j-1)
-        
-        if(j-1>=0 && visited[i][j-1]==0 && arr[i][j-1]==1){
-            
-            curr+='L';
-            visited[i][j-1]=1;
-            
-            solve(arr,i,j-1,curr,ans,visited,n);
-            
-            visited[i][j-1]=0;
-            curr.pop_back();
-            
-        }
-        
-        //RIGHT(i,j+1)
-        
-        if(j+1<=n-1 && visited[i][j+1]==0 && arr[i][j+1]==1){
-            
-            curr+='R';
-            visited[i][j+1]=1;
-            
-            solve(arr,i,j+1,curr,ans,visited,n);
-            
-            visited[i][j+1]=0;
-            curr.pop_back();
-            
-        }
-        
-        //UP(i-1,j)
-        
-        if(i-1>=0 && visited[i-1][j]==0 && arr[i-1][j]==1){
-            
-            curr+='U';
-            visited[i-1][j]=1;
-            
-            solve(arr,i-1,j,curr,ans,visited,n);
-            
-            visited[i-1][j]=0;
-            curr.pop_back();
-            
-        }
-        
-        //DOWN(i+1,j)
-        
-        if(i+1<=n-1 && visited[i+1][j]==0 && arr[i+1][j]==1){
-            
-            curr+='D';
-            visited[i+1][j] = 1;
-            
-            solve(arr,i+1,j,curr,ans,visited,n);
-            
-            visited[i+1][j] = 0;
-            curr.pop_back();
-            
-        }
-        
-        
-        
-    }
+    void solve(vector<vector<int>> arr, vector<vector<int>> visited,
+            string path, vector<string> &ans,int i,int j,int n){
+                
+                //base case
+                if(i == n-1 && j == n-1){
+                    
+                    ans.push_back(path);
+                    return;
+                    
+                }
+                
+                //mark this point as visited
+                visited[i][j] = 1;
+                
+                //check for moving UP
+                int newI = i-1;
+                int newJ = j;
+                
+                if(newI >= 0 && visited[newI][newJ] == 0 && arr[newI][newJ] != 0){
+                    
+                    path.push_back('U');
+                    solve(arr,visited,path,ans,newI,newJ,n);
+                    path.pop_back();
+                    
+                }
+                
+                //check for moving RIGHT
+                newI = i;
+                newJ = j+1;
+                
+                if(newJ < n && visited[newI][newJ] == 0 && arr[newI][newJ] != 0){
+                    
+                    path.push_back('R');
+                    solve(arr,visited,path,ans,newI,newJ,n);
+                    path.pop_back();
+                    
+                }
+                
+                //check for moving DOWN
+                newI = i+1;
+                newJ = j;
+                
+                if(newI < n && visited[newI][newJ] == 0 && arr[newI][newJ] != 0){
+                    
+                    path.push_back('D');
+                    solve(arr,visited,path,ans,newI,newJ,n);
+                    path.pop_back();
+                    
+                }
+                
+                //check for moving LEFT
+                newI = i;
+                newJ = j-1;
+                
+                if(newJ >= 0 && visited[newI][newJ] == 0 && arr[newI][newJ] != 0){
+                    
+                    path.push_back('L');
+                    solve(arr,visited,path,ans,newI,newJ,n);
+                    path.pop_back();
+                    
+                }
+                
+                //remove the visited mark
+                //we are leaving this point
+                visited[i][j] = 0;
+                
+            }
     
     public:
     vector<string> findPath(vector<vector<int>> &m, int n) {
-
-    vector<string> ans;
-    
-    vector<vector<int>> visited(n,vector<int>(n,0));
-    
-    string curr = "";
-    
-    int i = 0;
-    int j = 0;
-    
-    if(m[i][j]==0)return{};
-    
-    visited[i][j] = 1;
-    
-    solve(m,i,j,curr,ans,visited,n);
-    
-    return ans;
-
-
+        
+        //visited array to keep track of visited path
+        vector<vector<int>> visited(n,vector<int> (n,0));
+        
+        //initial position
+        int i = 0;
+        int j = 0;
+        
+        //if the initial position is not allowd
+        if(m[i][j] == 0)
+            return {};
+        
+        //current path
+        string path = "";
+        
+        //all possible paths (final answer)
+        vector<string> ans;
+        
+        //recursive function to solve the problem
+        solve(m,visited,path,ans,i,j,n);
+        
+        return ans;
+        
     }
 };
 
