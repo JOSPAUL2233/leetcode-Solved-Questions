@@ -12,23 +12,22 @@ public:
         
         map<ListNode*,bool> visited;
         
+        //edge case
         if(head==NULL)return false;
-        
         
         ListNode* it = head->next;
         
         visited[head]=true;
         
-        while(it!=NULL){
+        while(it != NULL){
             
-            if(visited[it]==true){
+            if(visited[it] == true){
                 return true;
             }
             
             visited[it] = true;
             
             it = it->next;
-            
         }
         
         return false;
