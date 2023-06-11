@@ -14,13 +14,9 @@ public:
             return false;
         
         ListNode* slow = head;
-        ListNode* fast = head->next;
+        ListNode* fast = head;
         
         while(fast != NULL){
-            
-            //if cycle exists
-            if(slow==fast)
-                return true;
             
             fast = fast->next;
             if(fast != NULL)
@@ -28,6 +24,9 @@ public:
 
             slow = slow->next;
             
+            //if cycle exists
+            if(slow==fast)
+                return true;
         }
         
         return false;
