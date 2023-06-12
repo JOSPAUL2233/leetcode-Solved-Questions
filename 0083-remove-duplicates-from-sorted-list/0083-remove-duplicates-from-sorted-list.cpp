@@ -19,8 +19,12 @@ public:
             //if same elements
             if(iter->next != NULL && iter->val == iter->next->val){
                 
+                ListNode* nodeToDelete = iter->next;
+                
                 //direct the link to the next element rather than the same element
                 iter->next = iter->next->next;
+                
+                delete(nodeToDelete);
                 
             }else{
                 
