@@ -12,16 +12,21 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         
-        ListNode* temp = head;
+        ListNode* iter = head;
         
-        while(temp != NULL && temp->next != NULL){
+        while(iter != NULL){
             
-            if(temp->val == temp->next->val){
+            //if same elements
+            if(iter->next != NULL && iter->val == iter->next->val){
                 
-                temp->next = temp->next->next;
+                //direct the link to the next element rather than the same element
+                iter->next = iter->next->next;
                 
-            }else
-            temp = temp->next;
+            }else{
+                
+                iter = iter->next;
+                
+            }
             
         }
         
