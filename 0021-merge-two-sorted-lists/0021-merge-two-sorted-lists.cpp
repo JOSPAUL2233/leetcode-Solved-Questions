@@ -12,58 +12,57 @@ class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         
-        ListNode* temp1 = list1;
-        ListNode* temp2 = list2;
+        //edge cases
+        if(list1 == NULL)
+                return list2;
         
-        if((list1==NULL && list2==NULL)||(list1!=NULL && list2==NULL))return list1;
+        if(list2 == NULL)
+                return list1;
         
-        if(list1==NULL && list2!=NULL)return list2;
+        ListNode* iter = NULL;
+        ListNode* prev = NULL;
+        ListNode* keep = NULL;
         
+        ListNode* newHead = NULL;
         
-        ListNode* merged = temp1;
-        
-        if(temp2->val < temp1->val){
+        //assign smaller value to iter
+        if(list1->val < list2->val){
             
-            merged = temp2;
-            temp2 = temp2->next;
+            iter = list1;
+            keep = list2;
+            
+        }else{
+            
+            iter = list2;
+            keep = list1;
             
         }
-        else {
-            
-            temp1 = temp1->next;
-            
-        }
         
-        ListNode* head = merged;
+        newHead = iter;
         
-        while(temp1 != NULL && temp2 != NULL){
+        //follow the algorithm---
+        
+        while(iter != NULL){
             
-            if(temp2->val < temp1->val){
-            
-                merged->next = temp2;
+            //move iter to the right until it reaches a node which is larger than            
+            //which is larger than the keep 
+            while((iter != NULL && keep != NULL) && iter->val <= keep->val){
                 
-                temp2 = temp2->next;
-            
-            }
-            else {
-            
-                merged->next = temp1;
+                prev = iter;
+                iter = iter->next;
                 
-                temp1 = temp1->next;
-            
             }
             
-            merged = merged->next;
+            // cout<<"iter->val:"<< iter->val <<endl;
+            //connect the link and swap(iter,keep)
+            prev->next = keep;
             
+            if(iter != NULL)
+                swap(iter,keep);
             
         }
-        
-        if(temp1 != NULL)merged -> next = temp1;
-        else merged -> next = temp2;
-        
-        return head;
-        
-        
+                
+        return newHead;
         
     }
 };
