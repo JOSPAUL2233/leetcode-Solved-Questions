@@ -32,55 +32,82 @@ struct Node *start = NULL;
 class Solution
 {
     public:
+    
+    void insertAtTail(Node* &tail,Node* iter){
+        
+        tail->next = iter;
+        tail = iter;
+        
+    }
+    
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
         
-       int zeroCount = 0;
-       int oneCount = 0;
-       int twoCount = 0;
-       
-       Node* iter = head;
-       
-       while(iter != NULL){
-           
-            if(iter->data == 0){
-                zeroCount++;
-            }else if(iter -> data == 1){
-                oneCount++;
-            }else{
-                twoCount++;
-            }
-            
-            iter = iter->next;
-        }
         
-        iter = head;
+        //make three dummy seperate nodes as the 1st node
+        //for 0s,1s and 2s inorder to create three different
+        //linked lists
+        
+        Node* zeroHead = new Node(-1);
+        Node* zeroTail = zeroHead;
+        
+        Node* oneHead = new Node(-1);
+        Node* oneTail = oneHead;
+        
+        Node* twoHead = new Node(-1);
+        Node* twoTail = twoHead;
+        
+        Node* iter = head;
+        
+        //allocate seperately for each of them
         
         while(iter != NULL){
             
-            if(zeroCount > 0){
+            int value = iter->data;
+            
+            if(value == 0){
                 
-                iter -> data = 0;
-                zeroCount--;
+                insertAtTail(zeroTail,iter);
                 
-            }else if(oneCount > 0){
+            }else if(value == 1){
                 
-                iter -> data = 1;
-                oneCount--;
+                insertAtTail(oneTail,iter);
                 
             }else{
                 
-                iter -> data = 2;
-                twoCount--;
-                
+                insertAtTail(twoTail,iter);
             }
             
             iter = iter->next;
-    
+            
         }
         
-        return head;
+        //merge all three linked list
         
+        //1s is not empty
+        if(oneHead->next != NULL){
+            
+            zeroTail->next = oneHead->next;
+        
+        //1s is empty
+        }else{
+            
+            zeroTail -> next = twoHead->next;
+            
+        }
+        
+        oneTail->next = twoHead->next;
+        twoTail->next = NULL;
+        
+        Node* newHead = zeroHead->next;
+        
+        // //delete the dummy nodes
+        delete(zeroHead);
+        delete(oneHead);
+        delete(twoHead);
+        
+        return newHead;
+
     }
 };
 
