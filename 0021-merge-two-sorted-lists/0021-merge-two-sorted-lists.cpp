@@ -13,11 +13,9 @@ public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         
         //edge cases
-        if(list1 == NULL)
-                return list2;
+        if(list1 == NULL)return list2;
         
-        if(list2 == NULL)
-                return list1;
+        if(list2 == NULL)return list1;
         
         ListNode* iter = NULL;
         ListNode* prev = NULL;
@@ -42,11 +40,11 @@ public:
         
         //follow the algorithm---
         
-        while(iter != NULL){
+        while(iter != NULL && keep != NULL){
             
             //move iter to the right until it reaches a node which is larger than            
             //which is larger than the keep 
-            while((iter != NULL && keep != NULL) && iter->val <= keep->val){
+            while(iter != NULL && iter->val <= keep->val){
                 
                 prev = iter;
                 iter = iter->next;
@@ -57,8 +55,7 @@ public:
             //connect the link and swap(iter,keep)
             prev->next = keep;
             
-            if(iter != NULL)
-                swap(iter,keep);
+            swap(iter,keep);
             
         }
                 
