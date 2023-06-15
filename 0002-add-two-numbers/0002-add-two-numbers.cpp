@@ -9,56 +9,99 @@
  * };
  */
 class Solution {
-    
-    
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-
+    
+    void insertAtTail(ListNode* &ansHead,ListNode* &ansTail,int digit){
+        
+        ListNode* temp = new ListNode(digit);
+        
+        //if answer is empty
+        if(ansHead == NULL){
+            
+            ansHead = temp;
+            ansTail = temp;
+        
+        //if answer is not empty
+        }else{
+            
+            ansTail->next = temp;
+            ansTail = temp;
+            
+        }
+        
+    }
+    
+    ListNode* addLists(ListNode* head1,ListNode* head2){
+        
         int carry = 0;
         
-        ListNode* ans = new ListNode();
+        ListNode* ansHead = NULL;
+        ListNode* ansTail = NULL;
         
-        ListNode* head = ans;
-        
-        while(l1 && l2){
+        while(head1 != NULL || head2 != NULL || carry != 0){
             
-            int sum = l1->val + l2->val + carry;
             
-            ans->next = new ListNode(sum%10);
-                        
-            carry = sum/10;
+            int val1 = 0;
+            int val2 = 0;
             
-            l1 = l1->next;
-            l2 = l2->next;
-            ans = ans->next;
-      
+            if(head1)
+                val1 = head1->val;
+            if(head2)
+                val2 = head2->val;
+                            
+            int sum = val1 + val2 + carry;
+            
+            int digit = sum % 10;
+            carry = sum / 10;
+            
+            insertAtTail(ansHead,ansTail,digit);
+            
+            if(head1 != NULL)
+                head1 = head1 -> next;
+            
+            if(head2 != NULL)
+                head2 = head2 -> next;
+            
         }
         
-        while(l1){
-            int sum = l1->val + carry;
-            ans->next = new ListNode(sum%10);
-            carry = sum/10;
+        return ansHead;
+        
+    }
+    
+    ListNode* reverseList(ListNode* head){
+        
+        ListNode* prev = NULL;
+        ListNode* iter = head;
+        ListNode* next = NULL;
+        
+        while(iter != NULL){
             
-            l1 = l1->next;
-            ans = ans->next;
+            next = iter->next;
+            iter->next = prev;
             
+            prev = iter;
+            iter = next;
         }
         
-        while(l2){
-            int sum = l2->val + carry;
-            
-            ans->next = new ListNode(sum%10);
-            
-            carry = sum/10;
-            
-            l2 = l2->next;
-            ans = ans->next;
-        }
+        return prev;
         
-        if(carry)ans->next = new ListNode(carry);
+    }
+    
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-        return head->next;
+        //step 1 - Reverse the given lists
+        // ListNode* head1 = reverseList(l1);
+        // ListNode* head2 = reverseList(l2);
+                
+        //step 2 - do addition of two lists
+        ListNode* ans = addLists(l1,l2);
+                
+        //step 3 - Reverse the answer if the digits are not reversed
+        //in the question
         
+        // ans = reverseList(ans);
+        
+        return ans;
         
     }
 };
