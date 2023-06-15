@@ -9,28 +9,54 @@
  * };
  */
 class Solution {
-public:
     
-    void solve(vector<int> &vec,ListNode* head){
+    ListNode* reverseList(ListNode* head){
         
-        ListNode* temp = head;
+        ListNode* prev = NULL;
+        ListNode* iter = head;
+        ListNode* next = NULL;
         
-        while(temp!=NULL){
-            vec.push_back(temp->val);
-            temp = temp->next;
+        while(iter != NULL){
+            
+            next = iter->next;
+            iter->next = prev;
+            
+            //move one step forward
+            prev = iter;
+            iter = next;
         }
         
+        return prev;
     }
     
+public:
     bool isPalindrome(ListNode* head) {
         
-        vector<int> vec;
+        ListNode* slow = head;
+        ListNode* fast = head;
         
-        solve(vec,head);
+        while(fast -> next != NULL && fast -> next -> next != NULL){
+            
+            slow = slow->next;
+            fast = fast->next->next;
+            
+        }
         
-        for(int i = 0;i<vec.size()/2;i++){
-         
-            if(vec[i]!=vec[vec.size()-1-i])return false;
+        //reverse the second half
+        ListNode* secondHead = reverseList(slow->next);
+        slow->next = secondHead;
+        
+        //check for palindrome
+        ListNode* left = head;
+        ListNode* right = secondHead;
+        
+        while(right != NULL){
+            
+            if(left->val != right->val)
+                return false;
+            
+            left = left->next;
+            right = right->next;
             
         }
         
