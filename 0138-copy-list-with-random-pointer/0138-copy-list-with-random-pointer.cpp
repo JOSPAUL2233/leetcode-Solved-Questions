@@ -17,38 +17,61 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
+                
+        //make  a structure in such a way that
+        //copies are also linked with the original
+        //linked list
         
-        //construct deep copies of nodes
-        map<Node*,Node*> copy;
+        Node* next = NULL;
         Node* iter = head;
         
-        while(iter != NULL){ 
-            //creating new node
+        while(iter != NULL){
+            
+            next = iter->next;
+            
+            //make deep copy node
             Node* temp = new Node(iter->val);
             
-            //mapping original node to the deep copy
-            copy[iter] = temp;
+            //make new links
+            iter->next = temp;
+            temp->next = next;
+          
+            //move to next pointer in original list
+            iter = next;
             
-            iter = iter->next;
         }
         
-        //take care of next and random pointer
+        //take care of random pointers
         
         iter = head;
         
         while(iter != NULL){
             
-            //next pointer
-            copy[iter] -> next = copy[iter->next];
+            if(iter->random != NULL)
+                iter->next->random = iter->random->next;
             
-            //random pointer
-            copy[iter] -> random = copy[iter->random];
+            iter = iter->next->next;
+        }
+                
+        //seperate original linked listand deep copy linked list
+        
+        Node* copyHead = new Node(0);//this is a dummy node
+        Node* copy = copyHead;
+        iter = head;
+        next = NULL;
+        
+        while(iter != NULL){
             
+            next = iter->next->next;
+            copy->next = iter->next;
+            iter->next = next;
+            
+            copy = copy->next;
             iter = iter->next;
             
         }
         
-        return copy[head];
+        return copyHead->next;
         
     }
 };
