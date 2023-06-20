@@ -10,33 +10,28 @@ using namespace std;
 class Solution
 {
     public:
+    
+    void solve(stack<int> &s,int halfSize){
+        
+        if(halfSize==0){
+            
+            s.pop();
+            return;
+            
+        }
+        
+        int element = s.top();
+        
+        s.pop();
+        solve(s,halfSize-1);
+        s.push(element);
+        
+    }
     //Function to delete middle element of a stack.
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
         
-        //to store the uppar layre elements
-        stack<int> store;
-        
-        int upparLayer = s.size()/2;
-        
-        while(upparLayer--){
-            
-            store.push(s.top());
-            s.pop();
-            
-        }
-        
-        //just remove the middle element without storing
-        s.pop();
-        
-        //store the rest of the elements from store
-        //back to stack s
-        while(!store.empty()){
-            
-            s.push(store.top());
-            store.pop();
-            
-        }
+        solve(s,sizeOfStack/2);
         
     }
 };
