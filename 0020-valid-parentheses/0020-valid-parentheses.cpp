@@ -4,35 +4,34 @@ public:
         
         stack<char> st;
         
-        for(int i = 0;i<s.size();i++){
-            
-            char ele = s[i];
+        for(auto x:s){
             
             //if element is any opening bracket, directly push
             //it into the stack
-            if(ele == '(' || ele == '{' || ele == '['){
+            if(x=='[' || x=='{' || x=='('){
                 
-                st.push(ele);
+                st.push(x);
+               
                 
             }else{
-           
                 //stack is empty and there is a closing bracket
                 //which directly says that this can't be balanced.
                 //because it won't be having any matching opening bracket.
-                if(st.empty())
-                    return false;
+                if(st.empty())return false;
+                
+                char temp = st.top();
                 
                 //correct order
-                if(( ele == ')' && st.top() == '(' ) || ( ele == ']' && st.top() == '[' )
-                                                   ||( ele == '}' && st.top() == '{' )){
+                if( (x==']' && temp=='[') || (x=='}' && temp=='{') || (x==')' && temp=='(') ){
+                    
+                    
                     st.pop();
-                                                       
-                }else{//wrong order
-                                                       
+                    
+                }else{//incorrect order
+                    
                     return false;
-                                                       
-                } 
-            }   
+                }
+            }
         }
         
         //stack should be empty(all brackets should be cancelled with other pair)
@@ -40,6 +39,7 @@ public:
             return true;
         else
             return false;
+        
         
     }
 };
