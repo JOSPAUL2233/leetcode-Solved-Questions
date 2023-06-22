@@ -1,90 +1,89 @@
 class Solution {
-private:
+public:
     
-    
-    vector<int> nextSmallerElement(vector<int> heights,int n){
+    vector<int> nextSmallerElement(vector<int> heights){
         
-        vector<int> ans(n,-1);
         stack<int> st;
+        vector<int> nextSmaller(heights.size(),0);
         
-        for(int i = n-1;i>=0;i--){
+        for(int i = heights.size()-1 ; i >= 0 ; i--){
             
-          while(!st.empty()){
-              
-              //check
-                  if(heights[st.top()]<heights[i]){
-
-                      ans[i] = st.top();
-                      break;
-
-                  }
-              
+            //remove all the greater elements to the right from stack
+            while(!st.empty() && heights[st.top()] >= heights[i])
                 st.pop();
-              
+            
+            //update the answer
+            if(st.empty()){
+                nextSmaller[i] = -1;
+            }else{
+                nextSmaller[i] = st.top();
             }
-            
-        st.push(i);
-            
-        }
-        
-        return ans;
-        
-    }
-    
-    vector<int> prevSmallerElement(vector<int> heights,int n){
-        
-        
-        vector<int> ans(n,-1);
-        stack<int> st;
-        
-        for(int i = 0;i<n;i++){
-            
-            while(!st.empty()){
-                
-                //check
-                if(heights[st.top()]<heights[i]){
-                    
-                    ans[i] = st.top();
-                    break;
-                    
-                }
-                
-                st.pop();
-            }
-            
+                        
+            //push the current value into stack
             st.push(i);
             
         }
         
-        return ans;
+        return nextSmaller;
         
     }
     
-    
-public:
-    int largestRectangleArea(vector<int>& heights) {
+    vector<int> prevSmallerElement(vector<int> heights){
         
-        int n = heights.size();
+        stack<int> st;
+        vector<int> prevSmaller(heights.size(),0);
         
-        vector<int> next = nextSmallerElement(heights,n);
-        vector<int> prev = prevSmallerElement(heights,n);
-        
-        int area = 0;
-        
-        for(int i = 0;i<n;i++){
+        for(int i = 0 ; i < heights.size() ; i++){
             
-            int l = heights[i];
+            //remove all the greater elements to the left from stack
+            while(!st.empty() && heights[st.top()] >= heights[i])
+                st.pop();
             
-            if(next[i]==-1)next[i] = n;
+            //update the answer
+            if(st.empty()){
+                prevSmaller[i] = -1;
+            }else{
+                prevSmaller[i] = st.top();
+            }
             
-            int b = next[i]-prev[i]-1;
-            
-            int compareArea = l*b;
-            area = max(area,compareArea);
+            //push the current value into stack
+            st.push(i);
             
         }
         
-        return area;
+        return prevSmaller;
+        
+    }
+    
+    int largestRectangleArea(vector<int>& heights) {
+        
+        
+        //make next smaller and prev smaller arrays
+        vector<int> next = nextSmallerElement(heights);
+        vector<int> prev = prevSmallerElement(heights);
+        
+        int maxArea = 0;
+        
+        for(int i = 0; i < heights.size(); i++){
+            
+            //get the length of the rectangle
+            int length = heights[i];
+            
+            //get the bridth of the rectangle
+            if(next[i] == -1)
+                next[i] = heights.size();
+            
+            int breadth = next[i] - prev[i] - 1;
+            
+            //calculate current area
+            int area = length*breadth;
+            
+            //store the maximum area
+            maxArea = area > maxArea ? area : maxArea;
+            
+        }
+        
+        return maxArea;
         
     }
 };
