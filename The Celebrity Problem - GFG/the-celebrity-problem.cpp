@@ -14,58 +14,32 @@ class Solution
     int celebrity(vector<vector<int> >& M, int n) 
     {
        
-       stack<int> st;
-       
-       for(int i = 0;i<n;i++){
-       
-            st.push(i);
+       for(int i = 0 ; i<n ; i++){
            
-       }
-       
-       while(st.size()>1){
+           int col = 0;
+           int raw = 0;
            
-           int a = st.top();
-           st.pop();
-           
-           int b = st.top();
-           st.pop();
-           
-           if(M[a][b]==1){
-               st.push(b);
-           }else{
-               st.push(a);
+           //check for raw
+           for(int j = 0;j<n;j++){
+               
+               raw += M[i][j];
+               
            }
            
-       }
-       
-       
-       //verify the stack element
-       
-       int celeb = st.top();
-       
-       int zeros = 0;
-       int ones = 0;
-       
-       for(int i = 0;i<n;i++){
+           //check for col
            
-           if(M[celeb][i] == 0)zeros++;
+           for(int j = 0;j<n;j++){
+               
+               col += M[j][i];
+               
+           }
+           
+           if(col == n-1 && raw == 0)
+            return i;
            
        }
        
-       if(zeros!=n)return -1;
-       
-       for(int i = 0;i<n;i++){
-           
-           if(M[i][celeb]==1)ones++;
-           
-       }
-       
-       if(ones!=n-1)return -1;
-       
-       
-       return celeb;
-       
-      
+       return -1;
        
     }
 };
