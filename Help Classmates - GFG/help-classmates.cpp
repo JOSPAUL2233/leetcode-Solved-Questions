@@ -13,30 +13,31 @@ class Solution{
     public:
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
-        
-        vector<int> ans(n,-1);
-        
-        stack<int> st;
 
-        for(int i = n-1;i>=0;i--){
+        stack<int> st;
+        vector<int> nextSmaller(n,0);
+        
+        for(int i=n-1 ; i>=0 ; i--){
             
-            while(!st.empty()){
-                
-                if(arr[st.top()] < arr[i]){
-                    ans[i] = arr[st.top()];
-                    break;
-                }
-                
+            //remove all the greater elements to the right from stack
+            while(!st.empty() && st.top() >= arr[i]){
                 st.pop();
             }
-            st.push(i);
+            
+            //update the answer
+            if(st.empty()){
+                nextSmaller[i] = -1;
+            }else{
+                nextSmaller[i] = st.top();
+            }
+            
+            //push the current value into the stack
+            st.push(arr[i]);
             
         }
         
-        return ans;
-        
+        return nextSmaller;
 
-        
     } 
 };
 
