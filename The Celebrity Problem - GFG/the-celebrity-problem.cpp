@@ -13,34 +13,72 @@ class Solution
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
     {
-       
-       for(int i = 0 ; i<n ; i++){
-           
-           int col = 0;
-           int raw = 0;
-           
-           //check for raw
-           for(int j = 0;j<n;j++){
-               
-               raw += M[i][j];
-               
-           }
-           
-           //check for col
-           
-           for(int j = 0;j<n;j++){
-               
-               col += M[j][i];
-               
-           }
-           
-           if(col == n-1 && raw == 0)
-            return i;
-           
-       }
-       
-       return -1;
-       
+        
+        stack<int> st;
+        
+        //push all the index into the stack
+        for(int i = 0 ; i < n ; i++){
+            
+            st.push(i);
+            
+        }
+
+        
+        while(st.size() > 1){
+            
+            //pick up two elements
+            int a = st.top();
+            st.pop();
+            
+            int b = st.top();
+            st.pop();
+            
+            //check if a knows b and push if it can
+            //be a candiate
+            if(M[a][b] == 1){
+                st.push(b);
+            }else{
+                st.push(a);
+            }
+            
+        }
+        
+        //now, st.top() can be an answer if the array
+        //contains any celebrity. so check for that
+        //candidate
+        
+        int ans = st.top();
+        
+        //check for col
+        int colOnes = 0;
+        
+        for(int i = 0;i<n;i++){
+            
+            if(M[i][ans] == 1)
+                colOnes++;
+                
+        }
+        
+        if(colOnes != n-1)
+            return -1;
+            
+        
+        //check for raw
+        int rawOnes = 0;
+        
+        for(int i = 0;i<n;i++){
+            
+            if(M[ans][i] == 1)
+                rawOnes++;
+            
+        }
+        
+        if(rawOnes != 0)
+            return -1;
+        
+        
+        //if it overcame col and raw check, then it is the celebrity.
+        return ans;
     }
 };
 
