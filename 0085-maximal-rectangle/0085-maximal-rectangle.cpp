@@ -1,6 +1,7 @@
 class Solution {
 public:
     
+    //used in histogram
     vector<int> nextSmaller(vector<int> vec){
         
         stack<int> st;
@@ -13,26 +14,20 @@ public:
                 st.pop();
             
             //assign the answer
-            if(st.empty()){
-                
+            if(st.empty())
                 rightSmaller[i] = -1;
-                
-            }else{
-                
+            else
                 rightSmaller[i] = st.top();
-                
-            }
             
             //push the current value to the stack
-            
             st.push(i);
             
         }
         
         return rightSmaller;
-        
     }
     
+    //used in histogram
     vector<int> prevSmaller(vector<int> vec){
         
         stack<int> st;
@@ -45,27 +40,22 @@ public:
                 st.pop();
             
             //assign answer
-            if(st.empty()){
-                
+            if(st.empty())
                 leftSmallest[i] = -1;
-                
-            }else{
-                
+            else
                 leftSmallest[i] = st.top();
-                
-            }
             
             //push the current element
             st.push(i);
-            
+
         }
         
         return leftSmallest;
-        
     }
     
     int areaOfHistogram(vector<int> vec){
         
+        //get the prevSmaller and nextSmaller for every element
         vector<int> left = prevSmaller(vec);
         vector<int> right = nextSmaller(vec);
         
@@ -80,8 +70,10 @@ public:
             int length = right[i] - left[i] - 1;
             int breadth = vec[i];
             
+            //calculate area
             int area = length*breadth;
             
+            //store the maximum area
             maxArea = max(area,maxArea);
             
         }
@@ -96,6 +88,9 @@ public:
         int raws = matrix.size();
         int cols = matrix[0].size();
         
+        //since it will be a vector of char, we keep a temporary vector of int
+        //to pass that into areaOfHistogram
+        
         vector<int> temp(cols,0);
         int maxArea = 0;
         
@@ -109,14 +104,16 @@ public:
                 else
                     temp[j] = 0;
                                 
-            }cout<<endl;
+            }
             
+            //find the area of Histogram for this raw
             int area = areaOfHistogram(temp);
+            
+            //store the maximum area
             maxArea = max(area,maxArea);
             
         }
         
         return maxArea;
-        
     }
 };
