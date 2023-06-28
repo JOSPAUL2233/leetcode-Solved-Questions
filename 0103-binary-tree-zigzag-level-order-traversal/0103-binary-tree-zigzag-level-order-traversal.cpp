@@ -13,40 +13,51 @@ class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         
-        if(!root)return{};
+        //edge case
+        if(!root)
+            return {};
         
-        vector<vector<int>> v;
+        vector<vector<int>> ans;
         
         queue<TreeNode*> que;
-        que.push(root);
+        bool leftToRight = true;
         
-        bool directionLeft = true;
+        que.push(root);
         
         while(!que.empty()){
             
-            int len = que.size();
-            vector<int> ele(len,0);
+            int size = que.size();
+            vector<int> vec(size,0);
             
-            for(int i = 0;i<len;i++){
+            for(int i = 0;i<size;i++){
                 
+                //take out the front element
                 TreeNode* temp = que.front();
                 que.pop();
                 
-                if(directionLeft)
-                    ele[i] = temp->val;
-                else
-                    ele[len-1-i] = temp->val;
+                //check for direction and store accordingly
+                if(leftToRight){
+                    vec[i] = temp->val;
+                }else{
+                    vec[size-1-i] = temp->val;
+                }
+            
+                //insert left and right into queue if exists
+                if(temp->left)
+                    que.push(temp->left);
                 
-                if(temp->left)que.push(temp->left);
-                
-                if(temp->right)que.push(temp->right);
+                if(temp->right)
+                    que.push(temp->right);
             }
-            v.push_back(ele);
-            directionLeft = !directionLeft;
+            
+            //store the vec to ans and change the direction
+            //for the next for next iteration
+            
+            ans.push_back(vec);
+            leftToRight = !leftToRight;
             
         }
         
-        return v;
-        
+        return ans;
     }
 };
