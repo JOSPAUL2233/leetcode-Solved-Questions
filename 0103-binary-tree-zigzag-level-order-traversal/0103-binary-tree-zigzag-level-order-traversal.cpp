@@ -17,12 +17,15 @@ public:
         if(!root)
             return {};
         
+        //answer vector
         vector<vector<int>> ans;
         
         queue<TreeNode*> que;
+        que.push(root);
+        
+        //to change the direction
         bool leftToRight = true;
         
-        que.push(root);
         
         while(!que.empty()){
             
@@ -36,11 +39,10 @@ public:
                 que.pop();
                 
                 //check for direction and store accordingly
-                if(leftToRight){
+                if(leftToRight)
                     vec[i] = temp->val;
-                }else{
+                else
                     vec[size-1-i] = temp->val;
-                }
             
                 //insert left and right into queue if exists
                 if(temp->left)
@@ -52,7 +54,6 @@ public:
             
             //store the vec to ans and change the direction
             //for the next for next iteration
-            
             ans.push_back(vec);
             leftToRight = !leftToRight;
             
