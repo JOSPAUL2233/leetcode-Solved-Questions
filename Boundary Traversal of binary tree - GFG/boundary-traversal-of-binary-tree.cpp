@@ -124,7 +124,7 @@ public:
         
     }
     
-    void leafPart(Node* root, vector<int> &ans){
+    void leaves(Node* root, vector<int> &ans){
         
         if(root == NULL)
             return;
@@ -137,8 +137,8 @@ public:
             
         
         //inorder traversal is followed(left to right)
-        leafPart(root->left,ans);
-        leafPart(root->right,ans);
+        leaves(root->left,ans);
+        leaves(root->right,ans);
         
     }
     
@@ -171,8 +171,8 @@ public:
         leftPart(root->left,ans);
         
         //take care of all the leaf nodes
-        leafPart(root->left,ans);
-        leafPart(root->right,ans);
+        leaves(root->left,ans);
+        leaves(root->right,ans);
         
         //take care of right part except the leaf node
         rightPart(root->right,ans);
