@@ -104,72 +104,81 @@ struct Node
 }; */
 
 class Solution {
-    
-    
-    void leftPart(Node* root,vector<int> &v){
+public:
+
+    void leftPart(Node* root,vector<int> &ans){
         
-        if(root==NULL || (root->left == NULL && root->right==NULL))return;
+        //if it's NULL or reaches leaf node, go back
+        if(root == NULL || (root->left == NULL && root->right == NULL))
+            return;
+            
+        //store the answer
+        ans.push_back(root->data);
         
-       
-        v.push_back(root->data);
-        
+        //go for next traversal to the left direction
+        //if left is'nt there, go to right once
         if(root->left)
-        leftPart(root->left,v);
-        
+            leftPart(root->left,ans);
         else
-        leftPart(root->right,v);
+            leftPart(root->right,ans);
         
     }
     
-    void leaves(Node* root,vector<int> &v){
+    void leafPart(Node* root, vector<int> &ans){
         
-        if(root==NULL)return;
+        if(root == NULL)
+            return;
         
-        if(root->left == NULL && root->right==NULL){
-            v.push_back(root->data);
+        //store the leaf nodes
+        if(root->left == NULL && root->right == NULL){
+            ans.push_back(root->data);
             return;
         }
+            
         
-        if(root->left)
-        leaves(root->left,v);
-        
-        if(root->right)
-        leaves(root->right,v);
+        //inorder traversal is followed(left to right)
+        leafPart(root->left,ans);
+        leafPart(root->right,ans);
         
     }
     
-    void rightPart(Node* root,vector<int> &v){
+    void rightPart(Node* root, vector<int> &ans){
         
-        if(root==NULL || (root->left == NULL && root->right==NULL))return;
+        //if it's NULL or reaches leaf node, go back
+        if(root == NULL || (root->left == NULL && root->right == NULL))
+            return;
         
+        //move further to right, if not then left
         if(root->right)
-        rightPart(root->right,v);
-        
+            rightPart(root->right,ans);
         else
-        rightPart(root->left,v);
+            rightPart(root->left,ans);
         
-        v.push_back(root->data);
+        //while back-tracking, store the node
+        ans.push_back(root->data);
         
     }
     
-    
-public:
+
     vector <int> boundary(Node *root)
     {
-       if(root==NULL)return{};
-       
-       vector<int> ans;
-       ans.push_back(root->data);
-       
-       leftPart(root->left,ans);
-       
-       leaves(root->left,ans);
-       leaves(root->right,ans);
-       
-       rightPart(root->right,ans);
-       
-       return ans;
-       
+        
+        vector<int> ans;
+        
+        ans.push_back(root->data);
+        
+        //take care of left part except the leaf node
+        leftPart(root->left,ans);
+        
+        //take care of all the leaf nodes
+        leafPart(root->left,ans);
+        leafPart(root->right,ans);
+        
+        //take care of right part except the leaf node
+        rightPart(root->right,ans);
+        
+        return ans;
+        
     }
 };
 
