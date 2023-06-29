@@ -104,55 +104,44 @@ class Solution
     //from left to right in Binary Tree.
     vector<int> topView(Node *root)
     {
-      
-      map<int,int> m;//horizontal diatance , value
-      
-      queue<pair<Node*,int>> que; // NODE , HORIZONTAL DISTANCE
-      
-      que.push(make_pair(root,0));
-      
-      vector<int> ans;
-      
-      while(!que.empty()){
-          
-          pair<Node*,int> temp = que.front();
-          que.pop();
-          
-          Node* node = temp.first;
-          int hd = temp.second;
-          
-          if( m.find(hd) == m.end() ){
-              
-             m[hd] = node->data;
-              
-          }
-          
-          if(node->left){
-              
-              que.push(make_pair(node->left,hd-1));
-              
-          }
-          
-          if(node->right){
-              
-              que.push(make_pair(node->right,hd+1));
-              
-          }
-          
-          
-      }
-      
-      
-      
-          for(auto i : m){
-              
-              ans.push_back(i.second);
-              
-          }
-    
-    
-            return ans;
-
+        //mapping : Horizontal Distance -> node
+        map<int,int> topNode;
+        
+        //queue since we do level order traversal
+        queue<pair<Node*,int>> que; //node,horizontal distance
+        
+        que.push({root,0});
+        
+        while(!que.empty()){
+            
+            Node* node = que.front().first;
+            int hd = que.front().second;
+            que.pop();
+            
+            //check if there is already an element who can hide
+            //the coming element from top
+            if(topNode.find(hd) == topNode.end()){
+                
+                topNode[hd] = node->data;
+                
+            }
+            
+            //go for left and right if they exists
+            if(node->left)
+                que.push({node->left,hd-1});
+            
+            if(node->right)
+                que.push({node->right,hd+1});
+            
+        }
+        
+        //extract the answer
+        vector<int> ans;
+        for(auto i : topNode){
+            ans.push_back(i.second);
+        }
+        
+        return ans;
     }
 
 };
