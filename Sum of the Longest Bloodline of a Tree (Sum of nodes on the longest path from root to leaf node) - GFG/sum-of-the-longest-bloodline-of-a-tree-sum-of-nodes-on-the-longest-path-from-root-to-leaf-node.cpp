@@ -116,52 +116,54 @@ struct Node
 */
 class Solution
 {
+public:
     
-    void solve(Node* root, pair<int,int> curr,pair<int,int> &max){
+    void solve(Node* root,pair<int,int> curr,pair<int,int> &max){
         
-        if(root==NULL)return;
+        if(root == NULL)
+            return;
         
-        curr.first = curr.first + root->data;
+        //update the current values
+        curr.first += 1;
+        curr.second += root->data;
         
-        
-        if(curr.second==max.second){ // IF THE HEIGHS ARE SAME
+        //if reached at the leaf node
+        if(root->left == NULL && root->right == NULL){
             
-            if(curr.first>max.first){
-             
+            //comparing the height
+            if(curr.first > max.first){
                 max.first = curr.first;
-                
+                max.second = curr.second;
+            }
+            if(curr.first == max.first){
+                //store the maximum sum
+                max.second = curr.second > max.second ? curr.second : max.second;
             }
             
         }
         
-        if(curr.second>max.second){ // IF THE CURRENT HEIGHT IS LARGER THAN THE MAX HEIGHT
-            
-            max.first = curr.first;
-            max.second = curr.second;
-            
-            
-        }
-        
-        
-        curr.second++;
-        
+        //go for left and right
         solve(root->left,curr,max);
         solve(root->right,curr,max);
         
+        //backtrack the updated values back
+        curr.first -= 1;
+        curr.second -= root->data;
         
     }
     
-public:
-    
     int sumOfLongRootToLeafPath(Node *root)
     {
+     
+        //pair : length,sum   
+        pair<int,int> curr = make_pair(0,0);
+        pair<int,int> max = make_pair(0,0);
         
-        pair<int,int> current = make_pair(0,0); // pair - sum,height
-        pair<int,int> max = make_pair(0,0); // pair - sum,height
+        solve(root,curr,max);
         
-        solve(root,current,max);
+        return max.second;
         
-        return max.first;
+        
     }
 };
 
