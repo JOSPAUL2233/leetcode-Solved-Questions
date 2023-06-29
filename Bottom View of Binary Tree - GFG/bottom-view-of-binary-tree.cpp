@@ -97,50 +97,40 @@ class Solution {
   public:
     vector <int> bottomView(Node *root) {
         
-        // MAP : hd -> node.data
+        //map : HD -> node
+        map<int,int> bottomNode;
         
-        map<int,int> nodes;
+        queue<pair<Node*, int>> que;//node and HD
         
-        //queue : pair< node , hd>
-        
-        queue<pair<Node*,int>> que;
-        
-        que.push(make_pair(root,0));
-        
-        vector<int> ans;
+        que.push({root,0});
         
         while(!que.empty()){
             
-            pair<Node*,int> temp = que.front();
+            //extract the elements
+            Node* node = que.front().first;
+            int hd = que.front().second;
             que.pop();
             
-            Node* tempNode = temp.first;
-            int hd = temp.second;
+            //push the current element to it's hd
+            bottomNode[hd] = node->data;
             
-            nodes[hd] = tempNode->data;
+            //take care of left and right part
+            if(node->left)
+                que.push({node->left,hd-1});
             
-            if(tempNode->left){
-                
-                que.push(make_pair(tempNode->left,hd-1));
-                
-            }
-            if(tempNode->right){
-                
-                que.push(make_pair(tempNode->right,hd+1));
-                
-            }
-            
+            if(node->right)
+                que.push({node->right,hd+1});
             
         }
         
+        //extract the answer from the map
+        vector<int> ans;
         
-        for(auto i:nodes){
+        for(auto i: bottomNode){
             ans.push_back(i.second);
         }
-     
-        return ans;
-     
         
+        return ans;
     }
 };
 
