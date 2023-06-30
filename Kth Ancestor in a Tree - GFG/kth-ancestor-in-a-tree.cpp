@@ -129,14 +129,10 @@ void solve(Node* root,int node,vector<int> v,vector<int> &path,bool found){
     
     v.pop_back();
     
-    
-    
-    
 }
 
 int kthAncestor(Node *root, int k, int node)
 {
-    
     vector<int>  path;
     
     vector<int> v;
