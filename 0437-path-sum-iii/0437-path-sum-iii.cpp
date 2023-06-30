@@ -11,35 +11,40 @@
  */
 class Solution {
     
-    void solve(TreeNode* root,int k,vector<long> &ans,int &count){
+    void solve(TreeNode* root,int target,vector<int> path,int &count){
         
-        if(root==NULL)return;
+        if(root == NULL)
+            return;
         
-        ans.push_back(root->val);
+        //push the current node into the path
+        path.push_back(root->val);
+        
+        //explore all routes(ie. left and right)
+        solve(root->left,target,path,count);
+        solve(root->right,target,path,count);
+        
+        //starting from the back, check for targetSum
         long sum = 0;
-        for(int i = ans.size()-1;i>=0;i--){
+        for(int i = path.size()-1;i>=0 ;i--){
             
-            sum+=ans[i];
-            if(sum==k){
+            sum += path[i];
+            
+            if(sum == target)
                 count++;
-            }
             
         }
-        
-        solve(root->left,k,ans,count);
-        solve(root->right,k,ans,count);
-        
-        ans.pop_back();
-        
         
     }
 public:
     int pathSum(TreeNode* root, int targetSum) {
         
-        vector<long> ans;
+        //make a vector to keep a track of the path
+        vector<int> path;
+        
+        //make a count to count the targetSum
         int count = 0;
         
-        solve(root,targetSum,ans,count);
+        solve(root,targetSum,path,count);
         
         return count;
         
