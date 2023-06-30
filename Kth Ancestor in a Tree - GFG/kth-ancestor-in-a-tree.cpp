@@ -112,38 +112,52 @@ struct Node
 */
 // your task is to complete this function
 
-void solve(Node* root,int node,vector<int> v,vector<int> &path,bool found){
+Node* solve(Node* root, int &k ,int node,bool &found){
     
-    if((root==NULL || found))return;
+    //base cases
+    if(root == NULL)
+        return NULL;
 
-    v.push_back(root->data);
+    if(root->data == node)
+        return root;
+    
+    //get for left and right part
+    Node* leftPart = solve(root->left,k,node,found);
+    Node* rightPart = solve(root->right,k,node,found);
+    
+    //if one of the part gave the node
+    if(leftPart || rightPart){
+        
+        k--;
+        //it reached the kth ancestor node
+        if(k == 0){
+            found = true;
+            //increase k in such a way
+            //that it doesn't reach 0 again after
+            //decrementing several times
+            k = INT_MAX;
+            return root;
+        
+        }
 
-    if(root->data == node){
-        found = true;
-        path = v;
-        return;
+        //return the node
+        return leftPart ? leftPart : rightPart;
+        
     }
     
-    solve(root->left,node,v,path,found);
-    solve(root->right,node,v,path,found);
-    
-    v.pop_back();
-    
+    return NULL;
+
 }
 
 int kthAncestor(Node *root, int k, int node)
 {
-    vector<int>  path;
-    
-    vector<int> v;
-    
+
     bool found = false;
+    Node* ans = solve(root,k,node,found);
     
-    solve(root,node,v,path,found);
-    
-    if(path.size()-1<k)return -1;
-    
-    return path[path.size()-1-k];
-    
+    if(found)
+        return ans->data;
+    else
+        return -1;
     
 }
