@@ -14,34 +14,34 @@ public:
     TreeNode* searchBST(TreeNode* root, int val) {
 //-----------RECURSIVE WAY -----------------------
         
-        if(root==NULL)return NULL;
+//         if(root==NULL)return NULL;
        
-        if(root->val == val)return root;
+//         if(root->val == val)return root;
         
-        //go to right if : val > current val of root
-        if(val > root->val){
+//         //go to right if : val > current val of root
+//         if(val > root->val){
             
-            return searchBST(root->right,val);
+//             return searchBST(root->right,val);
             
-        }else{
+//         }else{
             
-            return searchBST(root->left,val);
+//             return searchBST(root->left,val);
             
-        }
+//         }
         
 //------------ITERATIVE WAY---------------------
         
-//         TreeNode* temp = root;
+        TreeNode* temp = root;
         
-//         while(temp != NULL){
+        while(temp != NULL){
                         
-//             if(temp->val==val)return temp;
+            if(temp->val==val)return temp;
             
-//             if(temp->val>val)temp = temp->left;
-//             else temp = temp->right;
+            if(temp->val>val)temp = temp->left;
+            else temp = temp->right;
             
-//         }
+        }
          
-//     return NULL;//if the element is not found
+    return NULL;//if the element is not found
     }
 };
