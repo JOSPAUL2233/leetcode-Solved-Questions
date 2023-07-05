@@ -45,6 +45,7 @@ public:
     TreeNode* balanceBST(TreeNode* root) {
         
         //get the inorder
+        //here, nodes are stored but values can also be stored.
         vector<TreeNode*> inorder;
         getInorder(root,inorder);
         
