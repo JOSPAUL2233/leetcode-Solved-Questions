@@ -31,15 +31,16 @@ vector<int> minAnd2ndMin(int a[], int n) {
     int secondMin = INT_MAX;
     int min = INT_MAX;
     
-    
     for(int i = 0;i<n;i++){
         
+        //if new smaller element is found
         if(a[i] < min){
             
             secondMin = min;
             min = a[i];
-            
-        }else if(a[i] < secondMin && a[i] != min){
+        
+        //if there is an element which comes in between min and secondMin
+        }else if(a[i] < secondMin && a[i] > min){
             
             secondMin = a[i];
             
@@ -47,9 +48,8 @@ vector<int> minAnd2ndMin(int a[], int n) {
             
     }
     
-    if(secondMin == INT_MAX)
+    if(secondMin == INT_MAX)//if second element does not exist
         return {-1};
     else
         return {min,secondMin};
-    
 }
