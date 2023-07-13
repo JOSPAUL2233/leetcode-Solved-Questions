@@ -12,24 +12,24 @@ class Solution{
 public:
     int remove_duplicate(int a[],int n){
         
-        //using hashSet which does not store duplicates
-        set<int> s;
-        
-        for(int i = 0;i<n;i++){
-            s.insert(a[i]);
-        }
-        
-        //store it in array
         int i = 0;
         
-        for(auto j : s){
+        //keep the sorted array after removing the duplicates
+        //at the first of array 'a'
+        for(int j = 1;j<n;j++){
             
-            a[i++] = j;
+            if(a[i] != a[j]){
+                
+                i++;
+                a[i] = a[j];
+                
+            }
             
         }
         
-        //giv
-        return i;
+        //return the size of the sorted array after removing duplicates
+        return i + 1;
+        
     }
 };
 
