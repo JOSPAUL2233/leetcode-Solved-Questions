@@ -8,42 +8,47 @@ class Solution{
     public:
     int lenOfLongSubarr(int A[],  int N, int K) 
     { 
-        
-        unordered_map<int,int> prefixSums;
-        int longest = 0;
-        
-        int sum = 0;
 
+        //going to store the prefixSum in the hashmap
+        map<int,int> prefixSum;
+        
+        int maxLength = 0;
+        int sum = 0;
+        
         for(int i = 0;i<N;i++){
             
             sum += A[i];
-        
-            if(sum==K){
-                longest = max(longest, i+1);
+            
+            //check if the current sum is equal to K or not
+            if(sum == K){
+                
+                maxLength = max(maxLength , i+1);
+                
             }
             
+            //find the ele after removing which, we will get the sum as k
             int rem = sum - K;
-
-            //finding the remainder element which by subtracting,
-            //we get the value as k
-            if(prefixSums.find(rem) != prefixSums.end()){
-                int len = i - prefixSums[rem];
-                longest = max(longest,len);
+            
+            //check if that element is there in the prefixSum
+            if(prefixSum.find(rem) != prefixSum.end()){
+                
+                //get the length and store the maxLength
+                int length = i - prefixSum[rem];
+                maxLength = max(maxLength,length);
+                
             }
             
-            //only store the index if it is appearing for the 1st time
-            //since we need the longest length so, take the left most
-            //index as the starting position of any element if it is
-            //repeating
+            //since we have to find the maximum Length, we will only update the
+            //hashmap index if the prefixSum was not present previously(since we have
+            //to get the left most starting point)
             
-            if(prefixSums.find(sum) == prefixSums.end()){
-                prefixSums[sum] = i;
-            }
+            if(prefixSum.find(sum) == prefixSum.end())
+                prefixSum[sum] = i;
             
         }
-        
-        return longest;
-        
+
+    return maxLength;
+
     } 
 
 };
