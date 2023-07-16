@@ -2,38 +2,29 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         
-        int countOne = 0;
-        int countZero = 0;
-        int countTwo = 0;
+        int low = 0;
+        int mid = 0;
+        int high = nums.size()-1;
         
-        //counting the number of one's,two's and zero's
-        for(int i = 0;i<nums.size();i++){
+        while(mid <= high){
             
-            if(nums[i] == 0)
-                countZero++;
-            else if(nums[i]==1)
-                countOne++;
-            else if(nums[i] == 2)
-                countTwo++;
-            
-        }
-        
-        //overriding the existing values in sorted order
-        
-        for(int i = 0;i<nums.size();i++){
-            
-            if(countZero){
-                nums[i] = 0;
-                countZero--;
-            }else if(countOne){
-                nums[i] = 1;
-                countOne--;
-            }
-            else if(countTwo){
-                nums[i] = 2;
-                countTwo--;
-            }
+            if(nums[mid] == 0){
                 
+                swap(nums[low],nums[mid]);
+                low++;
+                mid++;
+                
+            }else if(nums[mid] == 1){
+                
+                mid++;
+                
+            }else if(nums[mid] == 2){
+                
+                swap(nums[mid],nums[high]);
+                high--;
+                
+            }
+            
         }
         
     }
