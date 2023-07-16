@@ -11,7 +11,7 @@ public:
             
             //if count is found to be zero, change the element and start counting from here
             //for this element
-            if(count == 0){
+            if(count <= 0){
                 
                 element = nums[i];
                 count = 1;
