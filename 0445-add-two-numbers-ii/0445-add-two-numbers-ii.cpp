@@ -12,6 +12,7 @@ class Solution {
 public:
     void insertAtTail(ListNode* &ansHead,ListNode* &ansTail,int digit){
         
+        //make a new node
         ListNode* temp = new ListNode(digit);
         
         //if answer is empty
@@ -39,7 +40,6 @@ public:
         
         while(head1 != NULL || head2 != NULL || carry != 0){
             
-            
             int val1 = 0;
             int val2 = 0;
             
@@ -64,7 +64,6 @@ public:
         }
         
         return ansHead;
-        
     }
     
     ListNode* reverseList(ListNode* head){
