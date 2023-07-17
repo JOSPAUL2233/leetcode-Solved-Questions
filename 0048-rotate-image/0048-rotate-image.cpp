@@ -1,31 +1,35 @@
 class Solution {
 public:
+    
+    void reverse(vector<int> &matrix,int n){
+        
+        for(int i = 0;i < n/2;i++){
+            swap(matrix[i] , matrix[n-1-i]);
+        }
+        
+    }
+    
     void rotate(vector<vector<int>>& matrix) {
         
-        int n = matrix.size();//matrix is of n x n size.
+        int n = matrix.size();
         
-        //create an axtra array where the rotated array will be stored.
-        vector<vector<int>> rotated(matrix.size(),vector<int> (matrix[0].size(),0));   
-        
-        //traverse throught the matrix and store the index accordingly in the rotated array
+        //Transpose the matrix
         for(int i = 0;i<n;i++){
             
-            for(int j = 0;j<n;j++){
-                rotated[j][n-1-i] = matrix[i][j];
+            for(int j = i+1;j<n;j++){
+                
+                swap(matrix[i][j] , matrix[j][i]);
+                
             }
             
         }
         
-        //allocate the rotated array into the matrix
+        //Reverse all the raws of the matrix
         for(int i = 0;i<n;i++){
             
-            for(int j = 0;j<n;j++){
-                matrix[i][j] = rotated[i][j];   
-            }
+            reverse(matrix[i],n);
             
         }
-        
-        
         
     }
 };
