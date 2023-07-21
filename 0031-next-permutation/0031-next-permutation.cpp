@@ -18,8 +18,8 @@ public:
         int n = nums.size();
         
         //edge case : if there is only one element, return the array
-        if(n == 1)
-            return;
+        // if(n == 1)
+        //     return;
         
         //step 1 : find the breaking point(an element which is lesser than the next element)
         
