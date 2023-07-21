@@ -2,58 +2,63 @@ class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
 
+    
+    //define left, right, top and bottom
+        
+    int top = 0;
+    int bottom =matrix.size()-1;
+    int left = 0;
+    int right = matrix[0].size()-1;
 
-    int SR = 0;
-    int ER =matrix.size()-1;
-    int SC = 0;
-    int EC = matrix[0].size()-1;
-
+    //store the total number of elements
     int max = matrix.size() * matrix[0].size();
 
+    //keeps a track of number of elements visited
     int count = 0;
 
     vector<int> v;
 
+    //loop will run till all the elements are visited
     while(count<max){
 
-        //raw1
-        for(int i = SC;i<=EC && count<max;i++){
+        // left to right
+        for(int i = left;i<=right && count<max;i++){
 
-            v.push_back(matrix[SR][i]);
+            v.push_back(matrix[top][i]);
             count++;
 
         }
-        SR++;
+        top++;
         
-        //column1
-        for(int i = SR;i<=ER && count<max;i++){
+        // top to bottom
+        for(int i = top;i<=bottom && count<max;i++){
 
-            v.push_back(matrix[i][EC]);
+            v.push_back(matrix[i][right]);
             count++;
 
         }
-        EC--;
+        right--;
 
-        //raw2
-        for(int i = EC;i>=SC && count<max;i--){
+        // right to left
+        for(int i = right;i>=left && count<max;i--){
 
-            v.push_back(matrix[ER][i]);
+            v.push_back(matrix[bottom][i]);
             count++;
 
         }
-        ER--;
+        bottom--;
 
-        //col2
-        for(int i = ER;i>=SR && count<max;i--){
-            v.push_back(matrix[i][SC]);
+        // bottom to top
+        for(int i = bottom;i>=top && count<max;i--){
+            v.push_back(matrix[i][left]);
             count++;
 
         }
-        SC++;
+        
+        left++;
 
     }
         
-        return v;
- 
+    return v;
     }
 };
