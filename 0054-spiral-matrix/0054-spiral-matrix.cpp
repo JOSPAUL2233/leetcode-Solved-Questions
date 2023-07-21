@@ -2,10 +2,6 @@ class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
 
-    //SR = START ROW
-    //ER = END ROW
-    //SC = START COL
-    //EC = END COL
 
     int SR = 0;
     int ER =matrix.size()-1;
