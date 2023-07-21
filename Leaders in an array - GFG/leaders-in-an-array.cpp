@@ -40,11 +40,12 @@ class Solution{
         
         for(int i = n-2 ; i >= 0 ; i--){
 
-            //if 
+            //current element is also a leader
             if(max == a[i]){
                 ans.push_back(max);
             }
             
+            //new leader found
             if(a[i] > max){
                 
                 max = a[i];
