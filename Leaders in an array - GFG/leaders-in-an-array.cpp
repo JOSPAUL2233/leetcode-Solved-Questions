@@ -39,8 +39,13 @@ class Solution{
         //then that is a leader and update the max accordingly
         
         for(int i = n-2 ; i >= 0 ; i--){
+
+            //if 
+            if(max == a[i]){
+                ans.push_back(max);
+            }
             
-            if(a[i] >= max){
+            if(a[i] > max){
                 
                 max = a[i];
                 ans.push_back(max);
