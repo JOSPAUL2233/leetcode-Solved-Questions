@@ -27,7 +27,7 @@ class Solution{
             int rem = sum;
             
             if(sum == 0){
-                maxLength = max(maxLength,i+1);
+                maxLength = i+1;
             }
 
             //check if that element is found already
