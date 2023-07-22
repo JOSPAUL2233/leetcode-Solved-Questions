@@ -33,20 +33,15 @@ class Solution{
             //check if that element is found already
             if(prefixSum.find(rem) != prefixSum.end()){
                 
-                // cout<<"inside"<<endl;
                 maxLength = max(maxLength , (i - prefixSum[rem]));
                 
             }
-            
-            // cout<<"sum "<<sum<<endl;
             
             //store only if the sum is not present anywhere left side
             //since we have to find the maximum length
             if(prefixSum.find(sum) == prefixSum.end())
                 prefixSum[sum] = i;
                 
-            // cout<<"prefix "<<prefixSum[sum]<<endl;
-            
         }
         
         if(maxLength == INT_MIN)
