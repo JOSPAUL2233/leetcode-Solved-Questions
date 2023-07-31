@@ -1,74 +1,55 @@
 class Solution {
-    
-    int binarySearch(vector<int>& nums,int start,int end,int target){
-        
-        while(start<=end){
-            
-            int mid = start+(end-start)/2;
-
-            if(nums[mid] == target)return mid;
-            
-            if(nums[mid]<target){
-                start = mid+1;
-            }else{
-                end = mid-1;
-            }
-            
-        }
-        
-        return -1;
-        
-    }
-    
-    int getPivot(vector<int>& nums){
-        
-        
-        int start = 0;
-        int end = nums.size()-1;
-        
-        while(start<end){
-            
-            int mid = start+(end-start)/2;
-            
-            if(nums[mid] >= nums[0]){
-                
-                start = mid+1;
-                
-            }else{
-                end = mid;
-            }
-            
-        }
-        return start;
-        
-    }
-    
 public:
     int search(vector<int>& nums, int target) {
         
-        int start = -1;
-        int end = -1;
+        int low = 0;
+        int high = nums.size()-1;
         
-        //find the pivot index
-        
-        int pivot = getPivot(nums);
-    
-        
-        //check which target side ----- left side [or] right side of pivot(includes pivot)
-        
-        if(target >= nums[pivot] && target<=nums[nums.size()-1]){
-            start = pivot;
-            end = nums.size()-1;
-        }else{
-            start = 0;
-            end = pivot-1;
+        while(low <= high){
+            
+            
+            int mid = low + (high - low)/2;
+            
+            
+            //check if target is found
+            if(nums[mid] == target)
+                return mid;
+            
+            //if left part is sorted
+            if(nums[low] <= nums[mid]){
+                
+                //check if element exists in the left part,
+                //if yes, then search in the left part
+                if(target >=nums[low] && target <= nums[mid]){
+                    
+                    high = mid-1;
+                    
+                }else{
+                    
+                    low = mid+1;
+                    
+                }
+                
+            //if right part is sorted
+            }else{
+                
+                //check if element exists in the right part,
+                //if yes, then search in the right part
+                if(target >=nums[mid] && target <= nums[high]){
+                    
+                    low = mid+1;
+                    
+                }else{
+                    
+                    high = mid-1;
+                    
+                }
+                
+            }
+            
         }
         
-        //go for binary search
-                                
-        int ans = binarySearch(nums,start,end,target);
-        
-        return ans;
-        
+        //if the element was not found
+        return -1; 
     }
 };
