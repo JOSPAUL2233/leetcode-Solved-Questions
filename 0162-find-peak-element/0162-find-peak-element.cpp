@@ -15,7 +15,7 @@ public:
         if(nums[n-1] > nums[n-2]) return n-1;
         
         
-        //there are three conditions-------------------------
+        //there are three conditions to search in the remaining arrays -------------------------
         //1. mid element is the peak element
         //2. mid element is greater than prev element
         //3. mid element is lesser than prev element or lesser than next element and prev
@@ -33,7 +33,7 @@ public:
                 return mid;
 
             //peak exists in the left part
-            if((mid-1) >= 0 && nums[mid] > nums[mid-1])
+            if(nums[mid] > nums[mid-1])
                 low = mid+1;
             //peak exists in the right part
             else
