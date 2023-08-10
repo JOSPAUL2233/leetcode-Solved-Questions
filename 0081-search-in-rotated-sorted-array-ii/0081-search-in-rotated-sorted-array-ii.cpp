@@ -35,7 +35,6 @@ public:
                     low = mid+1;
                 }
                 
-                
             }else{//if right part is sorted
                 
                 //check if target is in the right part,then search in right part
@@ -48,10 +47,8 @@ public:
                 
             }
             
-            
         }
         
         return false;
-        
     }
 };
