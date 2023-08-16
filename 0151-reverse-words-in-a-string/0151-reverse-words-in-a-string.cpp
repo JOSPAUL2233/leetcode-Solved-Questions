@@ -29,13 +29,13 @@ public:
         
         while(i < n){
 
-            //find the 1st char
+            //find the 1st non-space character
             while(i < n && s[i] == ' ')i++;
             
-            if(i >= n)
+            if(i == n)
                 break;
 
-            //find the last char
+            //find the first space after i
             int j = i+1;
             while(j < n && s[j] != ' ')j++;
 
