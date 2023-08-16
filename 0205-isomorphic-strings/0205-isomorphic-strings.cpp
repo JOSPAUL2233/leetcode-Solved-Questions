@@ -12,16 +12,31 @@ public:
         
         for(int i = 0;i<s.size();i++){
             
-            if(iso.find(s[i]) == iso.end() && !used[t[i]]){
+            int first = s[i];
+            int second = t[i];
+            
+            //if first element is already mapped to a char
+            if(iso.find(first) != iso.end()){
                 
-                iso[s[i]] = t[i];
-                used[t[i]] = true;
-                
-            }
-            else{
-                
-                if(iso[s[i]] != t[i])
+                //but second element is different than mapped one
+                if(iso[first] != second)
                     return false;
+                
+            }else{//if element is not mapped
+                
+                //but 2nd element is already mapped by one
+                if(used[second] == true)
+                    return false;
+                else{
+                    
+                    //if fist element is not mapped and also
+                    //second element is not used by another
+                    
+                    iso[first] = second;//map fist element to second
+                    used[second] = true;//mark this as used.
+                    
+                    
+                }
                 
             }
                 
