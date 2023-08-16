@@ -32,11 +32,12 @@ public:
             //find the 1st non-space character
             while(i < n && s[i] == ' ')i++;
             
+            //if i has reached the last index
             if(i == n)
                 break;
 
             //find the first space after i
-            int j = i+1;
+            int j = i;
             while(j < n && s[j] != ' ')j++;
 
             string word = s.substr(i,j-i);
