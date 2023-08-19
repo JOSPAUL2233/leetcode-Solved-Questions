@@ -15,43 +15,37 @@ public:
         if(head == NULL || head -> next == NULL)
             return head;
         
-        int count = 0;
+        //store the even Head since we have to join the end of odd LL to head LL
+        ListNode* evenHead = head->next;
         
-        ListNode* oddHead = new ListNode(-1);
-        ListNode* evenHead = new ListNode(-1);
+        //create two pointers for odd and even
+        ListNode* evenIter = head->next;
+        ListNode* oddIter = head;
         
-        ListNode* oddPart = oddHead;
-        ListNode* evenPart = evenHead;
-        
-        //store in odd part and even part
-        
-        ListNode* iter = head;
-        
-        while(iter != NULL){
+        while(oddIter->next != NULL && evenIter->next != NULL){
             
-            if(count % 2 == 1){
-                
-                oddPart -> next = new ListNode(iter->val);
-                oddPart = oddPart -> next;
-                
-            }else{
-                
-                evenPart -> next = new ListNode(iter->val);
-                evenPart = evenPart -> next;
-            }
+            //change the linkage of odd part
+            oddIter -> next = evenIter -> next;
+            oddIter = oddIter->next;
             
-            count++;
-            iter = iter->next;
+            //change the linkage of even part
+            evenIter -> next = oddIter -> next;
+            evenIter = evenIter -> next;
+                        
+        }
+        
+        //if the loop ended in odd index at the last, make it NULL
+        if(evenIter != NULL){
+            
+            evenIter = NULL;
             
         }
         
-        //attach both odd and even part
+        //join odd tail and even head
         
-        evenPart -> next = oddHead -> next;
+        oddIter -> next = evenHead;
         
-        return evenHead->next;
-        
-        
+        return head;
         
     }
 };
