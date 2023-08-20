@@ -10,30 +10,73 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
-        map<ListNode*,bool> visited;
+        //count the number of nodes in each linked list
         
-        //iterate through first Linked List
-        ListNode* iter = headA;
-        while(iter != NULL){
+        int countA = 0;
+        int countB = 0;
+        
+        ListNode* iterA = headA;
+        ListNode* iterB = headB;
+        
+        //count number of nodes in first list
+        while(iterA != NULL){
             
-            visited[iter] = true;
+            countA++;
+            iterA = iterA -> next;
             
-            iter = iter->next;
+        }
+     
+        //count number of nodes in second list
+        while(iterB != NULL){
+            
+            countB++;
+            iterB = iterB -> next;
+            
+        }
+        
+        //find the difference and adjust the position of pointers
+        int diff = abs(countA - countB);
+        
+        iterA = headA;
+        iterB = headB;
+        
+        if(countA > countB){
+            
+            //shift first to diff times forward
+            while(diff > 0){
+                
+                iterA = iterA -> next;
+                diff--;
+                
+            }
+            
+        }else{
+            
+            //shift second to diff times forward
+            while(diff > 0){
+                
+                iterB = iterB -> next;
+                diff--;
+                
+            }
+            
         }
         
         
-        //iterate through second Linked List
-        iter = headB;
-        while(iter != NULL){
+        
+        //now, move both the pointers one by one forward and check for intersection
+        while(iterA != NULL){
             
-            if(visited[iter] == true)
-                return iter;
+            //if intersection happens
+            if(iterA == iterB)
+                return iterA;
             
-            iter = iter->next;
+            iterA = iterA->next;
+            iterB = iterB->next;
             
         }
         
-        //if there is no intersection found
+        //no intersection
         return NULL;
         
     }
