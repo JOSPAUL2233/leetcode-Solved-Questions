@@ -31,7 +31,7 @@ public:
         //find the length of the list
         int length = getLength(head);
         
-        if(k == 0 || length == 0)
+        if(length == 0)
             return head;
         
         //reduce the number of repeated rotation
