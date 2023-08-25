@@ -10,16 +10,22 @@ public:
         if(b == 0)
             return 1;
         
+        //get the value of a^(b/2);
+        long long subAns = power(a,b/2,mod);
         
-        if(b % 2 == 0){
+        //get the value of a^(b/2) * a^(b/2)
+        subAns *= subAns;
+        subAns %= mod;
+        
+        //if b is odd, multiply a with it once again
+        if(b%2 == 1){
             
-            return power(a*a % mod,b/2,mod) % mod;
-            
-        }else{
-            
-            return a * power(a,b-1,mod) % mod;
+            subAns = subAns * a;
+            subAns %= mod;
             
         }
+        
+        return subAns; 
         
     }
     
