@@ -22,13 +22,9 @@ public:
             
         }
         
-        path.push_back('0');//put zero
-        solve(num,path,nums,ans);//recursive call
-        path.pop_back();//remove zero while backtracking
+        solve(num,path+'0',nums,ans);//recursive call
         
-        path.push_back('1');//put 1
-        solve(num,path,nums,ans);//recursive call
-        path.pop_back();//remove one while backtracking
+        solve(num,path+'1',nums,ans);//recursive call
         
     }
     
