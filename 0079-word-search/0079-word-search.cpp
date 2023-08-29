@@ -1,42 +1,81 @@
 class Solution {
-private:
-    int n, m;
-    vector<vector<bool>> vis;
-    bool dfs(vector<vector<char>> &board, string word, int i, int j, int index)
-    {
-        if(board[i][j] == word[index])
-        {
-            vis[i][j] = true;
-            if(index == word.length() - 1)
-                return true;
-            if(i-1 >= 0 && vis[i-1][j] == false)
-                if(dfs(board, word, i-1, j, index+1))
-                    return true;
-            if(i+1 < n && vis[i+1][j] == false)
-                if(dfs(board, word, i+1, j, index+1))
-                    return true;
-            if(j-1 >= 0 && vis[i][j-1] == false)
-                if(dfs(board, word, i, j-1, index+1))
-                    return true;
-            if(j+1 < m && vis[i][j+1] == false)
-                if(dfs(board, word, i, j+1, index+1))
-                    return true;
-            vis[i][j] = false;
-            return false;
-        }
-        return false;
-    }
 public:
-    bool exist(vector<vector<char>>& board, string word) {
-        n = board.size();
-        m = board[0].size();
-        vis = vector<vector<bool>>(n, vector<bool>(m, false));
-        for(int i=0; i<n; i++)
-            for(int j=0; j<m; j++)
-            {
-                if(dfs(board, word, i, j, 0))
-                    return true;
-            }
+    
+    bool check(vector<vector<char>> &board,string word, int index,int row,int col){
+        
+        int rowMax = board.size();
+        int colMax = board[0].size();
+
+        //base cases
+        if(board[row][col] != word[index])
+            return false;
+        
+        
+        if(index == word.size() - 1){
+            return true;
+        }
+        
+        //mark as visited
+        char temp = board[row][col];
+        board[row][col] = '*';
+        index++;
+        
+        //decide the direction--
+        
+        
+        //top
+        if(col-1 >= 0 && board[row][col-1] != '*')
+            if(check(board,word,index,row,col-1))
+                return true;
+        
+        //right
+        if(row + 1 < rowMax && board[row+1][col] != '*')
+            if(check(board,word,index,row+1,col))
+                return true;
+        
+        //bottom
+        if(col + 1 < colMax && board[row][col+1] != '*')
+            if(check(board,word,index,row,col+1))
+                return true;
+        
+        //left
+        if(row - 1 >= 0 && board[row-1][col] != '*')
+            if(check(board,word,index,row-1,col))
+                return true;
+
+        
+        board[row][col] = temp;
+        index--;
+                
         return false;
+        
+    }
+    
+    
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        int rowMax = board.size();
+        int colMax = board[0].size();
+                
+        char start = word[0];
+                
+        //check for the first char
+        for(int i = 0;i<rowMax;i++){
+            
+            for(int j = 0;j<colMax;j++){
+                
+                if(board[i][j] == start){
+                    
+                    if(check(board,word,0,i,j))
+                        return true;
+                    
+                }
+                
+            }
+            
+        }
+        
+        return false;
+                
     }
 };
