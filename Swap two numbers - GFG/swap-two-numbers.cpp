@@ -11,8 +11,16 @@ class Solution{
 public:
     pair<int, int> get(int a, int b){
         
-        return {b,a};
+        //stores a^b
+        a = a^b;
         
+        //stores a^b^b = a
+        b = a^b;
+        
+        //sores a^b^a = b
+        a = a^b;
+        
+        return {a,b};
     }
 };
 
