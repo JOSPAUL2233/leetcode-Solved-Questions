@@ -7,11 +7,9 @@ public:
         
         for(int i = 0;i<32;i++){
             
-            if((start >> i & 1)^ (goal >> i & 1) == 1 ){
-                
+            // (a >> i)shifts the a by i places and (& 1) gives the last bit
+            if((start >> i & 1)^ (goal >> i & 1) == 1 )
                 count++;
-                
-            }
             
         }
         
