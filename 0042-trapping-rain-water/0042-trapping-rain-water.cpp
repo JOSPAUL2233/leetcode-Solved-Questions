@@ -39,26 +39,31 @@ public:
     
     int trap(vector<int>& height) {
         
-        //create two arrays to store previous greater element and next greater element
+        //create two arrays to store greatest element from left and right
         vector<int> prevGreater = leftGreater(height);
         vector<int> nxtGreater = rightGreater(height);
         
-        int ans = 0;
+        int totalWater = 0;
         
+        //iterate through all the elements
         for(int i = 0;i<height.size();i++){
             
+            //get the greatest element from left and right
             int left = prevGreater[i];
             int right = nxtGreater[i];
             
+            //get the min from them
             int smaller = min(left,right);
             
+            //calculate the amound of water that can be trapped in that index
             int water = smaller - height[i];
             
-            ans += water;
+            //add it to total water
+            totalWater += water;
             
         }
         
-        return ans;
+        return totalWater;
         
     }
 };
