@@ -5,18 +5,20 @@ public:
         int left = 0;
         int maxCount = INT_MIN;
         
+        int zeroCount = 0;
+        
         for(int right = 0;right<nums.size();right++){
             
-            //if current element is zero
+            //if current element is zero, increase the zeroCount
             if(nums[right] == 0)
-                k--;
+                zeroCount++;
             
-            //shrink window till k becomes zero or greater
-            while(k < 0){
+            //shrink window till zeroCount becomes greater than or equals to k
+            while(zeroCount > k){
                 
                 //increase k if left encounters with zero
                 if(nums[left] == 0)
-                    k++;
+                    zeroCount--;
                 
                 left++;
             }
