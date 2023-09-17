@@ -15,11 +15,13 @@ public:
             //shrintk the basket size from left if the basket is overflowing
             while(basket.size() > 2){
                 
-                if(basket[fruits[left]] == 1){
+                //decrease count of left side fruit since we are
+                //removing one by one
+                basket[fruits[left]]--;
+                
+                //if fruit count becomes zero, remove it from basket
+                if(basket[fruits[left]] == 0)
                     basket.erase(fruits[left]);
-                }else{
-                    basket[fruits[left]]--;
-                }
                 
                 left++;
                 
