@@ -2,36 +2,20 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         
-        int maxLength = INT_MIN;
-        int left = 0;
-        
-        int maxFreq = INT_MIN;
-        
-        map<char,int> freq;
-        
-        for(int right = 0;right<s.size();right++){
+              unordered_map<char,int> m;
+        int maxLen=0,l=0,r=0,Max=0;
+        while(r<s.size()){
+            m[s[r]]++;
+            Max=max(Max,m[s[r]]);
             
-            //increment the frequency
-            freq[s[right]]++;
-            
-            //store the maximum frequency
-            maxFreq = max(maxFreq, freq[s[right]] );
-            
-            int windowSize = right - left + 1;
-            
-            if( (windowSize - maxFreq) > k){
-                
-                freq[s[left]]--;
-                left++;
-                
+            if(r-l+1-Max>k){
+                m[s[l]]--;
+                l++;
             }
-            
-            int length = right - left + 1;
-            maxLength = max(maxLength,length);
-            
+            maxLen=max(maxLen,r-l+1);
+            r++;
         }
-        
-        return maxLength;
+        return maxLen;
         
     }
 };
