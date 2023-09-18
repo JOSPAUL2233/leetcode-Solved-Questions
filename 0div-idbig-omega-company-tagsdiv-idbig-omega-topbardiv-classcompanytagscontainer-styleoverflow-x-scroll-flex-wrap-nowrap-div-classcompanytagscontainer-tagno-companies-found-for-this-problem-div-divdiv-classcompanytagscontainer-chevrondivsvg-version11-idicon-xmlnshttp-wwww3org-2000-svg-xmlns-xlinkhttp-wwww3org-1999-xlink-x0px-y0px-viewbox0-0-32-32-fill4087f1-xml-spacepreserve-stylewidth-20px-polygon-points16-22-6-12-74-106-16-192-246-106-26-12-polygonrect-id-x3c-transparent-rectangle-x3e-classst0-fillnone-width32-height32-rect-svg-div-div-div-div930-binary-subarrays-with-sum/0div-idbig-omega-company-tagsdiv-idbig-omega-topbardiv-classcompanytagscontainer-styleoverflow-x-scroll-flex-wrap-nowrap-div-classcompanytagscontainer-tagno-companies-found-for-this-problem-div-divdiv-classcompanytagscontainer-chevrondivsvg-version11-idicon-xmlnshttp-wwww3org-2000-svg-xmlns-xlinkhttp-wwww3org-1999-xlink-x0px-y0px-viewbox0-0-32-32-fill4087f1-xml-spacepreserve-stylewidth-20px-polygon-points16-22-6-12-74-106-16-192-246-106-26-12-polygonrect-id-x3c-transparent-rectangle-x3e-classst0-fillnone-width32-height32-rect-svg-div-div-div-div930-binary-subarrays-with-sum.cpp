@@ -1,36 +1,44 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
+    
+    int countSubArr(vector<int> nums,int goal){
         
-        map<int,int> prefixSum;//stores--> sum, count
+        if(goal < 0)
+            return 0;
+        
         int sum = 0;
         int count = 0;
         
-        for(int i = 0;i<nums.size();i++){
+        int left = 0;
+        
+        for(int right = 0;right<nums.size();right++){
             
-            //keep on storing sum
-            sum += nums[i];
-            
-            //check for equals condition
-            if(sum == goal)
-                count++;
-                        
-            //get the number after subtracting which we will get the sum as goal
-            int rem = sum - goal;
-            
-            //find if that number if there
-            if(prefixSum.find(rem) != prefixSum.end()){
+            //add the current element into the sum
+            sum += nums[right];
+            //shrink the subArray if the sum is exceeding goal
+            while(sum > goal){
                 
-                //if found,store the occurance of that number previously
-                count += prefixSum[rem];
+                sum -= nums[left];
+                left++;
                 
             }
             
-            //increment the occurance of sum
-            prefixSum[sum]++;
-
+            //this counts the subarrays in that window.
+            count += (right - left + 1);
         }
         
         return count;
+    }
+    
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        
+        //number of sub arrays with at most sum (goal) - number of
+        //sub arrays with at most sum (goal-1)
+        //sub array with sum goal will be found
+        
+        int ans = countSubArr(nums,goal) - countSubArr(nums,goal-1);
+        
+        return ans;
+        
     }
 };
