@@ -15,24 +15,33 @@ class Solution{
     // k : find kth smallest element and return using this function
     int kthSmallest(int arr[], int l, int r, int k) {
         
+        //declare a max heap
+        priority_queue<int> pq;
         
-        priority_queue<int,vector<int>,greater<int>> pq;
         
-        //push all the elements into the priority queue
-        for(int i = l;i<=r;i++){
+        //push first k elements into the heap
+        for(int i = l;i<l+k;i++){
             
             pq.push(arr[i]);
             
         }
-        
-        //remove top k-1 smaller elements
-        for(int i = 0;i<k-1;i++){
-            
-            pq.pop();
+        //push elements to pq keeping the strictly k sized heap
+        for(int i = l+k;i<=r;i++){
+
+            //check if the curr element is smaller than
+            //top element in the heap
+            if(arr[i] < pq.top()){
+                
+                pq.pop();
+                pq.push(arr[i]);
+                
+            }
             
         }
-     
         
+        //now, top k smallest elemnts will be in the heap
+        //get the top (kth) element so that we will get the greatest
+        //among them which is kth smallest element
         return pq.top();
         
     }
