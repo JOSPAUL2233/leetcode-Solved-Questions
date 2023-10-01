@@ -25,7 +25,10 @@ class Solution{
             pq.push(arr[i]);
             
         }
-        //push elements to pq keeping the strictly k sized heap
+        
+        //push rest of the elements to the heap
+        //on the condition that if a new smaller
+        //element is found
         for(int i = l+k;i<=r;i++){
 
             //check if the curr element is smaller than
