@@ -23,9 +23,9 @@ class Solution {
         //make a map or set to keep track of visited indices
         map<pair<int,int>,bool> visited;
         
-        //pusht the maximum sum value into pq
         int sum = A[n-1] + B[m-1];
         
+        //pusht the maximum sum value into pq and update visited
         pq.push({sum,{n-1,m-1}});
         visited[{n-1,m-1}] = true;
         
@@ -43,7 +43,7 @@ class Solution {
             ans.push_back(sum);
             
             //push (i-1,j) if they are not visited
-            if( (i-1 >= 0) && (visited.find({i-1,j}) == visited.end() )){
+            if( (i-1 >= 0) && (!visited[{i-1,j}] ) ){
 
                 sum = A[i-1] + B[j];
                 
@@ -53,7 +53,7 @@ class Solution {
             }
             
             //push (i,j-1) if they are not visited
-            if( (j-1 >= 0) && (visited.find({i,j-1}) == visited.end() )){
+            if( (j-1 >= 0) && (!visited[{i,j-1}]) ){
                 
                 sum = A[i] + B[j-1];
                 
