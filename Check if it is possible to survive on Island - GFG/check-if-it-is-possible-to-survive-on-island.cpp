@@ -11,13 +11,16 @@ class Solution{
 public:
     int minimumDays(int S, int N, int M){
         
+        //count number of sundays and subtract it from buyingDays
         int sundays = S/7;
-        
         int buyingDays = S - sundays;
+        
+        //total food required to survive
         int requiredFood = S*M;
         
         int ans = 0;
         
+        //formula based ans
         if(requiredFood % N == 0)
             ans = requiredFood/N;
         else
@@ -25,11 +28,10 @@ public:
         
         //if the minDays is more than buyingDays, then
         //she cannot survive
-        
         if(ans > buyingDays)
             return -1;
-        else
-            return ans;
+        
+        return ans;
 
     }
 };
