@@ -9,10 +9,16 @@ public:
         
         int count = 0;
         
-        for(int i = 1;i<=N;i++){
+        for(int i = 1;i*i <= N;i++){
             
-            if(N % i == 0)
+            if(N % i == 0){
+                
                 count++;
+                
+                if(i != N/i)
+                    count++;
+                
+            }
             
         }
         
