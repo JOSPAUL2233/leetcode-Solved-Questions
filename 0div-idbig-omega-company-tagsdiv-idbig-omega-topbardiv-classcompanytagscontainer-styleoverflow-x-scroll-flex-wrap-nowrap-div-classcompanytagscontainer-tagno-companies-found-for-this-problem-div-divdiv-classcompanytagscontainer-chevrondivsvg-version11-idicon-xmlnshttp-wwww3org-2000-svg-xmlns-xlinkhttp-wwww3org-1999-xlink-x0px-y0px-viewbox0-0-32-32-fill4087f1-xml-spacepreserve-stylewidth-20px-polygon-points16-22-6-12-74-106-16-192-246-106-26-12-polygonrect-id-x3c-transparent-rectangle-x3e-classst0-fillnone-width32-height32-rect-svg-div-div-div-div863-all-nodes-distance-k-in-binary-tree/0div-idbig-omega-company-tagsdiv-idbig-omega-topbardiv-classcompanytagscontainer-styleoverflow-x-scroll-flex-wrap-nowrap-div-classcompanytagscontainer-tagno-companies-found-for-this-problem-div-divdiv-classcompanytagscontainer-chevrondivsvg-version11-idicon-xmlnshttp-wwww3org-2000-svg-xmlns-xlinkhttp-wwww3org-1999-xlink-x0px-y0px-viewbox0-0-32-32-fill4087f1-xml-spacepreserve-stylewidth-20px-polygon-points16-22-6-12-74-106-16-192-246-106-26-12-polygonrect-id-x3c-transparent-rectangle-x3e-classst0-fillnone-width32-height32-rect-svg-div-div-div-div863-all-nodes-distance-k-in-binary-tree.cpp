@@ -15,7 +15,7 @@ public:
         queue<TreeNode*> que;
         
         que.push(root);
-        parent[root] = NULL;
+        parent[root] = NULL;//keep parent of root node to be NULL
         
         while(!que.empty()){
             
@@ -29,7 +29,7 @@ public:
                 //check for left child
                 if(node->left){
                     
-                    parent[node->left] = node;
+                    parent[node->left] = node;//parent update
                     que.push(node->left);
                     
                 }
@@ -37,7 +37,7 @@ public:
                 //check for right child
                 if(node->right){
                     
-                    parent[node->right] = node;
+                    parent[node->right] = node;//parent update
                     que.push(node->right);
                     
                 }
@@ -52,10 +52,10 @@ public:
 
         //keep a track of visited nodes
         map<TreeNode*,bool> visited;
-        
+        visited[target] = true;
+
         queue<TreeNode*> que;
         que.push(target);
-        visited[target] = true;
         
         //counts the levels
         int level = 0;
@@ -70,6 +70,8 @@ public:
                 TreeNode* node = que.front();
                 que.pop();
                 
+                visited[node] = true;
+                
                 //k distance
                 if(level == k)
                     ans.push_back(node->val);
@@ -78,7 +80,7 @@ public:
                 if(parent[node] && !visited[parent[node]]){
                     
                     que.push(parent[node]);
-                    visited[parent[node]] = true;
+                    // visited[parent[node]] = true;//update visited
                     
                 }
                 
@@ -86,7 +88,7 @@ public:
                 if(node->left && !visited[node->left]){
                     
                     que.push(node->left);
-                    visited[node->left] = true;
+                    // visited[node->left] = true;//update visited
                     
                 }
                 
