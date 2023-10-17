@@ -17,7 +17,8 @@ public:
         if(root == NULL)
             return 0;
         
-        //LEVEL ORDER TRAVERSAL
+        //LEVEL ORDER TRAVERSAL - calculating width in each level and storing max
+        
         queue<pair<TreeNode*,long long>> que;
         que.push({root,0});
         
