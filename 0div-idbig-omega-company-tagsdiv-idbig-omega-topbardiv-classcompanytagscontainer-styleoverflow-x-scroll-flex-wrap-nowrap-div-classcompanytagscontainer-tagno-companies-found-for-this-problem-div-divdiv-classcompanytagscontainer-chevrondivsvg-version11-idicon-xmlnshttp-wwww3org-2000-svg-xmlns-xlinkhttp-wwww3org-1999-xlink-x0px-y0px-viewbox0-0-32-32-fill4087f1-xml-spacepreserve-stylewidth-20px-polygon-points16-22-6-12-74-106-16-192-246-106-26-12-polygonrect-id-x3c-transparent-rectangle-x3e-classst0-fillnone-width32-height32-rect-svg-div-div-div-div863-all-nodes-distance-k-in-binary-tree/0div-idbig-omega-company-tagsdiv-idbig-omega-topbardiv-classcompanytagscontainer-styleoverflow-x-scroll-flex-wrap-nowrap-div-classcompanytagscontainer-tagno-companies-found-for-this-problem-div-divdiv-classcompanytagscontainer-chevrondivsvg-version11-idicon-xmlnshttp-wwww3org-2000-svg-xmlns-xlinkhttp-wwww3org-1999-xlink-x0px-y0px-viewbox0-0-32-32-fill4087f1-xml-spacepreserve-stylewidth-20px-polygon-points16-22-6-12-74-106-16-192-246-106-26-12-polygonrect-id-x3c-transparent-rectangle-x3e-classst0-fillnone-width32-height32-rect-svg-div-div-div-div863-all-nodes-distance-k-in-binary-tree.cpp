@@ -70,6 +70,9 @@ public:
                 TreeNode* node = que.front();
                 que.pop();
                 
+                //mark as visited
+                visited[node] = true;
+                
                 //k distance
                 if(level == k)
                     ans.push_back(node->val);
@@ -78,7 +81,6 @@ public:
                 if(parent[node] && !visited[parent[node]]){
                     
                     que.push(parent[node]);
-                    visited[parent[node]] = true;//update visited
                     
                 }
                 
@@ -86,7 +88,6 @@ public:
                 if(node->left && !visited[node->left]){
                     
                     que.push(node->left);
-                    visited[node->left] = true;//update visited
                     
                 }
                 
