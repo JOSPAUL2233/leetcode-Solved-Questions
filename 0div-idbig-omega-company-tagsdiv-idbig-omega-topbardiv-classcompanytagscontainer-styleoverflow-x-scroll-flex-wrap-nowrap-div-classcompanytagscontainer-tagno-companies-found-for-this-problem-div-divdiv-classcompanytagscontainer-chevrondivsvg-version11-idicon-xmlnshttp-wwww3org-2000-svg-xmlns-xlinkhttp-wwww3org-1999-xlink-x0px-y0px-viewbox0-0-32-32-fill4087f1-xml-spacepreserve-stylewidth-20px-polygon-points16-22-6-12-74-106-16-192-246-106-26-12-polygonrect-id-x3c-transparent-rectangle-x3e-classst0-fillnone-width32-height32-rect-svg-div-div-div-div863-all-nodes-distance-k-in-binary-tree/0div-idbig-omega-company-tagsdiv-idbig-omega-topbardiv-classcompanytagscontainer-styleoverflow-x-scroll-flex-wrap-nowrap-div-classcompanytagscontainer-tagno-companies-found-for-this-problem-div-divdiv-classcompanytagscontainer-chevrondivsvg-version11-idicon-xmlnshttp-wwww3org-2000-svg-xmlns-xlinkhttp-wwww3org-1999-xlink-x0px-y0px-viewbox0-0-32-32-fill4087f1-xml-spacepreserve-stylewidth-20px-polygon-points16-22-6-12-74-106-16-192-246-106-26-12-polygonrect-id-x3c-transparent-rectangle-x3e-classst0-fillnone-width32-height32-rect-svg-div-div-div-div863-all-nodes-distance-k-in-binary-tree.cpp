@@ -78,26 +78,16 @@ public:
                     ans.push_back(node->val);
                 
                 //upward direction
-                if(parent[node] && !visited[parent[node]]){
-                    
+                if(parent[node] && !visited[parent[node]])
                     que.push(parent[node]);
-                    
-                }
-                
+                                    
                 //left direction
-                if(node->left && !visited[node->left]){
-                    
+                if(node->left && !visited[node->left])
                     que.push(node->left);
-                    
-                }
-                
+                                    
                 //down direction
-                if(node->right && !visited[node->right]){
-                    
-                    que.push(node->right);
-                    visited[node->right] = true;
-                    
-                }
+                if(node->right && !visited[node->right])
+                    que.push(node->right);                    
                 
             }
             
