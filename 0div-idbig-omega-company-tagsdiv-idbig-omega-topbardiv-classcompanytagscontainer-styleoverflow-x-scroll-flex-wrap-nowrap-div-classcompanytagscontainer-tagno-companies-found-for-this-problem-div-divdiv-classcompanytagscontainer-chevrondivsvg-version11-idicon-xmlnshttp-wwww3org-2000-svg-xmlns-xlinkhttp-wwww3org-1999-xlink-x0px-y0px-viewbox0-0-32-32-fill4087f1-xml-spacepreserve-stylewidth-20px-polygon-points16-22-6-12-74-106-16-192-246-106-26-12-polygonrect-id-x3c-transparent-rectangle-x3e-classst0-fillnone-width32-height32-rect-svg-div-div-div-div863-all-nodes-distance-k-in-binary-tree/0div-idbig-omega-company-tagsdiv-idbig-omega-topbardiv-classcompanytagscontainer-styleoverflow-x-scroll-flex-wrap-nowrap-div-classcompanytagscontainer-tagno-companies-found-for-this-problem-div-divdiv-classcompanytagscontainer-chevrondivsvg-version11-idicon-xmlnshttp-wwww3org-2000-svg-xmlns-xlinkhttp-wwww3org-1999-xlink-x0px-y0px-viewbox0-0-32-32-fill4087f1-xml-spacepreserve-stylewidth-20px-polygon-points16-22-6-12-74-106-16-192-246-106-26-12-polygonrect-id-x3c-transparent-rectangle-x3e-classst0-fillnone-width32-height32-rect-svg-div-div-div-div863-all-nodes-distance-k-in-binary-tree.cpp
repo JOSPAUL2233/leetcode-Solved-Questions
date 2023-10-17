@@ -52,7 +52,6 @@ public:
 
         //keep a track of visited nodes
         map<TreeNode*,bool> visited;
-        visited[target] = true;
 
         queue<TreeNode*> que;
         que.push(target);
@@ -70,7 +69,7 @@ public:
                 TreeNode* node = que.front();
                 que.pop();
                 
-                //mark as visited
+                //mark this node as visited
                 visited[node] = true;
                 
                 //k distance
