@@ -35,14 +35,15 @@ public:
         int leftHeight = getLeftHeight(root);
         int rightHeight = getRightHeight(root);
         
+        //if it is a balanced binary tree
         if(leftHeight == rightHeight){
             
-            //calculate the number of nodes using
-            //height of balanced binary tree
+            //calculate the number of nodes using Height
             return pow(2,leftHeight) - 1;
             
         }else{
             
+            //if not a balanced binary tree
             return 1 + countNodes(root->left) + countNodes(root->right);
             
         }
