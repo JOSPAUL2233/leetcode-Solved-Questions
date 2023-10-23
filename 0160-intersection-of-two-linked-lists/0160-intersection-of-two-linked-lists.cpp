@@ -10,73 +10,61 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
+        //apprach 1 --> using hashmap (using space)
+        
+        //approach 2 --> Using two pointers
+        
         //count the number of nodes in each linked list
+        int count1 = 0;
+        int count2 = 0;
         
-        int countA = 0;
-        int countB = 0;
+        ListNode* iter = headA;
         
-        ListNode* iterA = headA;
-        ListNode* iterB = headB;
-        
-        //count number of nodes in first list
-        while(iterA != NULL){
-            
-            countA++;
-            iterA = iterA -> next;
-            
-        }
-     
-        //count number of nodes in second list
-        while(iterB != NULL){
-            
-            countB++;
-            iterB = iterB -> next;
-            
+        while(iter){
+            count1++;
+            iter = iter->next;
         }
         
-        //find the difference and adjust the position of pointers
-        int diff = abs(countA - countB);
+        iter = headB;
         
-        iterA = headA;
-        iterB = headB;
+        while(iter){
+            count2++;
+            iter = iter->next;
+        }
         
-        if(countA > countB){
-            
-            //shift first to diff times forward
-            while(diff > 0){
-                
-                iterA = iterA -> next;
-                diff--;
-                
-            }
+        int diff = abs(count1 - count2);
+        
+        //move the head of larger linked list forward diff times
+        
+        ListNode* iter1;
+        ListNode* iter2;
+        
+        if(count1>count2){
+            iter1 = headA;
+            iter2 = headB;
             
         }else{
+            iter1 = headB;
+            iter2 = headA;
+        }
+        
+        for(int i = 0;i<diff;i++){
             
-            //shift second to diff times forward
-            while(diff > 0){
-                
-                iterB = iterB -> next;
-                diff--;
-                
-            }
+            iter1 = iter1->next;
             
         }
         
-        
-        
-        //now, move both the pointers one by one forward and check for intersection
-        while(iterA != NULL){
+        //move forward one by one
+        while(iter1){
             
-            //if intersection happens
-            if(iterA == iterB)
-                return iterA;
+            if(iter1 == iter2)
+                return iter1;
             
-            iterA = iterA->next;
-            iterB = iterB->next;
+            iter1 = iter1->next;
+            iter2 = iter2->next;
             
         }
         
-        //no intersection
         return NULL;
         
     }
