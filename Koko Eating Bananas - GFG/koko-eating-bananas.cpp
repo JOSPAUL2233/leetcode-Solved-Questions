@@ -11,14 +11,17 @@ class Solution {
         
         for(int i = 0;i<piles.size();i++){
             
+            //time taken to eat the bananas in the pile in speed mid bananas per hour
             int timeToEat = piles[i]/mid;
             
+            //if there are bananas left to eat, take one more hour to finish that too
             if(piles[i]%mid != 0){
                 
                 timeToEat++;
                 
             }
             
+            //update total time taken to eat bananas
             hours += timeToEat;
             
             //check if the hour limit crosses
@@ -27,6 +30,7 @@ class Solution {
             
         }
         
+        //if he could eat all the bananas in mid bananas/hour
         return true;
         
     }
