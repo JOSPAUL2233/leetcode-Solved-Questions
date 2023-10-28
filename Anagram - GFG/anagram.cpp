@@ -10,11 +10,28 @@ class Solution
     //Function is to check whether two strings are anagram of each other or not.
     bool isAnagram(string a, string b){
         
-        sort(a.begin(),a.end());
-        sort(b.begin(),b.end());
+        vector<int> first(26,0);
+        vector<int> second(26,0);
         
-        return a==b;
+        for(auto i : a){
+            
+            int num = i-'a';
+            first[num]++;
+            
+        }
         
+        for(auto i :b){
+            
+            int num = i-'a';
+            second[num]++;
+            
+        }
+        
+        for(int i = 0;i<26;i++)
+            if(first[i] != second[i])
+                return false;
+                
+        return true;
     }
 
 };
