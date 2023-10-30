@@ -38,9 +38,6 @@ class Solution{
     	            
     	        }
     	        
-    	        if(ele == 0)
-    	            break;
-    	            
     	        position++;//shift the position
     	        
     	    }
@@ -54,12 +51,12 @@ class Solution{
     	    //now, using that ones, calculate the final number like how
     	    //decimal is calculated from binary number
     	    
-    	    long long int ans = 0;
+    	    long long ans = 0;
     	       
     	    for(int i = 0;i<32;i++){
     	        
     	       // long long answerOnes = ;
-    	        ans +=  pow(2,i) * ones[i] * zeros[i];
+    	        ans += (long long)pow(2,i) * ones[i] * zeros[i];
     	        
     	    }
     	    
