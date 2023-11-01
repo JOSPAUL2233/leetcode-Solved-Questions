@@ -14,12 +14,16 @@ class Solution{
   public:
     int missingNumber(vector<int>& array, int n) {
         
+        //find the sum of first n numbers
         int apSum = n*(n+1)/2;
+        
+        //calculate the sum from the array
         int sum = 0;
         
         for(int i : array)
             sum += i;
             
+        //get the missing number
         return apSum - sum;
         
         
