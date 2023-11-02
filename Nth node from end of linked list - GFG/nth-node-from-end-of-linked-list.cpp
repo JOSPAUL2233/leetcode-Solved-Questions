@@ -60,6 +60,8 @@ public:
     int getNthFromLast(Node *head, int n)
     {
            
+           //did not use recursion to find the size of the linked list sice
+           //it was taking extra memory of call stack which gave sigmentation error
            int size = getSize(head);
            
            if(size  < n)
