@@ -14,17 +14,22 @@ class Solution
             int ptr2 = 0;
             int ptr3 = 0;
             
-            set<int> st;
+            vector<int> ans;
             
             while((ptr1 < n1) && (ptr2 < n2) && (ptr3 < n3)){
                 
                 if(A[ptr1] == B[ptr2] && A[ptr1] == C[ptr3]){
                     
                     
-                    st.insert(A[ptr1]);
+                    ans.push_back(A[ptr1]);
                     ptr1++;
                     ptr2++;
                     ptr3++;
+                    
+                    while(A[ptr1-1] == A[ptr1]) ptr1++;
+                    while(B[ptr2-1] == B[ptr2]) ptr2++;
+                    while(C[ptr3-1] == C[ptr3]) ptr3++;
+                    
                     
                 }else if(A[ptr1] <= B[ptr2] && A[ptr1] <= C[ptr3]){
                     
@@ -42,11 +47,11 @@ class Solution
                 
             }
             
-            vector<int> ans;
+            // vector<int> ans;
             
-            for(auto i : st){
-                ans.push_back(i);
-            }
+            // for(auto i : st){
+            //     ans.push_back(i);
+            // }
             
             return ans;
             
