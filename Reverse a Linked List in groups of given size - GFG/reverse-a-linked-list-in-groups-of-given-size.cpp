@@ -55,19 +55,6 @@ class Solution
         if(head == NULL)
             return NULL;
         
-        // //check whether head has k nodes
-        // struct node* iter = head;
-        
-        // for(int i = 0;i<k;i++){
-            
-        //     if(iter == NULL)
-        //         return head;
-                
-        //     iter = iter->next;
-            
-        // }
-        
-        //if list has k nodes, reverse k nodes
         
         struct node* prev = NULL;
         struct node* curr = head;
