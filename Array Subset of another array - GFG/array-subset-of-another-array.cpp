@@ -30,23 +30,20 @@ int main() {
 
 string isSubset(int a1[], int a2[], int n, int m) {
     
-    sort(a1,a1+n);
-    sort(a2,a2+m);
+    map<int,int> freq;
     
-    int ind = 0;
-    
-    for(int i = 0;i<n;i++){
+    for(int i = 0;i<n;i++)
+        freq[a1[i]]++;
         
-        if(a1[i] == a2[ind])
-            ind++;
+    for(int i = 0;i<m;i++){
+        
+        freq[a2[i]]--;
+        
+        if(freq[a2[i]] < 0)
+            return "No";
         
     }
     
-    // cout<<ind<<endl;
-    
-    if(ind < m)
-        return "No";
-    else
-        return "Yes";
+    return "Yes";
     
 }
