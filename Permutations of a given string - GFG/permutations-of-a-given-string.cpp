@@ -29,7 +29,7 @@ class Solution
 		vector<string>find_permutation(string S)
 		{
 		    
-		    set<string> st;
+		    set<string> st;//to not to take duplicate permutations
 		    int index = 0;
 		    
 		    solve(S,st,index);
