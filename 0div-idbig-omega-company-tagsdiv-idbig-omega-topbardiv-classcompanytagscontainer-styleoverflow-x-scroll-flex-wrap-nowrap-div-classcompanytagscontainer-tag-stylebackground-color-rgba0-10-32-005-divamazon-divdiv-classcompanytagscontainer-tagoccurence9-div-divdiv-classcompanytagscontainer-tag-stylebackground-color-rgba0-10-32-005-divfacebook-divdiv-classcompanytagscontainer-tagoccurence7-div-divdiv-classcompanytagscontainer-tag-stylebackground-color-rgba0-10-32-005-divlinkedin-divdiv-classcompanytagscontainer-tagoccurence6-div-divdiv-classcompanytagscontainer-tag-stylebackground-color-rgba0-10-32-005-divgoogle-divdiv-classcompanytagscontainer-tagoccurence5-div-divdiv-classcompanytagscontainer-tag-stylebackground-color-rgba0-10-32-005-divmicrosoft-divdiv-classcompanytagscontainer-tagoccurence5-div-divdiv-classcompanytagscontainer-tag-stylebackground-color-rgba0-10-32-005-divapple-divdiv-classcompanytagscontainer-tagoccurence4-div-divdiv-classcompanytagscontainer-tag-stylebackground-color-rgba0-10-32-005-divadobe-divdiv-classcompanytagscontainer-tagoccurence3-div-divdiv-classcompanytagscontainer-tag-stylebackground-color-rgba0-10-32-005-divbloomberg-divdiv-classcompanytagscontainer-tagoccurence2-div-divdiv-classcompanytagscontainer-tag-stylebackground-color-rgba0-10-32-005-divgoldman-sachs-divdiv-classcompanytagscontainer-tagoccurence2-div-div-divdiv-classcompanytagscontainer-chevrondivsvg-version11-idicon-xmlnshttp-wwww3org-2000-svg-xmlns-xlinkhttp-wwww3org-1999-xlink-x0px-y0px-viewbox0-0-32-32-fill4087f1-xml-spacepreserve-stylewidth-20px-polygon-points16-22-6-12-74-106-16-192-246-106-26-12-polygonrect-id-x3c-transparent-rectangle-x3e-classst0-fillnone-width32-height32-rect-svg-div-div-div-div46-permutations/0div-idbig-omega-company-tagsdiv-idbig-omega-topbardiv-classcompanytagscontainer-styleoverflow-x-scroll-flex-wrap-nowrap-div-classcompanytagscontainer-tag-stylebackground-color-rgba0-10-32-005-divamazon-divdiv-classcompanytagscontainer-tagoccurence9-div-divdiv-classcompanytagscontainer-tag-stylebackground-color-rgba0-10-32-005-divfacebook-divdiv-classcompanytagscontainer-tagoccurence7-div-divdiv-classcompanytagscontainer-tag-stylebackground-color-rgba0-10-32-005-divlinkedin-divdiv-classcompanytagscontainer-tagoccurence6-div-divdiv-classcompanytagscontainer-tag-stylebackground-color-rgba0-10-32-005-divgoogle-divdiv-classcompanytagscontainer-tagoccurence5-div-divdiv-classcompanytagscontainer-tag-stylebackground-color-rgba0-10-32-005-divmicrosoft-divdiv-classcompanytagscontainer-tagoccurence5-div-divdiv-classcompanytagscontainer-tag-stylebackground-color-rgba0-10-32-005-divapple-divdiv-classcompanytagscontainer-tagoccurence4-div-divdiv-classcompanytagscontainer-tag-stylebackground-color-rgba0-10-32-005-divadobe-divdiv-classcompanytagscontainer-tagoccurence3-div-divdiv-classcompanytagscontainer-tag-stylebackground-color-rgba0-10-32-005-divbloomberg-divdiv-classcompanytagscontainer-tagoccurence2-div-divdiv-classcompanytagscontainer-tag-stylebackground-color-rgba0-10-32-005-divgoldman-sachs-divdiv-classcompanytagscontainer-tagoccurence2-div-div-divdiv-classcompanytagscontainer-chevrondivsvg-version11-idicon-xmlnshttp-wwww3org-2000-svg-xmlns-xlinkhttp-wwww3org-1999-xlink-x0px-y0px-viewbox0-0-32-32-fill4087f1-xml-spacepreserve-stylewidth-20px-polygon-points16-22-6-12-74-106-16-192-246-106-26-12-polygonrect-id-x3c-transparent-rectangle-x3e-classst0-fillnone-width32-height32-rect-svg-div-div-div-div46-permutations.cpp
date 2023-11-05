@@ -1,43 +1,33 @@
 class Solution {
 public:
-    
-    void solve(int index,vector<int> nums,vector<int> path,vector<vector<int>> &ans,map<int,bool> visited){
+    void solve(vector<int> nums,vector<vector<int>>& ans,int index){
         
-        //base case,when the index goes out of range
+        //base case, when index goes out of range
         if(index == nums.size()){
             
-            ans.push_back(path);
+            ans.push_back(nums);
             return;
             
         }
         
-        //run a loop for position placing
-        for(int i = 0;i<nums.size();i++){
+        //iterate through all the alphabets from current index till last index
+        for(int i = index;i<nums.size();i++){
             
-            if(!visited[i]){
-                
-                path.push_back(nums[i]);
-                visited[i] = true;
-                solve(index+1,nums,path,ans,visited);
-                visited[i] = false;
-                path.pop_back();
-                
-            }
+            swap(nums[index],nums[i]);//swap
+            solve(nums,ans,index+1);//go for next index
+            swap(nums[index],nums[i]);//backtracking
             
         }
-        
+         
     }
     
+    public:
     vector<vector<int>> permute(vector<int>& nums) {
         
-        vector<int> path;
         vector<vector<int>> ans;
         int index = 0;
         
-        //keep a track of visited index
-        map<int,bool> visited;
-        
-        solve(index,nums,path,ans,visited);
+        solve(nums,ans,index);
         
         return ans;
         
