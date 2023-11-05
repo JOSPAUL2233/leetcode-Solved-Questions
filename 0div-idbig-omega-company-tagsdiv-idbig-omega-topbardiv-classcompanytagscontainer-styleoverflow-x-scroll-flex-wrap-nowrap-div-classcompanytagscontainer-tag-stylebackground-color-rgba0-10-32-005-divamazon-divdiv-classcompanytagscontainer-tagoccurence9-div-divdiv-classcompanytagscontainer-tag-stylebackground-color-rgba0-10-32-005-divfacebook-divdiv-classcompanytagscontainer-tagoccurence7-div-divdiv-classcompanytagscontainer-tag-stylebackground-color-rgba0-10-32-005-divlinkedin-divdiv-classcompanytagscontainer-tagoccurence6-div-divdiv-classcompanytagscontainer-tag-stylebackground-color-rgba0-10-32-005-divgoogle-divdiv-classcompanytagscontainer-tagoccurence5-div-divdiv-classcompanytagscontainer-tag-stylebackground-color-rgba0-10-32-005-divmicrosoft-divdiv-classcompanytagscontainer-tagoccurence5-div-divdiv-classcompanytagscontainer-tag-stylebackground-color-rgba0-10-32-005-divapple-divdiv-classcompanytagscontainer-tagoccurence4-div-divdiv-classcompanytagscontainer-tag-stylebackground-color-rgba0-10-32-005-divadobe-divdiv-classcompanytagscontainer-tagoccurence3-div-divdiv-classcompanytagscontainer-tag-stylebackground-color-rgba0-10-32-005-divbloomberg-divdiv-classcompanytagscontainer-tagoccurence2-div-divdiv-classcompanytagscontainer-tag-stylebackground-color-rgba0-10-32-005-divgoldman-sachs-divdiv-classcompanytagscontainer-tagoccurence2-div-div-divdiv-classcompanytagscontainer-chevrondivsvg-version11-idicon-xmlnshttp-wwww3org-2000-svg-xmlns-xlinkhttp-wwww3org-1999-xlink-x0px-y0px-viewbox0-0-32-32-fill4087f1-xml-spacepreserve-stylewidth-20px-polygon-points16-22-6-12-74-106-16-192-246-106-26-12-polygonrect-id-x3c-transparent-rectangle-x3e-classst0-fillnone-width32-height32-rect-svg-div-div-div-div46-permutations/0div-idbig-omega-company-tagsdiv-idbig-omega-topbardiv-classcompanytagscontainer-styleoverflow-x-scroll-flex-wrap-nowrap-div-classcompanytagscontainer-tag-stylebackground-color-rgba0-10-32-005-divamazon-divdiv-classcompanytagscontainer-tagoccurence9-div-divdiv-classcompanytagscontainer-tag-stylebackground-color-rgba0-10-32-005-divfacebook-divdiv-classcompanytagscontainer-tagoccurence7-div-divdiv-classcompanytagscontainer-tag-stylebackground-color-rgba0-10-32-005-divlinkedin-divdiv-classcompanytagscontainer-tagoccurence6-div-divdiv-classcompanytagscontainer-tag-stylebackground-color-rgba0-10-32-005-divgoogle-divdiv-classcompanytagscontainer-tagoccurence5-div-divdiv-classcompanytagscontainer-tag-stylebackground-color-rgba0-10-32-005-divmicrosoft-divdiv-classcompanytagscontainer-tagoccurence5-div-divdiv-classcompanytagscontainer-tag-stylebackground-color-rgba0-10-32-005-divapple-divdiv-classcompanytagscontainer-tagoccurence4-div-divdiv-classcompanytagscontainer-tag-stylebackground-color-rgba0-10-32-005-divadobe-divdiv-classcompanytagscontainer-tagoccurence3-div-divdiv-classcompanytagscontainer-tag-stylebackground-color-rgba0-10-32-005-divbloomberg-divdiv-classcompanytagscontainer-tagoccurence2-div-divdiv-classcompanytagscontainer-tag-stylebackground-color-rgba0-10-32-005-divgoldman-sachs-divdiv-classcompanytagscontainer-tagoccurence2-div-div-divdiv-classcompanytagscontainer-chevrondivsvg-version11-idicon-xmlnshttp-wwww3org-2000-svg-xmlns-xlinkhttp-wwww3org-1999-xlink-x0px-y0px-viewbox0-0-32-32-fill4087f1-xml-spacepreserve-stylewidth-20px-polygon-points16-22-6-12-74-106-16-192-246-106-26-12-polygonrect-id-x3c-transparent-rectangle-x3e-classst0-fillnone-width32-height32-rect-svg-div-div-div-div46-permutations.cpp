@@ -21,7 +21,6 @@ public:
          
     }
     
-    public:
     vector<vector<int>> permute(vector<int>& nums) {
         
         vector<vector<int>> ans;
