@@ -20,7 +20,7 @@ public:
         int diagonal = min(xDiff,yDiff);
 
         //get the distance that is left after travelling through diagonal
-        int remaining = max(xDiff,yDiff) - min(xDiff,yDiff);
+        int remaining = abs(xDiff - yDiff);
         
         //this gives the leastTime that t should take to reach to the final
         int leastTime = diagonal + remaining;
