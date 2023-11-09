@@ -5,24 +5,27 @@ public:
         
         //check for left
         if(left.find(c) != left.end()){
+            
             if(left[c] != str){
-                // cout<<"fail"<<endl;
                 return false;
             }
+            
         }else
             left[c] = str;
         
+        
         //check for right
         if(right.find(str) != right.end()){
+            
             if(right[str] != c){
-                // cout<<"fail2"<<endl;
                 return false;
             }
+            
         }else
             right[str] = c;
         
         
-        // cout<<"success"<<endl;
+        //if everything is fine
         return true;
         
     }
@@ -32,8 +35,10 @@ public:
         map<char,string> left;
         map<string,char> right;
         
+        //index in pattern
         int i = 0;
         
+        //indices in s
         int ptr1 = 0;
         int ptr2 = 0;
         
@@ -42,16 +47,18 @@ public:
             //take care of last index
             if(ptr2 == s.size()-1){
                 
+                int strLen = ptr2 - ptr1 + 1;//get the length of string
+
+                //extract the char and string
                 char c = pattern[i++];
-                int strLen = ptr2 - ptr1 + 1;//only this makes difference
-                                
                 string str = s.substr(ptr1,strLen);
                 
-                // cout<<c<<" "<<str<<endl;
-                
+                //go for checking
                 if(!check(left,right,c,str))
                     return false;
                 
+                //if ptr2 is the last index but there are still characters left in patter,
+                //then it is not a valid matching pattern
                 if(i < pattern.size())
                     return false;
                 
@@ -59,22 +66,22 @@ public:
             
             if(s[ptr2] == ' '){
                 
+                int strLen = ptr2 - ptr1;//get the length of string
+                
+                //extract the char and string
                 char c = pattern[i++];
-                int strLen = ptr2 - ptr1;//only this makes difference
-                
-                // cout<<strLen<<endl;
-                
                 string str = s.substr(ptr1,strLen);
                 
-                // cout<<c<<" "<<str<<endl;
-                
+                //go for checking
                 if(!check(left,right,c,str))
                     return false;
             
+                //update the first pointer to starting of next word
                 ptr1 = ptr2+1;
             
             }
             
+            //keep increasing the second pointer
             ptr2++;
                                     
         }
