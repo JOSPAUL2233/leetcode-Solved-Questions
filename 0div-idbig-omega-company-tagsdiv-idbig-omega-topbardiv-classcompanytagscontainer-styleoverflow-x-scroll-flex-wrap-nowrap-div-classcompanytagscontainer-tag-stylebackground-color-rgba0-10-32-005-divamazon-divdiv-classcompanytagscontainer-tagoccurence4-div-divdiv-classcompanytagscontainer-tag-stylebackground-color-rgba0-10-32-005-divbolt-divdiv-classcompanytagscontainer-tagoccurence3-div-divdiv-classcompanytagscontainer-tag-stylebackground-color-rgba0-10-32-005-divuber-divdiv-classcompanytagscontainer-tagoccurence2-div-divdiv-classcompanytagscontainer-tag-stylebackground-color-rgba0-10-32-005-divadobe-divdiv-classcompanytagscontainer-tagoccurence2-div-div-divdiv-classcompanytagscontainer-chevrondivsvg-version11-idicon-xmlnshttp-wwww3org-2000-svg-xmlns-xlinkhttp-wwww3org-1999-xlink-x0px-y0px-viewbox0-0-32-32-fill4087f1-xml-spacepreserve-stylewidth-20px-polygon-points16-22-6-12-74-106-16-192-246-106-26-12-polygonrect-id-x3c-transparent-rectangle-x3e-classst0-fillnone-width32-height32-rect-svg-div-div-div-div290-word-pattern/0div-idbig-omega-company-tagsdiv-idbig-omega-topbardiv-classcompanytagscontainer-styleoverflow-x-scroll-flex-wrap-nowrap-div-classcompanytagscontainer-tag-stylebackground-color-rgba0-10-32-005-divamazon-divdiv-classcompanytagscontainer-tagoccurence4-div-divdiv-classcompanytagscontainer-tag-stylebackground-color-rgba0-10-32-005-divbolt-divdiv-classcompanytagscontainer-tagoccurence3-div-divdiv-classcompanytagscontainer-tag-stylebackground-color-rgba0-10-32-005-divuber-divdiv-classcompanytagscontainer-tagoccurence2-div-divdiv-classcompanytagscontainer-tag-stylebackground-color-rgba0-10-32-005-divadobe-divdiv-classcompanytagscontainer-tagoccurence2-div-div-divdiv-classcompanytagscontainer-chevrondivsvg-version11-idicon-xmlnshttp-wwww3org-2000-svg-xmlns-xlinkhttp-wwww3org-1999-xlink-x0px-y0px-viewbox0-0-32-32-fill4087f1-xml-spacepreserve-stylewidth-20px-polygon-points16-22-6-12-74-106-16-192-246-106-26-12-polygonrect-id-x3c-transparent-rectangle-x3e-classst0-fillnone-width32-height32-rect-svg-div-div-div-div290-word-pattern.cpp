@@ -3,7 +3,7 @@ public:
     
     bool check(map<char,string> &left,map<string,char> &right,char c,string str){
         
-        //check for left
+        //check for left--------------------------------------
         if(left.find(c) != left.end()){
             
             if(left[c] != str){
@@ -14,7 +14,7 @@ public:
             left[c] = str;
         
         
-        //check for right
+        //check for right-------------------------------------
         if(right.find(str) != right.end()){
             
             if(right[str] != c){
@@ -25,7 +25,7 @@ public:
             right[str] = c;
         
         
-        //if everything is fine
+        //if everything is fine-------------------------------
         return true;
         
     }
@@ -44,7 +44,7 @@ public:
         
         while(ptr2 < s.size()){
             
-            //take care of last index
+            //take care of last index----------------------------------------------
             if(ptr2 == s.size()-1){
                 
                 int strLen = ptr2 - ptr1 + 1;//get the length of string
@@ -64,6 +64,7 @@ public:
                 
             }
             
+            //if there is a space----------------------------------------------------
             if(s[ptr2] == ' '){
                 
                 int strLen = ptr2 - ptr1;//get the length of string
