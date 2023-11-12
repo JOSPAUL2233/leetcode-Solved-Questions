@@ -24,11 +24,13 @@ class Solution
             
             if(arr[start] <= arr[mid]){//LEFT PART IS SORTED
                 
+                //take out the mini in tis part and search in other part
                 mini = min(mini,arr[start]);
                 start = mid+1;
                 
             }else{//RIGHT PART IS SORTED
                 
+                //take out the mini in tis part and search in other part
                 mini = min(mini,arr[mid]);
                 end = mid-1;
                 
