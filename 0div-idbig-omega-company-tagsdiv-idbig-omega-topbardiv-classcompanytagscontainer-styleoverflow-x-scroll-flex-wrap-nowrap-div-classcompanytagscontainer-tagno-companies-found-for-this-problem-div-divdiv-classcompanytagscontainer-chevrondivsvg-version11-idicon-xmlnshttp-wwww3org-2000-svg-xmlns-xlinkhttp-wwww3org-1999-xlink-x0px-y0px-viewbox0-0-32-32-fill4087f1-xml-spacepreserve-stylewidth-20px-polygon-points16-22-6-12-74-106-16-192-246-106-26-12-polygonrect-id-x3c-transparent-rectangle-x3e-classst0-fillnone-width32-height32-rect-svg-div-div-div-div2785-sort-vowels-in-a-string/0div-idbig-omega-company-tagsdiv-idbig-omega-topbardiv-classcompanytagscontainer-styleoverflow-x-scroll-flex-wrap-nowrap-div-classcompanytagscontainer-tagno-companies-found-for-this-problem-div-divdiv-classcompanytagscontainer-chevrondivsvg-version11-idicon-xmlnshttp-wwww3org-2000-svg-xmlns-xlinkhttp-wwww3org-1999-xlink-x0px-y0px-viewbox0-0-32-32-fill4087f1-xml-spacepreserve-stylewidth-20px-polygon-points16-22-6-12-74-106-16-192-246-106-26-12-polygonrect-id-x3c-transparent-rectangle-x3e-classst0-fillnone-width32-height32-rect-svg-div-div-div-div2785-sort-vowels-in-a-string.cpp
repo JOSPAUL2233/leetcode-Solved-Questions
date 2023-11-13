@@ -12,31 +12,33 @@ public:
     
     string sortVowels(string s) {
         
-        //extract the vowels and keep it in a string
-        string vowel = "";
+        //maintain a freq map of all the vowels
         
-        for(int i = 0;i<s.size();i++){
-            
-            if(isVowel(s[i]))
-                vowel.push_back(s[i]);
-            
-        }
+        unordered_map<char,int> freq;
         
-        //sort the vowels
-        sort(vowel.begin(),vowel.end());
+        for(char c  : s)
+            freq[c]++;
         
-        
-        //place the vowels according to the sorted order where ever vowel appeared in the string
+        //now, keep them in sorted order
+        string vowelOrder = "AEIOUaeiou";
         int index = 0;
         
+        //now, follow the count sort method
+        
         for(int i = 0;i<s.size();i++){
             
-            if(isVowel(s[i]))
-                s[i] = vowel[index++];
+            if(isVowel(s[i])){
+                
+                while(freq[vowelOrder[index]] == 0)
+                    index++;
+                
+                s[i] = vowelOrder[index];//assiin the vowel
+                freq[vowelOrder[index]]--;//decreaset the frequency
+                
+            }
             
         }
-        
+
         return s;
-        
     }
 };
