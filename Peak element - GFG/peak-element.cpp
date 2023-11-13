@@ -15,20 +15,25 @@ class Solution
     int peakElement(int arr[], int n)
     {
        
+       //take care of edge cases
        if(n == 0)
         return -1;
         
+    //agar ek hi element hai tho that will be your peak element
        if(n == 1)
         return 0;
         
-       //check for special cases
-       if(arr[0] >= arr[1])
+       //check for special cases, check if first and last element is your peak element
+       
+       if(arr[0] >= arr[1])//for first
         return 0;
         
-        if(arr[n-1] >= arr[n-2])
+        if(arr[n-1] >= arr[n-2])//for last
         return n-1;     
         
     
+        //then the answer will lie between index 1 to n-2 nd index so do a binary search on this reange
+        
        int start = 1;
        int end = n-2;
        
@@ -36,9 +41,11 @@ class Solution
            
            int mid = start + (end - start)/2;
            
+           //if the peak element is found
            if(arr[mid] >= arr[mid+1] && arr[mid] >= arr[mid-1])
             return mid;
         
+            //shrink the search space
             if(arr[mid] > arr[mid-1])
                 start = mid+1;
             else
