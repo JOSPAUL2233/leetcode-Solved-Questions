@@ -1,6 +1,6 @@
 # Peak element
-## Easy
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">An element is called a peak element if its value&nbsp;is not smaller than the value of&nbsp;its adjacent elements(if they exists).<br>Given an array <strong>arr[]</strong> of size&nbsp;<strong>N</strong>,&nbsp;<strong>Return the index of any one of its&nbsp;peak elements</strong>.<br><strong>Note:&nbsp;</strong>The generated output will always be&nbsp;1 if the index that you&nbsp;return is correct. Otherwise output will be 0.&nbsp;</span></p>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">An element is called a peak element if its value is not smaller than the value of its adjacent elements(if they exists). Given an array <strong>arr[]</strong> of size&nbsp;<strong>N</strong>,&nbsp;<strong>Return the index of any one of its&nbsp;peak elements</strong>.&nbsp;<br><strong>Note:&nbsp;</strong>The generated output will always be 1 if the index that you return is correct. Otherwise output will be 0. Also, <strong>arr[]</strong> will be in ascending order before the peak element, and in descending order after that.</span></p>
 <p><br><strong><span style="font-size: 18px;">Example 1:</span></strong></p>
 <pre><strong><span style="font-size: 18px;">Input: 
 </span></strong><span style="font-size: 18px;">N = 3
