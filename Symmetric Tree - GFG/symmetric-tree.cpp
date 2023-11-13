@@ -130,7 +130,7 @@ class Solution{
 	    if(root)
 	        return isMirrorImage(root->left,root->right);
 	    else
-	        root;
+	        false;
 	    
     }
 };
