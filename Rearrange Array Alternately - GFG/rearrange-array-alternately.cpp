@@ -16,7 +16,13 @@ class Solution{
     void rearrange(long long *arr, int n) 
     { 
     	
-        //UNDERSTAND THE INTUITION AND DO DRY RUN
+        //PLEASE UNDERSTAND THE INTUITION!!! AND DO DRY RUN!!!
+        
+        //CONCEPT BASED ON
+        //DIVIDENT = QUOTIENT * DIVISOR + REMAINDER
+        
+        //video link: https://www.youtube.com/watch?v=kQrezgskpho
+        
         int maxi = arr[n-1]+1;
         int maxIndex = n-1;
         int minIndex = 0;
