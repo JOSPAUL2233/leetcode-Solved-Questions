@@ -29,7 +29,7 @@ class Solution {
         
         vector<int> dp(n+1,-1);
         
-        return fibo(n,dp) % mod;
+        return fibo(n,dp);
         
     }
 };
