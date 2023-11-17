@@ -12,34 +12,29 @@
 class Solution {
 public:
     
-    void preorder(TreeNode* root, vector<TreeNode*> &nodes){
+    // RIGHT - LEFT - NODE
+    void inversePreorder(TreeNode* root, TreeNode* &prev){
         
+        //base case
         if(root == NULL)
             return;
         
-        nodes.push_back(root);
-        preorder(root->left,nodes);
-        preorder(root->right,nodes);
+        inversePreorder(root->right,prev);
+        inversePreorder(root->left,prev);
+        
+        root->right = prev;
+        root->left = NULL;
+        
+        //keep track of current Node as the last node for next node
+        prev = root;
         
     }
     
     void flatten(TreeNode* root) {
         
-        //USING AN EXTRA SPACE to store the nodes and connecting each other.
-        vector<TreeNode*> nodes;
+        TreeNode* prev = NULL;//keep a track of prev Node, which is also acts as tail
         
-        //store preorder
-        preorder(root,nodes);
-        
-        //flatten it
-        for(int i = 0;i<nodes.size();i++){
-            
-            nodes[i]->left = NULL;
-            
-            if(i == nodes.size()-1)
-                nodes[i]->right = NULL;//for last node
-            else
-                nodes[i]->right = nodes[i+1];
-        }    
+        inversePreorder(root,prev);
+                
     }
 };
