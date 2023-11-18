@@ -4,7 +4,7 @@ public:
         
         sort(nums.begin(),nums.end());
         
-        int maxLength = 0;
+        long long maxLength = 0;
         long long prefixSum = k;
         
         int left = 0;
@@ -19,13 +19,17 @@ public:
             //shrink the search space if needed
             while(left < right && prefixSum < target){
                 
+                //shrink from back
                 prefixSum -= nums[left++];
+                
+                //accordingly update the length and the target
                 len = right - left + 1;
                 target = nums[right] * len;
                 
             }
             
-            maxLength = len > maxLength ? len : maxLength;
+            //store the maximum length of valid window
+            maxLength = max(len,maxLength);
             
         }
         
