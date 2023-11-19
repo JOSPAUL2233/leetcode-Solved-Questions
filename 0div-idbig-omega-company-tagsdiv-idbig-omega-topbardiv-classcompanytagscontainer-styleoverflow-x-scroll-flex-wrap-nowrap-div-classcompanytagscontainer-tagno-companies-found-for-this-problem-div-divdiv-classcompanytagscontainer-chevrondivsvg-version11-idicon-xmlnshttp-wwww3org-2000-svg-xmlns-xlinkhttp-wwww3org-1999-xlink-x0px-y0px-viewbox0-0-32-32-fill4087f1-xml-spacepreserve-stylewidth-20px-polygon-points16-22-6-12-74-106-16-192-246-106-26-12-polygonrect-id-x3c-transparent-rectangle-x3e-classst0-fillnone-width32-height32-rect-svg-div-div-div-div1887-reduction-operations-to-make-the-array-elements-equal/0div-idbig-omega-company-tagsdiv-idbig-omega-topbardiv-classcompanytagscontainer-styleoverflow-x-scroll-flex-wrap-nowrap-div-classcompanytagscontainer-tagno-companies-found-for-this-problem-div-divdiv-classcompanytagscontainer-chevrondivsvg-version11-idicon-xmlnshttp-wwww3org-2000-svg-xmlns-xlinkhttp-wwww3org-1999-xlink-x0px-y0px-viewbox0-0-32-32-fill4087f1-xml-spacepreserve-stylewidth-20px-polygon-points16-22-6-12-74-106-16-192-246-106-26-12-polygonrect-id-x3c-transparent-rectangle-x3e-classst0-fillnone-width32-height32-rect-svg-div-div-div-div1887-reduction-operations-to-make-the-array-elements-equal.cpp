@@ -16,8 +16,10 @@ public:
                 largest--;
             }
             
+            //gives the count of elements which are greater than the second largest element
             int count = nums.size() -1 - largest;
             
+            //if the second largest element does exist, add it upto answer, otherwise break
             if(largest < 0)
                 break;
             else
