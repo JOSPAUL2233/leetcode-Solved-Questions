@@ -4,27 +4,29 @@ public:
         
         sort(nums.begin(),nums.end());
         
-        int largest = nums.size()-1;
-        
+        int ptr = nums.size()-1;//keep a pointer which points to the largest element
         int ans = 0;
         
-        while(largest >= 0){
+        while(ptr >= 0){
             
-            int largestEle = nums[largest];
+            //store the largest number
+            int largestEle = nums[ptr];
             
-            while(largest >= 0 && nums[largest] == largestEle){
-                largest--;
+            //move the pointer backwards until second largest is found
+            while(ptr >= 0 && nums[ptr] == largestEle){
+                ptr--;
             }
             
-            //gives the count of elements which are greater than the second largest element
-            int count = nums.size() -1 - largest;
+            //get the count of largest elements
+            int count = nums.size() -1 - ptr;
             
-            //if the second largest element does exist, add it upto answer, otherwise break
-            if(largest < 0)
+            //if the second largest element does exist, end iteration here.
+            //if it exists, then add the number of largest numbers which are converted(virtually)
+            //to second largest , to the final answer
+            if(ptr < 0)
                 break;
             else
                 ans += count;
-            
             
         }
         
