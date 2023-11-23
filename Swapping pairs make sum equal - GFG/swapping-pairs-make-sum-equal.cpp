@@ -28,6 +28,7 @@ class Solution{
             
             int diff = A[ptr1] - B[ptr2];
             
+            //do swap
             sumB += diff;
             sumA -= diff;
             
@@ -35,13 +36,16 @@ class Solution{
                 return 1;
             }else if(sumA < sumB){
                 
+                //swap it back
                 sumB -= diff;
                 sumA += diff;
                 
+                //since sumA is lesser than sumB, increase the ptr from B
                 ptr2++;
                 
             }else{
                 
+                //swap it back
                 sumB -= diff;
                 sumA += diff;
                 
