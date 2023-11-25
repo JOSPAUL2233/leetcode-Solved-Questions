@@ -4,6 +4,7 @@ public:
         
         int n = nums.size();
         
+        //maintain seperate prefix and suffix sum
         vector<int> prefixSum(n,-1);
         vector<int> suffixSum(n,-1);
                 
@@ -20,17 +21,21 @@ public:
             
         }
         
-        //now, computer the answer
+        //now, computer the answer seperately using prefix and suffix sum in calculation
+        //inorder to overcome negative values.
+        
         vector<int> ans(n,-1);
         
         for(int i = 0;i<nums.size();i++){
             
-            ans[i] = ((nums[i] * i) - prefixSum[i]) + (suffixSum[i] - ( nums[i] * (n-i)));
+            int leftCount = i;//number of elements present left side of ith position
+            int rightCount = n-i;//number of elements present right side of ith position including the ith element
+            
+            ans[i] = ((nums[i] * leftCount) - prefixSum[i]) + (suffixSum[i] - ( nums[i] * rightCount));
             
         }
         
         return ans;
-        
         
     }
 };
