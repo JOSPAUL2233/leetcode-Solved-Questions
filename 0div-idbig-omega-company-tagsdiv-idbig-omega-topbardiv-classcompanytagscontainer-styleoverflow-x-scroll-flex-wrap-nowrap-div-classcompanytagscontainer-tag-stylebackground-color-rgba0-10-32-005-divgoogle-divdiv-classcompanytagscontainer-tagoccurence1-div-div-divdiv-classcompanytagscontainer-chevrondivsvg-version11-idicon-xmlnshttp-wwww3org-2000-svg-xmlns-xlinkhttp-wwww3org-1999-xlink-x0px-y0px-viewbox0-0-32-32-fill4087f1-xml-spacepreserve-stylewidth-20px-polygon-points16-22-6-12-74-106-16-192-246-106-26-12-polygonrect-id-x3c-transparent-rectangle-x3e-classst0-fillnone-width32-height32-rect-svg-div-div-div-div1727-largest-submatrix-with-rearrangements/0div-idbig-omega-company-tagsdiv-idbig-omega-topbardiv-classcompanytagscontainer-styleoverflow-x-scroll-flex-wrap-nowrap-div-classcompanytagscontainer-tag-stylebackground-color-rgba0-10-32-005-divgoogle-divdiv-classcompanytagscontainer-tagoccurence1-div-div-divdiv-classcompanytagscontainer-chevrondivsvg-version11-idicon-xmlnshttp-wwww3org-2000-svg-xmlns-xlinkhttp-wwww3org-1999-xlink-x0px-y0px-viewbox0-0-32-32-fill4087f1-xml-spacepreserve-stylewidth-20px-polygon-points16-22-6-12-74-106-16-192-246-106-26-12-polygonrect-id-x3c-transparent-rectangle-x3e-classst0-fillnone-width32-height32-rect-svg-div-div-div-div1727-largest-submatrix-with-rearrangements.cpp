@@ -4,12 +4,13 @@ public:
         
         vector<vector<int>> height(matrix.size(),vector<int>(matrix[0].size(),0));
         
-        //find heights
+        int maxArea = 0;
         
         for(int i = 0;i<matrix.size();i++){
-            
-            for(int j = 0;j<matrix[0].size();j++){
                 
+            //finding heights
+            for(int j = 0;j<matrix[0].size();j++){
+                                
                 if(matrix[i][j] == 0){
                     height[i][j] = 0;
                 }else{
@@ -20,29 +21,21 @@ public:
                        height[i][j] = 1 + height[i-1][j];
                    }
                     
-                }
+                }                
                 
             }
             
-        }
-        
-        
-        int maxArea = 0;
-
-        //sort each row
-        for(int i = 0;i<height.size();i++){
+            //extract the current row and sort it
+            vector<int> curr = height[i];
             
-            sort(height[i].begin(),height[i].end());
-            
-        }
+            //get entire row of heigths sorted
+            sort(curr.begin(),curr.end());
 
-        //get max area
-        for(int i = 0;i<height.size();i++){
-                        
-            for(int j = 0;j<height[i].size();j++){
+            //get the answer from the sorted row
+            for(int j = 0;j<curr.size();j++){
                 
-                int h = height[i][j];
-                int w = height[i].size() - j;
+                int h = curr[j];
+                int w = curr.size() - j;
                                 
                 int area = h*w;
                 maxArea = max(maxArea,area);
@@ -50,7 +43,7 @@ public:
             }
             
         }
-        
+
         return maxArea;
         
     }
