@@ -4,6 +4,8 @@ public:
         
         vector<vector<int>> height(matrix.size(),vector<int>(matrix[0].size(),0));
         
+        //find heights
+        
         for(int i = 0;i<matrix.size();i++){
             
             for(int j = 0;j<matrix[0].size();j++){
@@ -27,22 +29,21 @@ public:
         
         int maxArea = 0;
 
+        //sort each row
         for(int i = 0;i<height.size();i++){
             
             sort(height[i].begin(),height[i].end());
             
         }
 
-        
+        //get max area
         for(int i = 0;i<height.size();i++){
                         
             for(int j = 0;j<height[i].size();j++){
                 
                 int h = height[i][j];
                 int w = height[i].size() - j;
-                
-                // cout<<h<<" "<<w<<endl;
-                
+                                
                 int area = h*w;
                 maxArea = max(maxArea,area);
                 
