@@ -27,8 +27,6 @@ public:
             
             //extract the current row and sort it
             vector<int> curr = height[i];
-            
-            //get entire row of heigths sorted
             sort(curr.begin(),curr.end());
 
             //get the answer from the sorted row
