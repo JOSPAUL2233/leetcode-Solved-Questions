@@ -10,11 +10,12 @@ public:
         
         while(s1<word1.size() && s2<word2.size()){
                         
-            if(word1[s1][ptr1] != word2[s2][ptr2])
+            //if not equal
+            if(word1[s1][ptr1++] != word2[s2][ptr2++])
                 return false;
             
-            ptr1++;
-            ptr2++;
+            
+            //update to next string if needed 
             
             if(ptr1 == word1[s1].size()){
                 
@@ -22,7 +23,7 @@ public:
                 s1++;
                 
             }
-                        
+            
             if(ptr2 == word2[s2].size()){
                 
                 ptr2 = 0;
