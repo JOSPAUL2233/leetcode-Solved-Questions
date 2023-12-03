@@ -12,15 +12,12 @@ public:
         for(int i = 1;i<points.size();i++){
             
             //find the smallest diff which will be the diagonal distance
-            int diffx = abs(points[i][0] - prev[0]);
-            int diffy = abs(points[i][1] - prev[1]);
+            int xDist = abs(prev[0] - points[i][0]);
+            int yDist = abs(prev[1] - points[i][1]);
             
-            int diaDist = min(diffx,diffy);
-            int normalDist = diffx + diffy;    
+            int totalDist = max(xDist,yDist);
             
-            int dist = normalDist - diaDist;
-            
-            count += dist;
+            count += totalDist;
             
             //update the prev
             prev[0] = points[i][0];
