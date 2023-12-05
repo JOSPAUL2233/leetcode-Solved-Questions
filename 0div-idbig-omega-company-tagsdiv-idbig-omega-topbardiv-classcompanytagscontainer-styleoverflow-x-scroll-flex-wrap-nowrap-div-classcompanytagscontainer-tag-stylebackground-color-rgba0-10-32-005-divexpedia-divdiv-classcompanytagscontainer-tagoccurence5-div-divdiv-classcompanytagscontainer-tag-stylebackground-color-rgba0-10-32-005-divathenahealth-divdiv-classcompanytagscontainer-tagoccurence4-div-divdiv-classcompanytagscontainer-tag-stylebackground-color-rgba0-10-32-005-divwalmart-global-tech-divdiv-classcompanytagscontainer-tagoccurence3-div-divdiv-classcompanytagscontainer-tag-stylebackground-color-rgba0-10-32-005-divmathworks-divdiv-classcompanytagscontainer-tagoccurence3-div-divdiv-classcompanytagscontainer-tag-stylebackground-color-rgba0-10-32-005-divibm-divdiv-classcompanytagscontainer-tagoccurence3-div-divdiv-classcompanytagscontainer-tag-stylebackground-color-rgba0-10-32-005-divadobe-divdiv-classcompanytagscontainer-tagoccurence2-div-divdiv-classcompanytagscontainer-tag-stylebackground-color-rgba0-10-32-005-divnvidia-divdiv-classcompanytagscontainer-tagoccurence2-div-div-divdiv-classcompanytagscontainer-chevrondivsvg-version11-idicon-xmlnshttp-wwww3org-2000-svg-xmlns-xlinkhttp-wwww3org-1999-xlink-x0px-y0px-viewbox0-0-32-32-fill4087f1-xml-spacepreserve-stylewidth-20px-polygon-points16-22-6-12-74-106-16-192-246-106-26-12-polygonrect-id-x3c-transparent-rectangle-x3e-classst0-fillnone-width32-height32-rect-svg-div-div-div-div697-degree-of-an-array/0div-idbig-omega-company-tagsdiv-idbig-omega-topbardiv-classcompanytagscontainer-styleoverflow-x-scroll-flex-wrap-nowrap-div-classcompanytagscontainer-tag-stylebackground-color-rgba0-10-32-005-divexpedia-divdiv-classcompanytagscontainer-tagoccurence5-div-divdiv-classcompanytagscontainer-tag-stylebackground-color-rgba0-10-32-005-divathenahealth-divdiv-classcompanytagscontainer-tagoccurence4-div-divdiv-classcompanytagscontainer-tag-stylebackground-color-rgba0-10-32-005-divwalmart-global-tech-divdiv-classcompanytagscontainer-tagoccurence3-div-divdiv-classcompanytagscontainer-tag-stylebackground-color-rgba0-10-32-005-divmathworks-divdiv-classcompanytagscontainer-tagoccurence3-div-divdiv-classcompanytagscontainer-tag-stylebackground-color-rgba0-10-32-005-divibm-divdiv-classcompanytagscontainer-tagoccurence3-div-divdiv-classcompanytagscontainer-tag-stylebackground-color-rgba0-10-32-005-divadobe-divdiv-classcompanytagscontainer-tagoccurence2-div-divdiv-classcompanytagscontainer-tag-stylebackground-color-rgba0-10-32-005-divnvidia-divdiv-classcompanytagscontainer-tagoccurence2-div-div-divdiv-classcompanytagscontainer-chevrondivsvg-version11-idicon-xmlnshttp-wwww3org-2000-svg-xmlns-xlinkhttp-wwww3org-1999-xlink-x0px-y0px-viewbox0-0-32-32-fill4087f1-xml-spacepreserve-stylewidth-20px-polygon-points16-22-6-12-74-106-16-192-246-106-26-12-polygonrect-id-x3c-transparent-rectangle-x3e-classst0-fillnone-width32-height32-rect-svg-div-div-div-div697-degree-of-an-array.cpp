@@ -8,7 +8,9 @@ public:
         
         int minLen = INT_MAX;
         
-        int maxi = 0;
+        int maxFreq = 0;
+        
+        //get the maxFreq
         
         for(int i = 0;i<nums.size();i++){
             
@@ -23,19 +25,16 @@ public:
             last[nums[i]] = i;
             
             //update the maximum frequency
-            if(freq[nums[i]] > maxi){
-                maxi = freq[nums[i]];
-            }            
+            maxFreq = max(maxFreq,freq[nums[i]]);
             
         }
         
                 
         for(int i = 0;i<nums.size();i++){
             
-            if(freq[nums[i]] == maxi){
+            if(freq[nums[i]] == maxFreq){
                 
                 int len = last[nums[i]] - first[nums[i]] + 1;
-                
                 minLen = min(minLen , len);
                 
             }
