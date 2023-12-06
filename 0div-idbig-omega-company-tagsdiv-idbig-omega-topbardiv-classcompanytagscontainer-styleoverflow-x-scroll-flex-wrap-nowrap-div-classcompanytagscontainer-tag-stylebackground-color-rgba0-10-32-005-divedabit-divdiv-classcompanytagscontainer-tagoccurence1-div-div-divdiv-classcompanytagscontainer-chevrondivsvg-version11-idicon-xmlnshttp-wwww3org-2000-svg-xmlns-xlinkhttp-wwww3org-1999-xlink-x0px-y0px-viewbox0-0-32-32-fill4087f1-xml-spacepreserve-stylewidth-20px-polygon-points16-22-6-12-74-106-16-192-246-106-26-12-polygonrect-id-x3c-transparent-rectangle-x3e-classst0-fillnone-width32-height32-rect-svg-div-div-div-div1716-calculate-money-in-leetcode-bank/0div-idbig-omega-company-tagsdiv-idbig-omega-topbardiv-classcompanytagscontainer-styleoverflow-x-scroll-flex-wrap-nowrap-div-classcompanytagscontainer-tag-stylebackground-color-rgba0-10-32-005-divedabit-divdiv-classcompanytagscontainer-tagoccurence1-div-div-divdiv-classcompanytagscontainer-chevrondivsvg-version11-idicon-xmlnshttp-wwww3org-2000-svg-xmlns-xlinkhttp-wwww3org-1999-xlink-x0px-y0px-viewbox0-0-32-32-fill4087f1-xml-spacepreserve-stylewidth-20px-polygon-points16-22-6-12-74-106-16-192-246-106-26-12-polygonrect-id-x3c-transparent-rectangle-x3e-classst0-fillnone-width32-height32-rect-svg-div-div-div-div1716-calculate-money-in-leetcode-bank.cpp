@@ -2,22 +2,29 @@ class Solution {
 public:
     int totalMoney(int n) {
         
-        int sum = 0;
-        
-        int row = n/7 + 1;
-        
-        int count = n;
-        
-        for(int i = 1;i<=row;i++){
+        //ap first = a1
+        //last = an = a1 + (n-1)d
+        //sum = (n/2) * (first + last)
                         
-            for(int j = i;j<i+7;j++){
-
-                sum += j;
-                count--;
-                
-                if(count==0)
-                    return sum;
-            }
+        int first = 1;
+        int last = 7;
+        
+        //for the first row
+        int sum = (7) * (first + last) / 2;
+        
+        //now, let's find for the cols
+        int row = n/7;
+        
+        first = sum;
+        last = first + (row-1)*7;
+        
+        sum = row * (first + last)/2;
+        
+        //now, find the value for the last row
+        for(int i = 0;i<n%7;i++){
+            
+            sum += row+i+1;
+            
         }
         
         return sum;
