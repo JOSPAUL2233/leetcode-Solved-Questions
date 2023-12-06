@@ -12,7 +12,7 @@ public:
         //for the first row
         int sum = (7) * (first + last) / 2;
         
-        //now, let's find for the cols
+        //now, let's find for the other rows using AP
         int row = n/7;
         
         first = sum;
@@ -21,9 +21,10 @@ public:
         sum = row * (first + last)/2;
         
         //now, find the value for the last row
+        //though it can be calcualted without loop also using the same sum formula
         for(int i = 0;i<n%7;i++){
             
-            sum += row+i+1;
+            sum += row + i + 1;
             
         }
         
