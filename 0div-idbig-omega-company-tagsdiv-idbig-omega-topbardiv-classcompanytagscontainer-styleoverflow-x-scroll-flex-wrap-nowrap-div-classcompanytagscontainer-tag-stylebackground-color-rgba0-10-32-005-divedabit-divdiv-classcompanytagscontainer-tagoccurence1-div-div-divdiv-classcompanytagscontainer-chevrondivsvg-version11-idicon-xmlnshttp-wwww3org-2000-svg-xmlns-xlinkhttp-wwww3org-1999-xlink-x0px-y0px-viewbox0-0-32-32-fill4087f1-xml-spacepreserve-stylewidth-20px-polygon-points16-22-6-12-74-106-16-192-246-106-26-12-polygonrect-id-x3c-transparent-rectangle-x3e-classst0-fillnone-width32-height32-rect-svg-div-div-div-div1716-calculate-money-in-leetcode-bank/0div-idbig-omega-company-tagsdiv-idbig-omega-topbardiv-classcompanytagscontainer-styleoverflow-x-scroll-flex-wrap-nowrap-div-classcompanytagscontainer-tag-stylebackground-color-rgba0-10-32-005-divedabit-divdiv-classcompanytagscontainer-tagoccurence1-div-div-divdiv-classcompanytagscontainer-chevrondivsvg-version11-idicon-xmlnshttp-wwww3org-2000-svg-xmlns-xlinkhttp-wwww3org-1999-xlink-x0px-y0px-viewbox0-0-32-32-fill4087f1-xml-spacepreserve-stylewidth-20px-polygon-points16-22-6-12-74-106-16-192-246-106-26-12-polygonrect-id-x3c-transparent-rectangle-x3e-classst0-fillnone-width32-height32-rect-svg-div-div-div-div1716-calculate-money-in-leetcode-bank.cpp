@@ -5,7 +5,6 @@ public:
         int sum = 0;
         
         int row = n/7 + 1;
-        int col = n%7;
         
         int count = n;
         
