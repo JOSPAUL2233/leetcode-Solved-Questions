@@ -11,8 +11,6 @@ class Solution
     vector<int> subarraySum(vector<int>arr, int n, long long s)
     {
         
-        //sliding window approach
-        
         int left = 0;
         int sum = 0;
         
@@ -22,9 +20,7 @@ class Solution
             
             while(left < right && sum > s){
                 
-                //shrink from left
-                sum -= arr[left];
-                left++;
+                sum -= arr[left++];
                 
             }
             
