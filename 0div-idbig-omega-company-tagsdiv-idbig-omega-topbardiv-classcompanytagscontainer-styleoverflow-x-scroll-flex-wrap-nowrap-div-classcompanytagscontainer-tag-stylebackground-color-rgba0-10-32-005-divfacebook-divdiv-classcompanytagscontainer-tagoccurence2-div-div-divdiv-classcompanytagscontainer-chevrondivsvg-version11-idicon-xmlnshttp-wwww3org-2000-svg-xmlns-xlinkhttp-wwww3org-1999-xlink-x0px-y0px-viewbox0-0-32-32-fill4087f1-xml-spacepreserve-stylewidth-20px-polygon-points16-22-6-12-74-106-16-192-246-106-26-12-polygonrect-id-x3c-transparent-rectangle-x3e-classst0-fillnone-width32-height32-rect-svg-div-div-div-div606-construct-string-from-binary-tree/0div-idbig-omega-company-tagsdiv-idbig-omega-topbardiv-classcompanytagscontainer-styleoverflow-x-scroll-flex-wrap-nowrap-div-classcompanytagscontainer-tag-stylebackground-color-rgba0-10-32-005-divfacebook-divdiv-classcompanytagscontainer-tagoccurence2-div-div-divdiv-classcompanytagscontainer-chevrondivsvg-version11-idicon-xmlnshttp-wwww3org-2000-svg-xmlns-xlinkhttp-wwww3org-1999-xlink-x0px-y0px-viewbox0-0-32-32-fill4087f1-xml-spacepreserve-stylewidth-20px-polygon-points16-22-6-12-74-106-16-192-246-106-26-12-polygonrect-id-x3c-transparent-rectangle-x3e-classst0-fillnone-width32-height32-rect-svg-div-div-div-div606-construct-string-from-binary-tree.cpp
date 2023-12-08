@@ -15,9 +15,8 @@ public:
     void preorder(TreeNode* root, string &ans){
         
         
-        ans += to_string(root->val);
+        ans.append(to_string(root->val));
 
-        
         if(root->left){
             ans.push_back('(');
             preorder(root->left,ans);
@@ -25,7 +24,7 @@ public:
         }
         
         if(!root->left && root->right){
-            ans += "()";
+            ans.append("()");
         }
                 
         if(root->right){
