@@ -27,7 +27,6 @@ public:
         if(!root->left && root->right){
             ans += "()";
         }
-        
                 
         if(root->right){
             ans.push_back('(');
