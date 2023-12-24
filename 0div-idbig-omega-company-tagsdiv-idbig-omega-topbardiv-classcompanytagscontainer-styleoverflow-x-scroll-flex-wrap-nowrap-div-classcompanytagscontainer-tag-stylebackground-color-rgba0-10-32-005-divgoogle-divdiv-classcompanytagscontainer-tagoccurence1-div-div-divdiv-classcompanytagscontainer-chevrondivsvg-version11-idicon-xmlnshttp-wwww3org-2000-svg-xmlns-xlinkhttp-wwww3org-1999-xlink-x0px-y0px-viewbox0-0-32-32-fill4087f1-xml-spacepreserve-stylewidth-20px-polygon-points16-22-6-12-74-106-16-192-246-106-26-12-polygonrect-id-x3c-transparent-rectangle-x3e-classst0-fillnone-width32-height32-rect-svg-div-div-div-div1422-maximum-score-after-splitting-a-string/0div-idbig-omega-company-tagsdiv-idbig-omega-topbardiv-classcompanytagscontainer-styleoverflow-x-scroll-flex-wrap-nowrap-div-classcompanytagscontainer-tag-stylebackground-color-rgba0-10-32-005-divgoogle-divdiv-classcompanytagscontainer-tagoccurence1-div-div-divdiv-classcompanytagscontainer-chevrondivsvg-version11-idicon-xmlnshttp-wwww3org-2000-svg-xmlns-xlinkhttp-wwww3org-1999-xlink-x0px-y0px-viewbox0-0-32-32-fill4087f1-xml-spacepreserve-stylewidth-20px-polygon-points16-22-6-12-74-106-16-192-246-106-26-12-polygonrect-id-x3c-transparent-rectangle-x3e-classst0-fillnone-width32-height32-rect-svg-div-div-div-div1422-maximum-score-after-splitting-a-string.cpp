@@ -2,21 +2,28 @@ class Solution {
 public:
     int maxScore(string s) {
         
-        int rightOnes = 0, leftZeroes = 0;
+        int leftZeros = 0;
+        int rightOnes = 0;
         
-        for(char c: s)
-            if(c=='1') rightOnes++;
+        for(char c : s)
+            if(c == '1')
+                rightOnes++;
         
-        int score = 0;
+        int maxScore = 0;
         
-        for(int i=0; i<s.length()-1; i++){
+        for(int i = 0;i<s.size()-1;i++){
             
-            if(s[i]=='0') leftZeroes++;
-            else rightOnes--;
+            if(s[i] == '0')
+                leftZeros++;
+            else
+                rightOnes--;
             
-            score = max(score, leftZeroes + rightOnes);
+            int score = leftZeros + rightOnes;
+            maxScore = max(maxScore,score);
+            
         }
-        return score;
+        
+        return maxScore;
         
     }
 };
