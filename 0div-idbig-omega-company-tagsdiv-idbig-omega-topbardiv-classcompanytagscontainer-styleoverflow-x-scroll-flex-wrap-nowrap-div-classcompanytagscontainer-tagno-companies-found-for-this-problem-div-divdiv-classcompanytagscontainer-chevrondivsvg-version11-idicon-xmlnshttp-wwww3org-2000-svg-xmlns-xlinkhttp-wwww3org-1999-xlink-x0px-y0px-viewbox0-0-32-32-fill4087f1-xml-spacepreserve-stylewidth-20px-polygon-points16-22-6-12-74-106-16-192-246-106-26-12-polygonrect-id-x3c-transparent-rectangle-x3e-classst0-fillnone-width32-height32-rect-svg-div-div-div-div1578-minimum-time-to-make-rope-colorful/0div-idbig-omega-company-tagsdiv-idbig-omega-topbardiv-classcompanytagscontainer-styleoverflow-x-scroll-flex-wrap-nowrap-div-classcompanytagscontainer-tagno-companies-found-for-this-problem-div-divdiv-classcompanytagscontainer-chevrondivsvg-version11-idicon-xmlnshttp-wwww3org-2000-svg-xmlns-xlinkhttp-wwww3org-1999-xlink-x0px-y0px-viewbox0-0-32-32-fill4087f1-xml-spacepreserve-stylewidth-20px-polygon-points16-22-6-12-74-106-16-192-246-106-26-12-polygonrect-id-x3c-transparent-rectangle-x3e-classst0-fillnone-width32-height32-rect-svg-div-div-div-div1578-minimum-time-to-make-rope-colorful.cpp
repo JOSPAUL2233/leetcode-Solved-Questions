@@ -1,19 +1,32 @@
 class Solution {
 public:
-int minCost(string s, vector<int>& cost) 
-    {
-        int res = 0;
-        int n = s.size();
-        for(int i = 1; i < n; i++)
-        {
-            if(s[i] == s[i - 1])
-            {
-                res += min(cost[i], cost[i - 1]); 
-                cost[i] = max(cost[i], cost[i - 1]); 
-            }     
+    int minCost(string colors, vector<int>& neededTime) {
+        
+        //get the sum and get the sum of largest char
+        int sum = 0;
+        int largestSum = 0;
+        
+        for(int i = 0;i<colors.size();i++){
+            
+            sum += neededTime[i];
+            
+            int largest = neededTime[i];
+            
+            while(i+1 < colors.size() && colors[i] == colors[i+1]){
+                                
+                largest = max(largest,neededTime[i+1]);
+                i++;
+                
+                sum += neededTime[i];
+                
+            }
+            
+            // cout<<largest<<endl;
+            largestSum += largest;
+            
         }
         
-        return res;
+        return sum - largestSum;
         
     }
 };
