@@ -6,6 +6,13 @@ using namespace std;
 class Solution 
 {
     public:
+    
+    bool isValid(int r,int c,int row,int col){
+        
+        return (r>=0 && r<row && c>=0 && c<col);
+        
+    }
+    
     //Function to find minimum time required to rot all oranges. 
     int orangesRotting(vector<vector<int>>& grid) {
         
@@ -31,6 +38,10 @@ class Solution
             
         }
         
+        //make a deltaRow and deltaCol for the four neibours indices
+        vector<int> delRow = {-1,0,+1,0};
+        vector<int> delCol = {0,+1,0,-1};
+        
         int time = 0;
         
         while(!que.empty()){
@@ -50,38 +61,21 @@ class Solution
                 
                 //push all the fresh oranges which are neibours(make neibours rotten)
                 
-                //left -->i,j-1
-                if(j-1 >= 0 && grid[i][j-1] == 1 && !visited[i][j-1]){
+                for(int k = 0;k<4;k++){
                     
-                    visited[i][j-1] = 1;
-                    que.push({i,j-1});
+                    //change indices according to the neibouring directions
+                    int r = i + delRow[k];
+                    int c = j + delCol[k];
                     
+                    //make it rotten if valid
+                    if(isValid(r,c,row,col) && grid[r][c] == 1 && !visited[r][c]){
+                        
+                        visited[r][c] = 1;
+                        que.push({r,c});
+    
+                    }
+                
                 }
-                
-                //right --> i,j+1
-                if(j+1 < col && grid[i][j+1] == 1 && !visited[i][j+1]){
-                    
-                    visited[i][j+1] = 1;
-                    que.push({i,j+1});
-                    
-                }         
-                
-                //up --> i-1,j
-                if(i-1 >= 0 && grid[i-1][j] == 1 && !visited[i-1][j]){
-                    
-                    visited[i-1][j] = 1;
-                    que.push({i-1,j});
-                    
-                }       
-                
-                //down --> i+1,j
-                if(i+1 < row && grid[i+1][j] == 1 && !visited[i+1][j]){
-                    
-                    visited[i+1][j] = 1;
-                    que.push({i+1,j});
-
-                }
-                
             }
             
             //increment the time
@@ -103,8 +97,6 @@ class Solution
             }
             
         }
-        
-        
         
         return time;
         
