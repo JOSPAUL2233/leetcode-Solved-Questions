@@ -27,7 +27,9 @@ public:
         
     }
     
-    int numEnclaves(vector<vector<int>>& grid) {
+    int numEnclaves(vector<vector<int>>& gr) {
+        
+        vector<vector<int>> grid = gr;
         
         int row = grid.size();
         int col = grid[0].size();
