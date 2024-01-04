@@ -2,7 +2,6 @@ class Solution {
 public:
     int minOperations(vector<int>& nums) {
         
-        //store the frequecy 
         map<int,int> freq;
         
         for(int i : nums)
@@ -15,10 +14,8 @@ public:
             if(i.second == 1)
                 return -1;
             
-            count += (i.second/3);
+            count += i.second/3 + (i.second%3 != 0);
             
-            if(i.second%3 != 0)
-                count++;
             
         }
         
