@@ -29,6 +29,8 @@ public:
     
     int numEnclaves(vector<vector<int>>& gr) {
         
+        //making a duplicate because I don't want to change the actual data.
+        //we can also make a visited array and then solve
         vector<vector<int>> grid = gr;
         
         int row = grid.size();
