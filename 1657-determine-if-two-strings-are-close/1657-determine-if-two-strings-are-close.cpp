@@ -1,32 +1,35 @@
 class Solution {
 public:
-bool closeStrings(std::string word1, std::string word2) {
-        std::vector<int> freq1(26, 0);
-        std::vector<int> freq2(26, 0);
-
-        for (char ch : word1) {
-            freq1[ch - 'a']++;
+    bool closeStrings(string word1, string word2) {
+        
+        if(word1.size() != word2.size())
+            return false;
+        
+        vector<int> freq1(26,0);
+        vector<int> freq2(26,0);
+        
+        for(int i = 0;i<word1.size();i++){
+            
+            char c = word1[i];
+            freq1[c-'a']++;
+            
         }
 
-        for (char ch : word2) {
-            freq2[ch - 'a']++;
+        for(int i = 0;i<word2.size();i++){
+            
+            char c = word2[i];
+            
+            if(freq1[c-'a'] == 0)
+                return false;  
+            
+            freq2[c-'a']++;
+            
         }
-
-        for (int i = 0; i < 26; i++) {
-            if ((freq1[i] == 0 && freq2[i] != 0) || (freq1[i] != 0 && freq2[i] == 0)) {
-                return false;
-            }
-        }
-
-        std::sort(freq1.begin(), freq1.end());
-        std::sort(freq2.begin(), freq2.end());
-
-        for (int i = 0; i < 26; i++) {
-            if (freq1[i] != freq2[i]) {
-                return false;
-            }
-        }
-
-        return true;
+        
+        sort(freq1.begin(),freq1.end());
+        sort(freq2.begin(),freq2.end());
+        
+        return freq1==freq2;
+        
     }
 };
