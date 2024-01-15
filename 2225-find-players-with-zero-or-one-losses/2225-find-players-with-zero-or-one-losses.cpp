@@ -5,30 +5,29 @@ public:
         vector<int> notLost;
         vector<int> oneLost;
         
-        map<int,int> won;
         map<int,int> lost;
-        
-        set<int> st;
-        
+                
         for(int i = 0;i<matches.size();i++){
             
-            won[matches[i][0]]++;
-            lost[matches[i][1]]++;
+            int winner = matches[i][0];
+            int loser = matches[i][1];
             
-            st.insert(matches[i][0]);
-            st.insert(matches[i][1]);
-            
+            if(lost.find(winner) == lost.end())
+                lost[winner] = 0;
+    
+            lost[loser]++;
+                        
         }
         
         //fill not lost and onelost
         
-        for(auto i : st){
+        for(auto i : lost){
             
-            if(lost[i] == 0)
-                notLost.push_back(i);
+            if(i.second == 0)
+                notLost.push_back(i.first);
             
-            if(lost[i] == 1)
-                oneLost.push_back(i);
+            if(i.second == 1)
+                oneLost.push_back(i.first);
             
         }
         
