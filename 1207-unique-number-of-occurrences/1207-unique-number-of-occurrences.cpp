@@ -3,17 +3,17 @@ public:
     bool uniqueOccurrences(vector<int>& arr) {
         
         map<int,int> freq;
-        map<int,int> freq1;
+        set<int> st;
         
         for(int i : arr)
             freq[i]++;
         
         for(auto p : freq){
             
-            freq1[p.second]++;
-            
-            if(freq1[p.second] > 1)
+            if(st.find(p.second) != st.end())
                 return false;
+            
+            st.insert(p.second);
             
         }
         
