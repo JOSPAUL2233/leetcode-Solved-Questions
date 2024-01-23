@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int solve(vector<string> arr,string path,int index){
+    int solve(vector<string> arr,string &path,int index){
         
         //base cases
         
@@ -13,7 +13,10 @@ public:
         if(index == arr.size())
             return path.size();
         
-        int left = solve(arr,path+arr[index],index+1);
+        for(char c : arr[index]) path.push_back(c);
+        int left = solve(arr,path,index+1);
+        for(char c : arr[index]) path.pop_back();
+
         int right = solve(arr,path,index+1);
         
         return max(left,right);
