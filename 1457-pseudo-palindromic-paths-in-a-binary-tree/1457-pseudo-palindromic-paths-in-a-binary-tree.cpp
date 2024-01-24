@@ -12,52 +12,42 @@
 class Solution {
 public:
     
-    bool check(map<int,int> freq){
-                
-        int count = 0;
+    bool check(int odds){
         
-        for(auto i : freq)
-            if(i.second % 2 != 0)
-                count++;
-        
-        return count<=1;
+        return (odds == 0) ||(( odds & (odds-1)) == 0);
         
     }
     
-    void solve(TreeNode* root,int &count,map<int,int> &freq){
+    void solve(TreeNode* root,int &count,int &odds){
         
         //base case
+        
+        int mask = 1<<root->val;
+        odds ^= mask;
+        
         if(!root->left && !root->right){
             
-            freq[root->val]++;
-            
-            if(check(freq))
-                count++;
-            
-            freq[root->val]--;
-                        
-            return;
+           if(check(odds))
+               count++;
             
         }
         
-        freq[root->val]++;
-        
         if(root->left)
-            solve(root->left,count,freq);
+            solve(root->left,count,odds);
         
         if(root->right)
-            solve(root->right,count,freq);
+            solve(root->right,count,odds);
         
-        freq[root->val]--;
+        odds ^= mask;
         
     }
     
     int pseudoPalindromicPaths (TreeNode* root) {
         
         int count = 0;
-        map<int,int> freq;
+        int odds = 0;
         
-        solve(root,count,freq);
+        solve(root,count,odds);
         
         return count;
         
