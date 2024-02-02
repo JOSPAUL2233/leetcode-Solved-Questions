@@ -6,16 +6,12 @@ public:
         
         for(int i = 1;i<10;i++){
             
-            for(int j = 1;j<10;j++){
-                
-                int num = 0;
-                
-                for(int it = i;it<=j;it++){
-                    
-                    num = (num*10) + it;
-                    
-                }
-                
+            int num = 0;
+            
+            for(int j = i;j<10;j++){
+                                    
+                num = (num*10) + j;
+                                    
                 if(num>=low && num<=high)
                     ans.push_back(num);
                 
