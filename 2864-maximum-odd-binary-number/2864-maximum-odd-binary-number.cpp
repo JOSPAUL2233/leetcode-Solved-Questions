@@ -10,11 +10,12 @@ public:
         count--;
         
         string ans;
-        while(count--){
-            ans.push_back('1');
-        }
         
-        while(size--) ans.push_back('0');
+        while(count--)
+            ans.push_back('1');
+        
+        while(size--)
+            ans.push_back('0');
         
         ans.push_back('1');
         
