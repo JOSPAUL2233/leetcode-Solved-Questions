@@ -9,6 +9,7 @@ public:
         queue<string> que;
         que.push(beginWord);
         
+        //keep track of level
         int level = 1;
         
         while(!que.empty()){
@@ -17,15 +18,18 @@ public:
             
             for(int i = 0;i<size;i++){
                 
+                //take out the word from queue
                 string word = que.front();
                 que.pop();
                 
+                //check if the word is found,if yes return the shortest path
                 if(word == endWord)
                     return level;
                 
+                //iterate through all the chars of current word
                 for(int i = 0;i<word.size();i++){
                     
-                    int original = word[i];
+                    int original = word[i];//keep track of original char
                     
                     //change the char to A-Z and check if it can make a path
                     for(char ch = 'a';ch<='z';ch++){
@@ -36,14 +40,14 @@ public:
                         }
                     }
                     
-                    word[i] = original;
+                    word[i] = original;//keep the original char
                     
                 }
                 
                 
             }
             
-            
+            //increase level if exists
             if(!que.empty())
                 level++;
             
