@@ -5,9 +5,10 @@ public:
         int row = heights.size();
         int col = heights[0].size();
         
+        //maintain a minDist matrix
         vector<vector<int>> minDist(row,vector<int>(col,INT_MAX));
         
-        //min heap
+        //min heap --> {effort,{row,col}}
         priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
         
         pq.push({0,{0,0}});
@@ -21,12 +22,12 @@ public:
             auto p = pq.top();
             pq.pop();
             
-            int dist = p.first;
+            int effort = p.first;
             int r = p.second.first;
             int c = p.second.second;
             
             if(r==row-1 && c==col-1)
-                return dist;
+                return effort;
             
             for(int i = 0;i<4;i++){
                 
@@ -35,11 +36,13 @@ public:
                 
                 if(nr>=0 && nr<row && nc>=0 && nc<col){
                     
-                    int effort = max(dist,abs(heights[nr][nc] - heights[r][c]));
+                    //take out the maximum effort till now --> max(prev_Effort,curr_Effort)
+                    int newEffort = max(effort,abs(heights[nr][nc] - heights[r][c]));
                     
-                    if(effort < minDist[nr][nc]){
-                        minDist[nr][nc] = effort;
-                        pq.push({effort,{nr,nc}});
+                    //store the minEffort in minDist matrix
+                    if(newEffort < minDist[nr][nc]){
+                        minDist[nr][nc] = newEffort;
+                        pq.push({newEffort,{nr,nc}});
                     } 
                     
                 }
