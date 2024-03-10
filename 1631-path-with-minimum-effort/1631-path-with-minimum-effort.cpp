@@ -50,8 +50,6 @@ public:
             }
             
         }
-        
-        return -1;
-        
+        return 342; //this will not occure
     }
 };
