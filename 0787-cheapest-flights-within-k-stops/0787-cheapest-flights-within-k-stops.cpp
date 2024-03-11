@@ -12,10 +12,11 @@ public:
         
         vector<int> minDist(n,INT_MAX);
         
+        //use queue so to go level-wise or stop-wise
         queue<pair<int,pair<int,int>>> que;
         que.push({0,{src,0}}); //stops,node,cost
         
-        minDist[src] = 0;
+        // minDist[src] = 0;
         
         while(!que.empty()){
             
