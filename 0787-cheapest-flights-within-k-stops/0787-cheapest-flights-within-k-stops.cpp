@@ -13,7 +13,7 @@ public:
         vector<int> minDist(n,INT_MAX);
         
         queue<pair<int,pair<int,int>>> que;
-        que.push({0,{src,0}}); //cost,node,steps
+        que.push({0,{src,0}}); //stops,node,cost
         
         minDist[src] = 0;
         
@@ -22,12 +22,10 @@ public:
             auto p = que.front();
             que.pop();
             
-            int cost = p.first;
+            int stops = p.first;
             int node = p.second.first;
-            int stops = p.second.second;
-            
-            // cout<<cost<<" "<<node<<" "<<steps<<endl;
-            
+            int cost = p.second.second;
+                        
             if(stops > k)
                 continue;
                         
@@ -35,7 +33,7 @@ public:
                 
                 if(cost + it.second < minDist[it.first]){
                     minDist[it.first] = cost+it.second;
-                    que.push({cost+it.second,{it.first,stops+1}});
+                    que.push({stops+1,{it.first,cost+it.second}});
                 }
                 
             }
