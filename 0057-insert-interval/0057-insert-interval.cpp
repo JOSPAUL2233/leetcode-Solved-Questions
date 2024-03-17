@@ -2,52 +2,45 @@ class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         
-        //insert newInterval at the appropriate place
-        
-        vector<vector<int>> vec;
-        
-        for(auto it : intervals){
-            
-            if(it[0] <= newInterval[0])
-                vec.push_back(it);
-            else
-                break;
-            
-            
-        }
-        
-        vec.push_back(newInterval);
-        
-        for(auto it : intervals){
-            
-            if(it[0] > newInterval[0])
-                vec.push_back(it);
-            
-        }
-        
-        //merge the intervals if needed
         vector<vector<int>> ans;
-        pair<int,int> p = {vec[0][0],vec[0][1]};
         
-        for(auto it : vec){
+        int start = newInterval[0];
+        int end = newInterval[1];
+        int n = intervals.size();
+        
+        int i = 0;
+
+        //push back all the intervals which are not overlapping
+        while(i < n && intervals[i][1] < start){
             
-            if(it[0] <= p.second){//if overlaps
-                
-                p.second = max(p.second,it[1]);
-                
-            }else{
-                
-                //push the current pair into ans and start pairing from this index
-                ans.push_back({p.first,p.second});
-                p = {it[0],it[1]};
-                
-            }
+            ans.push_back(intervals[i]);
+            i++;
+            
+        } 
+
+        //merge the intervals which are overlapping
+        vector<int> mergedInterval = {start, end};
+        
+        while(i < n && intervals[i][0] <= end){
+            
+            mergedInterval[0] = min(mergedInterval[0], intervals[i][0]);
+            mergedInterval[1] = max(mergedInterval[1], intervals[i][1]);
+            
+            i++;
             
         }
         
-        ans.push_back({p.first,p.second});
+        ans.push_back(mergedInterval);
+
+        //push back all ther remaining intervals which aren't overlapping
         
-        return ans;
+        while(i < n){
+            
+            ans.push_back(intervals[i]);
+            i++;
         
+        }
+
+        return ans;        
     }
 };
