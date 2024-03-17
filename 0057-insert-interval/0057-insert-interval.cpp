@@ -37,6 +37,7 @@ public:
                 
             }else{
                 
+                //push the current pair into ans and start pairing from this index
                 ans.push_back({p.first,p.second});
                 p = {it[0],it[1]};
                 
