@@ -18,8 +18,10 @@ public:
             
             while(left<=right && freq.size() > k){
                 
+                //remove one element from left
                 freq[nums[left]]--;
-                    
+                
+                //erase the element if it entirely got removed
                 if(freq[nums[left]]==0){
                     freq.erase(nums[left]);
                 }
@@ -27,6 +29,7 @@ public:
                 left++;
             }
             
+            //count the number of subarrays with this length
             count += (right-left+1);
             
             right++;
