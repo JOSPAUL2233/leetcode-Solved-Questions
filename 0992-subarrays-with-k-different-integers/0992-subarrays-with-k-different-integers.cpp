@@ -7,6 +7,7 @@ public:
         
         int left = 0;
         int right = 0;
+        int distInt = 0;
         
         int count = 0;
         
@@ -14,16 +15,19 @@ public:
         
         while(right<n){
             
+            if(freq[nums[right]]==0)
+                distInt++;
+            
             freq[nums[right]]++;
             
-            while(left<=right && freq.size() > k){
+            while(left<=right && distInt > k){
                 
                 //remove one element from left
                 freq[nums[left]]--;
                 
                 //erase the element if it entirely got removed
                 if(freq[nums[left]]==0){
-                    freq.erase(nums[left]);
+                    distInt--;
                 }
                 
                 left++;
