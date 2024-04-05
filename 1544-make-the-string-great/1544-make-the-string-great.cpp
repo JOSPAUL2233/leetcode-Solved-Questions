@@ -6,9 +6,9 @@ public:
         if((a>='a' && a<='z') && (b>='A' && b<='Z'))
             return (a-'a') == (b-'A');
         
-        if((b>='a' && b<='z') && (a>='A' && a<='Z')){
+        if((b>='a' && b<='z') && (a>='A' && a<='Z'))
             return (a-'A') == (b-'a');
-        }
+        
         return false;
         
     }
@@ -16,10 +16,8 @@ public:
     string makeGood(string s) {
         
         stack<char> st;
-        
-        st.push(s[0]);
-        
-        for(int i = 1;i<s.size();i++){
+                
+        for(int i = 0;i<s.size();i++){
             
             char c = s[i];
             
