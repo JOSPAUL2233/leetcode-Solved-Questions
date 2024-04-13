@@ -9,13 +9,9 @@ public:
         
         int ind = 0;
         
-        for(auto it : st){
-            
+        for(auto it : st)
             nums[ind++] = it;
-            
-        }
         
         return st.size();
-        
     }
 };
