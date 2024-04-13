@@ -3,9 +3,10 @@ public:
     int removeDuplicates(vector<int>& nums) {
         
         set<int> st;
-        for(int i : nums)st.insert(i);
         
-        int size = st.size();
+        for(int i : nums)
+            st.insert(i);
+        
         int ind = 0;
         
         for(auto it : st){
@@ -14,7 +15,7 @@ public:
             
         }
         
-        return size;
+        return st.size();
         
     }
 };
